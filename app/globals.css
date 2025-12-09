@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-body {
+html,body {
   font-family: var(--font-jetbrains);
+  overflow: auto;
+  -ms-overflow-style: none;      /* IE */
+  scrollbar-width: none;   
 }
 
+ html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+        display: none;                 /* Chrome, Safari, Opera */
+    }
