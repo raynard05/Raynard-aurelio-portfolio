@@ -7,7 +7,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 import "@/app/component/Hero/Hero.css";
 function Model() {
-  const gltf = useGLTF("/astronout2.glb"); // ganti sesuai model kamu
+  const gltf = useGLTF("/astronout3.glb"); // ganti sesuai model kamu
   const ref = useRef<THREE.Group>(null);
 
   // Animasi bounce lembut, pelan, loop

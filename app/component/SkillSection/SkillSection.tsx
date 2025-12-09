@@ -33,7 +33,7 @@ export default function skillsSection() {
       <h2 className="title">
         Skills <span>& Technologies</span>
       </h2>
-      <p className="subtitle">Showcasing 3D assets using React Three Fiber + Drei</p>
+      <p className="subtitle"> </p>
 
       <div className="grid-container">
         {assets.map((a, i) => (
