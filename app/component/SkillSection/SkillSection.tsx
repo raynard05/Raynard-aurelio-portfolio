@@ -7,7 +7,7 @@ import "./Skills.css";
 import TargetCursor from "@/components/TargetCursor";
 import ElectricBorder from "@/components/ElectricBorder";
 import StarBorder from "@/components/StarBorder";
-
+import AnimatedContent  from "@/components/AnimatedContent"
 interface ModelProps {
   path: string;
 }
@@ -46,28 +46,42 @@ export default function skillsSection() {
 
       <div className="grid-container">
         {assets.map((a, i) => (
-          <div className="card cursor-target" key={i}>
-          <ElectricBorder
-            color="#FFD000"
-            speed={0.6}
-            chaos={0.5}
-            thickness={4}
-          >
-            <div style={{ borderRadius: 16, overflow: "hidden" }}>
-              <div className="r3f-wrapper">
-                <Canvas camera={{ position: [2, 2, 2], fov: 40 }}>
-                  <ambientLight intensity={1} />
-                  <directionalLight position={[1, 1, 1]} intensity={1} />
-                  <Model path={a.path} />
-                  <OrbitControls enableZoom={false} />
-                  <Environment preset="studio" />
-                </Canvas>
-              </div>
-
-              <p>{a.name}</p>
-            </div>
-          </ElectricBorder>
+         <AnimatedContent
+  distance={150}
+  direction="horizontal"
+  reverse={false}
+  duration={1.2}
+  ease="bounce.out"
+  initialOpacity={0.2}
+  animateOpacity
+  scale={1.1}
+  threshold={0.2}
+  delay={0.3}
+>
+  <div className="card cursor-target" key={i}>
+    <ElectricBorder
+      color="#FFD000"
+      speed={0.6}
+      chaos={0.5}
+      thickness={4}
+    >
+      <div style={{ borderRadius: 16, overflow: "hidden" }}>
+        <div className="r3f-wrapper">
+          <Canvas camera={{ position: [2, 2, 2], fov: 40 }}>
+            <ambientLight intensity={1} />
+            <directionalLight position={[1, 1, 1]} intensity={1} />
+            <Model path={a.path} />
+            <OrbitControls enableZoom={false} />
+            <Environment preset="studio" />
+          </Canvas>
         </div>
+
+        <p>{a.name}</p>
+      </div>
+    </ElectricBorder>
+  </div>
+</AnimatedContent>
+
 
         ))}
       </div>
@@ -80,8 +94,8 @@ export default function skillsSection() {
               speed="3s"
               className="w-[290px] py-6 text-center rounded-xl  cursor-target"
             >
-              <h3 className="text-2xl font-bold">10+ </h3>
-              <p className="opacity-80">Technologies Mastered</p>
+              <h3 className="text-4xl font-bold">10+ </h3>
+              <p className="opacity-80 mt-2">Technologies Mastered</p>
             </StarBorder>
 
             <StarBorder
@@ -90,8 +104,8 @@ export default function skillsSection() {
               speed="3s"
               className="w-[290px]  py-6 text-center rounded-xl  cursor-target"
             >
-              <h3 className="text-2xl font-bold">5</h3>
-              <p className="opacity-80">Projects Completed</p>
+              <h3 className="text-4xl font-bold">5</h3>
+              <p className="opacity-80 mt-2">Projects Completed</p>
             </StarBorder>
 
             <StarBorder
@@ -101,8 +115,8 @@ export default function skillsSection() {
 
               className="w-[290px] py-6 text-center rounded-xl cursor-target"
             >
-              <h3 className="text-2xl font-bold">100%</h3>
-              <p className="opacity-80">Client Satisfaction</p>
+              <h3 className="text-4xl font-bold">100%</h3>
+              <p className="opacity-80 mt-2">Client Satisfaction</p>
             </StarBorder>
                       </div>
               </section>
