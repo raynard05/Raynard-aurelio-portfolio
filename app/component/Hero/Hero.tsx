@@ -4,7 +4,9 @@ import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import "../Hero/Hero.css";
 import HeroModel from "../../component/HeroModel";
 import Particles from "@/app/component/Particles_background/background-particles";
-
+import BlurText from "@/components/BlurText";
+import TextType from "@/components/TextType"
+import TargetCursor from "@/components/TargetCursor";
 export default function Hero() {
   return (
     <section className="hero-section">
@@ -41,40 +43,63 @@ export default function Hero() {
             />
           </div>
 
-          <h1 className="hero-title">Raynard Aurelio</h1>
-          <h2 className="hero-role">Software Engineer</h2>
+                <BlurText
+            text="Raynard Aurelio"
+            delay={120}
+            animateBy="words"
+            direction="top"
+            className="hero-title"   // tetap pakai CSS kamu
+          />
 
-          <p className="hero-desc">
-            Software engineer specializing in scalable architecture and high-impact features.
-            I help teams move faster, reduce complexity, and ship products that perform reliably at scale.
-          </p>
+          {/* HERO ROLE */}
+          <BlurText
+            text="Software Engineer"
+            delay={180}
+            animateBy="words"
+            direction="top"
+            className="hero-role"    // tetap pakai CSS kamu
+          />
+
+          <TextType 
+          text={`Software engineer specializing in scalable architecture and high-impact features. I help teams move faster, reduce complexity, and ship products that perform reliably at scale.`}
+          typingSpeed={30}
+          pauseDuration={6000}
+          showCursor={true}
+          cursorCharacter=">"
+          className="hero-desc"
+        />
 
           {/* SOCIAL ICONS */}
           <div className="hero-socials">
-            <a href="https://linkedin.com/in/yourprofile" target="_blank" className="social-icon">
+            <a href="https://linkedin.com/in/yourprofile" target="_blank" className="social-icon cursor-target">
               <Linkedin size={18} />
             </a>
 
-            <a href="https://github.com/yourusername" target="_blank" className="social-icon">
+            <a href="https://github.com/yourusername" target="_blank" className="social-icon cursor-target">
               <Github size={18} />
             </a>
 
-            <a href="mailto:yourmail@gmail.com" className="social-icon">
+            <a href="mailto:yourmail@gmail.com" className="social-icon cursor-target">
               <Mail size={18} />
             </a>
 
-            <a href="/cv.pdf" target="_blank" className="social-icon">
+            <a href="/cv.pdf" target="_blank" className="social-icon cursor-target">
               <FileText size={18} />
             </a>
           </div>
 
+          <TargetCursor 
+        spinDuration={4}
+        hideDefaultCursor={true}
+        parallaxOn={true}
+      />
           {/* BUTTONS */}
           <div className="hero-buttons">
-            <a href="#projects" className="btn-primary">
+            <a href="#projects" className="btn-primary cursor-target">
               View My Work →
             </a>
 
-            <a href="#contact" className="btn-secondary">
+            <a href="#contact" className="btn-secondary cursor-target">
               Get In Touch
             </a>
           </div>
