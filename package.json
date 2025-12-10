@@ -19,16 +19,18 @@
     "@splinetool/runtime": "^1.12.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "face-api.js": "^0.22.2",
     "framer-motion": "^12.23.25",
     "gsap": "^3.14.1",
     "lucide-react": "^0.556.0",
     "motion": "^12.23.25",
     "next": "16.0.7",
     "ogl": "^1.0.11",
+    "postprocessing": "^6.38.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "tailwind-merge": "^3.4.0",
-    "three": "^0.181.2"
+    "three": "^0.167.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

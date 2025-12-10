@@ -8,6 +8,7 @@ import TargetCursor from "@/components/TargetCursor";
 import ElectricBorder from "@/components/ElectricBorder";
 import StarBorder from "@/components/StarBorder";
 import AnimatedContent  from "@/components/AnimatedContent"
+import { GridScan } from "@/components/GridScan";
 interface ModelProps {
   path: string;
 }
@@ -33,7 +34,21 @@ export default function skillsSection() {
 
   return (
     <section className="skills-section">
-      
+       <div className="absolute inset-0 -z-10">
+          <GridScan
+    sensitivity={0.1}
+    lineThickness={3}
+    linesColor="#392e4e"
+    gridScale={0.1}
+    scanColor="#FFD000"
+    scanOpacity={0.1}
+    enablePost
+    bloomIntensity={0.3}
+    chromaticAberration={0.002}
+    noiseIntensity={0}
+  />
+      </div>
+    
         <TargetCursor 
               spinDuration={4}
               hideDefaultCursor={true}
@@ -48,7 +63,7 @@ export default function skillsSection() {
         {assets.map((a, i) => (
          <AnimatedContent
   distance={150}
-  direction="horizontal"
+  direction="vertical"
   reverse={false}
   duration={1.2}
   ease="bounce.out"
@@ -56,7 +71,7 @@ export default function skillsSection() {
   animateOpacity
   scale={1.1}
   threshold={0.2}
-  delay={0.3}
+  delay={0.8}
 >
   <div className="card cursor-target" key={i}>
     <ElectricBorder
