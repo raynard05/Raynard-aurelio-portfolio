@@ -3,6 +3,7 @@ import Hero from "@/app/component/Hero/Hero";
 import SkillsSection from "./component/SkillSection/SkillSection";
 import Marquee, { ScrollVelocity } from "./component/ScrollVelocity/ScrollVelocity";
 import CurvedLoop from "@/components/CurvedLoop"
+import ProjectPage  from "./component/ProjectSession/Projectpage";
 export default function Home() {
   return (
     <>
@@ -40,6 +41,9 @@ export default function Home() {
 />
 
       <SkillsSection />
+     <section className="h-screen w-full">
+        <ProjectPage />
+      </section>
       
       <main>
       

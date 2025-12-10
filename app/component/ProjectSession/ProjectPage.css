@@ -1,0 +1,32 @@
+/* Container utama halaman */
+.project-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+}
+
+/* Layer animasi lingkaran */
+.project-animated-bg {
+  position: absolute;
+  inset: 0;
+  background: #facc15; /* yellow-400 */
+  pointer-events: none;
+}
+
+/* Konten halaman */
+.project-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-content h1 {
+  color: white;
+  font-size: 2.5rem;
+}
