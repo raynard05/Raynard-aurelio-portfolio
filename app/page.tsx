@@ -2,6 +2,7 @@ import Navbar from "@/app/component/Navbar";
 import Hero from "@/app/component/Hero/Hero";
 import SkillsSection from "./component/SkillSection/SkillSection";
 import Marquee, { ScrollVelocity } from "./component/ScrollVelocity/ScrollVelocity";
+import CurvedLoop from "@/components/CurvedLoop"
 export default function Home() {
   return (
     <>
@@ -39,6 +40,7 @@ export default function Home() {
 />
 
       <SkillsSection />
+      
       <main>
       
       </main>

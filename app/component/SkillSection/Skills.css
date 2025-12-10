@@ -2,6 +2,7 @@
     position: relative;
   width: 100%;
   padding: 80px 0;
+  min-height: 100vh;
   text-align: center;
   background: transparent;
   color: white;
@@ -174,6 +175,23 @@
 .grid-container {
   grid-auto-flow: row;
 }
+
+
+.curvedloop-wrapper {
+  margin-top: -40px;   /* angkat ke atas */
+  transform: translateY(-20px);
+  z-index: 5;
+  position: relative;
+}
+
+/* Responsif untuk mobile */
+@media (max-width: 400px) {
+  .curvedloop-wrapper {
+    margin-top: -20px;
+    transform: translateY(-10px);
+  }
+}
+
 
 
 

@@ -9,6 +9,7 @@ import ElectricBorder from "@/components/ElectricBorder";
 import StarBorder from "@/components/StarBorder";
 import AnimatedContent  from "@/components/AnimatedContent"
 import { GridScan } from "@/components/GridScan";
+import CurvedLoop from "@/components/CurvedLoop"
 interface ModelProps {
   path: string;
 }
@@ -134,6 +135,20 @@ export default function skillsSection() {
               <p className="opacity-80 mt-2">Client Satisfaction</p>
             </StarBorder>
                       </div>
+      <div className="curvedloop-wrapper">
+<CurvedLoop 
+  marqueeText="Hire Me ✦ Hire Me ✦ Hire Me ✦ "
+  speed={5}
+  curveAmount={170}
+  direction="right"
+  interactive={true}
+ 
+ 
+/>
+
+</div>
+
+                              
               </section>
   );
 }
