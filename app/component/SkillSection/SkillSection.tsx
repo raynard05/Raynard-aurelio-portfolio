@@ -6,9 +6,7 @@ import { OrbitControls, Environment, useGLTF } from "@react-three/drei";
 import "./Skills.css";
 import TargetCursor from "@/components/TargetCursor";
 import ElectricBorder from "@/components/ElectricBorder";
-
-
-
+import StarBorder from "@/components/StarBorder";
 
 interface ModelProps {
   path: string;
@@ -75,19 +73,38 @@ export default function skillsSection() {
       </div>
       {/* Static Stats */}
             <div className="stats-row">
-            <div className="stat-box">
-            <h3>10+</h3>
-            <p>Technologies Mastered</p>
-            </div>
-            <div className="stat-box">
-            <h3>5</h3>
-            <p>Projects Completed</p>
-            </div>
-            <div className="stat-box">
-            <h3>100%</h3>
-            <p>Client Satisfaction</p>
-            </div>
-            </div>
-    </section>
+
+          <StarBorder
+              as="div"
+              color="#FFD000"
+              speed="3s"
+              className="w-[290px] py-6 text-center rounded-xl  cursor-target"
+            >
+              <h3 className="text-2xl font-bold">10+ </h3>
+              <p className="opacity-80">Technologies Mastered</p>
+            </StarBorder>
+
+            <StarBorder
+              as="div"
+              color="#FFD000"
+              speed="3s"
+              className="w-[290px]  py-6 text-center rounded-xl  cursor-target"
+            >
+              <h3 className="text-2xl font-bold">5</h3>
+              <p className="opacity-80">Projects Completed</p>
+            </StarBorder>
+
+            <StarBorder
+              as="button"
+              color="#FFD000"
+              speed="3s"
+
+              className="w-[290px] py-6 text-center rounded-xl cursor-target"
+            >
+              <h3 className="text-2xl font-bold">100%</h3>
+              <p className="opacity-80">Client Satisfaction</p>
+            </StarBorder>
+                      </div>
+              </section>
   );
 }
