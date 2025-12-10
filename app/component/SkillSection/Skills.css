@@ -178,7 +178,7 @@
 
 
 .curvedloop-wrapper {
-  margin-top: -40px;   /* angkat ke atas */
+  margin-top: -180px;   /* angkat ke atas */
   transform: translateY(-20px);
   z-index: 5;
   position: relative;

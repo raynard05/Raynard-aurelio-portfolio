@@ -139,7 +139,7 @@ export default function skillsSection() {
 <CurvedLoop 
   marqueeText="Hire Me ✦ Hire Me ✦ Hire Me ✦ "
   speed={5}
-  curveAmount={170}
+  curveAmount={250}
   direction="right"
   interactive={true}
  
