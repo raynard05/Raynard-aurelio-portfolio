@@ -28,8 +28,7 @@ export default function Hero() {
           <h2 className="hero-role">Software Engineer</h2>
 
           <p className="hero-desc">
-            Passionate about creating immersive 3D experiences and modern web
-            applications. Specialized in 3D modeling, animation, and interactive design.
+           Software engineer specializing in scalable architecture and high-impact features. I help teams move faster, reduce complexity, and ship products that perform reliably at scale
           </p>
 
           {/* SOCIAL ICONS */}

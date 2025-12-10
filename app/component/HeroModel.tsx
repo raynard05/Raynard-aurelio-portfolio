@@ -25,7 +25,7 @@ function Model() {
 export default function HeroModel() {
   return (
     <div className="hero-3d-wrapper">
-      <Canvas camera={{ position: [0, 0, 2], fov: 45 }}>
+      <Canvas camera={{ position: [-1, 0, 2], fov: 45 }}>
         <ambientLight intensity={1} />
         <directionalLight position={[3, 3, 3]} />
         <Model />
