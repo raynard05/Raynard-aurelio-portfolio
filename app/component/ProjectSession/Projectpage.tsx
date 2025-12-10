@@ -1,32 +1,50 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useAnimation } from "framer-motion";
+import { useEffect, useState } from "react";
 import "./ProjectPage.css";
+import AirplaneMotion from "../ProjectSession/PlaneModel";
 
 export default function ProjectPage() {
   const { scrollYProgress } = useScroll();
+  const controls = useAnimation();
+  const [hovered, setHovered] = useState(false);
 
-  const clipPath = useTransform(
+  // Circle mengikuti scroll
+  const clipPathScroll = useTransform(
     scrollYProgress,
-    [0.9, 1],
-    [
-      "circle(0% at 0% 0%)", 
-      "circle(150% at 0% 0%)"
-    ]
+    [0.2, 1],
+    ["circle(0% at 0% 0%)", "circle(150% at 0% 0%)"]
   );
+
+  // 🔥 Set true otomatis saat circle > 10%
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (v) => {
+      if (v > 0.2 && !hovered) {
+        console.log("🔥 Circle > 10%, airplane mulai jalan");
+        setHovered(true);
+      } 
+      else if (v <= 0.2 && hovered) {
+        console.log("⭕ Circle < 10%, airplane reset");
+        setHovered(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [scrollYProgress, hovered]);
 
   return (
     <section className="project-section">
-      {/* Layer animasi background */}
+
+      {/* Background tetap pakai scroll */}
       <motion.div
-        style={{ clipPath }}
+        style={{ clipPath: clipPathScroll }}
         className="project-animated-bg"
       />
 
-      {/* Konten */}
-      <div className="project-content">
-        <h1>Project Page (Kosong)</h1>
-      </div>
+      {/* Pesawat bergerak mengikuti state hovered */}
+      <AirplaneMotion hovered={hovered} />
+
     </section>
   );
 }
