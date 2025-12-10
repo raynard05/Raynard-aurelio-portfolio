@@ -53,7 +53,7 @@ export default function Hero() {
 
           {/* HERO ROLE */}
           <BlurText
-            text="Software Engineer"
+            text="Software Engineer - Surabaya, Indonesia"
             delay={180}
             animateBy="words"
             direction="top"

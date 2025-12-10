@@ -4,6 +4,11 @@ import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment, useGLTF } from "@react-three/drei";
 import "./Skills.css";
+import TargetCursor from "@/components/TargetCursor";
+import ElectricBorder from "@/components/ElectricBorder";
+
+
+
 
 interface ModelProps {
   path: string;
@@ -30,6 +35,12 @@ export default function skillsSection() {
 
   return (
     <section className="skills-section">
+      
+        <TargetCursor 
+              spinDuration={4}
+              hideDefaultCursor={true}
+              parallaxOn={true}
+            />
       <h2 className="title">
         Skills <span>& Technologies</span>
       </h2>
@@ -37,18 +48,29 @@ export default function skillsSection() {
 
       <div className="grid-container">
         {assets.map((a, i) => (
-          <div className="card" key={i}>
-            <div className="r3f-wrapper">
-              <Canvas camera={{ position: [2, 2, 2], fov: 40 }}>
-                <ambientLight intensity={1} />
-                <directionalLight position={[1, 1, 1]} intensity={1} />
-                <Model path={a.path} />
-                <OrbitControls enableZoom={false} />
-                <Environment preset="studio" />
-              </Canvas>
+          <div className="card cursor-target" key={i}>
+          <ElectricBorder
+            color="#FFD000"
+            speed={0.6}
+            chaos={0.5}
+            thickness={4}
+          >
+            <div style={{ borderRadius: 16, overflow: "hidden" }}>
+              <div className="r3f-wrapper">
+                <Canvas camera={{ position: [2, 2, 2], fov: 40 }}>
+                  <ambientLight intensity={1} />
+                  <directionalLight position={[1, 1, 1]} intensity={1} />
+                  <Model path={a.path} />
+                  <OrbitControls enableZoom={false} />
+                  <Environment preset="studio" />
+                </Canvas>
+              </div>
+
+              <p>{a.name}</p>
             </div>
-            <p>{a.name}</p>
-          </div>
+          </ElectricBorder>
+        </div>
+
         ))}
       </div>
       {/* Static Stats */}
