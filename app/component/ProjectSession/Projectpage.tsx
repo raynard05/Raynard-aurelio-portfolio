@@ -72,7 +72,7 @@ export default function ProjectPage() {
 
       {/* ========== VIDEO ========== */}
       {!hideVideo && (
-        <video
+       <video
           className={`project-video-bg ${fadeOut ? "fade-out" : ""}`}
           src="/video_1.mp4"
           autoPlay
@@ -80,7 +80,14 @@ export default function ProjectPage() {
           playsInline
           preload="auto"     
           onLoadedData={() => setVideoReady(true)}
+          onEnded={() => {
+            setFadeOut(true);
+            setTimeout(() => {
+              setHideVideo(true);
+            }, 1500); // durasi fade-out
+          }}
         />
+
       )}
 
     </section>
