@@ -10,9 +10,6 @@ export default function ProjectPage() {
   const [circleFull, setCircleFull] = useState(false);
   const [freezeBG, setFreezeBG] = useState(false);
 
-  const [showLoader, setShowLoader] = useState(false);
-  const [loaderDone, setLoaderDone] = useState(false);
-
   const [videoReady, setVideoReady] = useState(false);
   const [videoStart, setVideoStart] = useState(false);
 
@@ -33,33 +30,34 @@ export default function ProjectPage() {
         setCircleFull(true);
         setFreezeBG(true);
 
-        // Loader muncul langsung
-        setShowLoader(true);
+        // langsung start video kalau sudah full
+        if (videoReady) {
+          setVideoStart(true);
 
-        // Loader fixed 1.5 detik
-        setTimeout(() => {
-          setLoaderDone(true);
-        }, 1500);
+          setTimeout(() => {
+            setFadeOut(true);
+            setTimeout(() => {
+              setHideVideo(true);
+            }, 1500);
+          }, 10000);
+        }
       }
     });
-  }, [circleFull]);
+  }, [circleFull, videoReady]);
 
-  /** Jika loader selesai DAN video siap → tampilkan video */
+  /** Jika video siap → tampilkan video */
   useEffect(() => {
-    if (loaderDone && videoReady) {
-      setShowLoader(false);
+    if (videoReady && circleFull) {
       setVideoStart(true);
 
-      // video berjalan 10 detik lalu fade out
       setTimeout(() => {
         setFadeOut(true);
-
         setTimeout(() => {
           setHideVideo(true);
         }, 1500);
       }, 10000);
     }
-  }, [loaderDone, videoReady]);
+  }, [videoReady, circleFull]);
 
   return (
     <section className="project-section">
@@ -72,14 +70,6 @@ export default function ProjectPage() {
         className="project-animated-bg"
       />
 
-      {/* ========== LOADER (khusus page ini saja) ========== */}
-      {showLoader && !videoStart && (
-        <div className="project-video-loader">
-          <div className="spinner" />
-          <p>Loading video...</p>
-        </div>
-      )}
-
       {/* ========== VIDEO ========== */}
       {!hideVideo && (
         <video
@@ -88,7 +78,7 @@ export default function ProjectPage() {
           autoPlay
           muted
           playsInline
-          preload="auto"     // ⭐ MEMPERCEPAT LOAD
+          preload="auto"     
           onLoadedData={() => setVideoReady(true)}
         />
       )}
