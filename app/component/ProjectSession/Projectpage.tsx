@@ -77,7 +77,7 @@ export default function ProjectPage() {
       {!hideVideo && (
         <video
           className={`project-video-bg ${fadeOut ? "fade-out" : ""}`}
-          src="/video_1.mp4"
+          src="/video_2.mp4"
           autoPlay
           muted
           playsInline
