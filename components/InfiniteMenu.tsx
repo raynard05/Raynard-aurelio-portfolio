@@ -1101,12 +1101,12 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
       <canvas
         id="infinite-grid-menu-canvas"
         ref={canvasRef}
-        className="cursor-grab w-full h-full overflow-hidden relative outline-none active:cursor-grabbing"
+        className="cursor-grab w-full h-full overflow-hidden relative outline-none active:cursor-grabbing text-black"
       />
 
       {activeItem && (
         <>
-          <h2
+          <h1
             className={`
           select-none
           absolute
@@ -1119,6 +1119,14 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           -translate-y-1/2
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+          text-black
+          bg-yellow-400
+          border-[5px]
+          border-black
+          border-round-[20px]
+          rounded-[20px]
+          py-[0.2em]
+          px-[0.4em]
           ${
             isMoving
               ? 'opacity-0 pointer-events-none duration-[100ms]'
@@ -1127,18 +1135,21 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
         `}
           >
             {activeItem.title}
-          </h2>
+          </h1>
 
-          <p
+          <h3
             className={`
+              
+    
           select-none
           absolute
           max-w-[10ch]
           text-[1.5rem]
           top-1/2
-          right-[1%]
+          right-[5%]
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+          text-black
           ${
             isMoving
               ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-60%] -translate-y-1/2'
@@ -1147,7 +1158,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
         `}
           >
             {activeItem.description}
-          </p>
+          </h3>
 
           <div
             onClick={handleButtonClick}
@@ -1158,8 +1169,9 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           w-[60px]
           h-[60px]
           grid
+          cursor-target
           place-items-center
-          bg-[#00ffff]
+          bg-yellow-400
           border-[5px]
           border-black
           rounded-full

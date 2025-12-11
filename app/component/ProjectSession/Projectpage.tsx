@@ -25,10 +25,12 @@ export default function ProjectPage() {
   );
 
   const items = [
-    { image: 'https://picsum.photos/300/300?grayscale', link: '#', title: 'Item 1', description: 'This is pretty cool, right?' },
-    { image: 'https://picsum.photos/400/400?grayscale', link: '#', title: 'Item 2', description: 'This is pretty cool, right?' },
-    { image: 'https://picsum.photos/500/500?grayscale', link: '#', title: 'Item 3', description: 'This is pretty cool, right?' },
-    { image: 'https://picsum.photos/600/600?grayscale', link: '#', title: 'Item 4', description: 'This is pretty cool, right?' }
+    { image: '/project1.png', link: '#', title: 'Smarthouse App', description: 'Smarthouse mobile application for monitoring home security based on MQTT, Firebase and Flutter' },
+    { image: '/project2.png', link: '#', title: 'ShrimpScale', description: 'Freelance Desktop app for Pt. Wirontono Baru Jakarta.' },
+    { image: '/project3.png', link: '#', title: 'Unesa Eco-edu', description: ' Freelance Unesa eco-edu tourism website for the cultural village of Lidah Wetan based on next.js' },
+     { image: '/project4.png', link: '#', title: 'Talent-Go', description: 'internship for pt.vascomm sidoarjo - Talent-Go laravel mysql & website' },
+     { image: '/project5.jpg', link: '#', title: 'One-Click', description: ' Freelance MIT inventory application from polytechnic health information management students' }
+  
   ];
 
   /** Ketika sudah 150%, stop scroll effect */
