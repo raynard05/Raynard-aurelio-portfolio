@@ -12,7 +12,7 @@
   grid-template-columns: 1fr 1fr;
   width: 100%;
   max-width: 1200px; /* sesuai permintaan */
-  gap: 40px;
+  gap: 10px;
   align-items: start;
 }
 
@@ -20,7 +20,7 @@
 .contact-left {
   min-height: 300px;
   border-radius: 12px;
-  padding: 20px;
+  padding: 60px;
 }
 
 /* RIGHT SIDE */
@@ -29,6 +29,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   padding: 32px;
+  border-color: #f5d142;
 }
 
 .contact-title {

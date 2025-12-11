@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import "./ContactPage.css";
+import ProfileCard from "@/components/ProfileCards";
 
 export default function ContactPage() {
   return (
@@ -11,6 +12,24 @@ export default function ContactPage() {
       <div className="contact-container">
         {/* LEFT SECTION (kosong - kamu isi sendiri nanti) */}
         <div className="contact-left">
+
+            <ProfileCard
+  name="Raynard Aurelio"
+  title="Software Engineer"
+
+  handle="_ryndklys666"
+  status="Available for Work"
+  contactText="Contact"
+  avatarUrl="/profile-card.png"
+  miniAvatarUrl="/profile-card.png"
+  iconUrl="</>"
+  showUserInfo={true}
+  enableTilt={false}
+  enableMobileTilt={false}
+  behindGlowEnabled={false}
+  onContactClick={() => console.log('Contact clicked')}
+/>
+            
           {/* Tambah kontenmu sendiri di sini */}
         </div>
 
@@ -23,12 +42,12 @@ export default function ContactPage() {
           <form className="contact-form">
             <div className="form-group">
               <label>Your Name</label>
-              <Input placeholder="John Doe" />
+              <Input placeholder="Type Your name here ...." />
             </div>
 
             <div className="form-group">
               <label>Email Address</label>
-              <Input type="email" placeholder="john@example.com" />
+              <Input type="email" placeholder="Name@example.com" />
             </div>
 
             <div className="form-group">
