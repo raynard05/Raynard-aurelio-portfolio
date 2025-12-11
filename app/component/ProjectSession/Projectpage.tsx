@@ -1,8 +1,8 @@
 "use client";
-
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import "./ProjectPage.css";
+import InfiniteMenu  from "@/components/InfiniteMenu";
 
 export default function ProjectPage() {
   const { scrollYProgress } = useScroll();
@@ -16,12 +16,20 @@ export default function ProjectPage() {
   const [fadeOut, setFadeOut] = useState(false);
   const [hideVideo, setHideVideo] = useState(false);
 
-  /** Clip path mengikuti scroll hingga 150% */
+  const [showMenu, setShowMenu] = useState(false);
+
   const clipPathScroll = useTransform(
     scrollYProgress,
     [0.9, 1],
     ["circle(0% at 0% 0%)", "circle(150% at 0% 0%)"]
   );
+
+  const items = [
+    { image: 'https://picsum.photos/300/300?grayscale', link: '#', title: 'Item 1', description: 'This is pretty cool, right?' },
+    { image: 'https://picsum.photos/400/400?grayscale', link: '#', title: 'Item 2', description: 'This is pretty cool, right?' },
+    { image: 'https://picsum.photos/500/500?grayscale', link: '#', title: 'Item 3', description: 'This is pretty cool, right?' },
+    { image: 'https://picsum.photos/600/600?grayscale', link: '#', title: 'Item 4', description: 'This is pretty cool, right?' }
+  ];
 
   /** Ketika sudah 150%, stop scroll effect */
   useEffect(() => {
@@ -30,55 +38,50 @@ export default function ProjectPage() {
         setCircleFull(true);
         setFreezeBG(true);
 
-        // langsung start video kalau sudah full
         if (videoReady) {
           setVideoStart(true);
-
-          setTimeout(() => {
-            setFadeOut(true);
-            setTimeout(() => {
-              setHideVideo(true);
-            }, 1500);
-          }, 10000);
         }
       }
     });
   }, [circleFull, videoReady]);
 
-  /** Jika video siap → tampilkan video */
+  /** Munculkan menu setelah video hilang */
   useEffect(() => {
-    if (videoReady && circleFull) {
-      setVideoStart(true);
-
-      setTimeout(() => {
-        setFadeOut(true);
-        setTimeout(() => {
-          setHideVideo(true);
-        }, 1500);
-      }, 10000);
+    if (hideVideo) {
+      setShowMenu(true);
     }
-  }, [videoReady, circleFull]);
+  }, [hideVideo]);
 
   return (
     <section className="project-section">
 
-      {/* ========== BACKGROUND CIRCLE ========== */}
+      {/* BACKGROUND CIRCLE */}
       <motion.div
-        style={{
-          clipPath: freezeBG ? "circle(150% at 0% 0%)" : clipPathScroll
-        }}
+        style={{ clipPath: freezeBG ? "circle(150% at 0% 0%)" : clipPathScroll }}
         className="project-animated-bg"
       />
 
-      {/* ========== VIDEO ========== */}
+      {/* Infinite Menu */}
+      {showMenu && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          style={{ height: '600px', position: 'relative' }}
+        >
+          <InfiniteMenu items={items} />
+        </motion.div>
+      )}
+
+      {/* VIDEO */}
       {!hideVideo && (
-       <video
+        <video
           className={`project-video-bg ${fadeOut ? "fade-out" : ""}`}
           src="/video_1.mp4"
           autoPlay
           muted
           playsInline
-          preload="auto"     
+          preload="auto"
           onLoadedData={() => setVideoReady(true)}
           onEnded={() => {
             setFadeOut(true);
@@ -87,9 +90,7 @@ export default function ProjectPage() {
             }, 1500); // durasi fade-out
           }}
         />
-
       )}
-
     </section>
   );
 }

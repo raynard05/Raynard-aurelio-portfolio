@@ -922,8 +922,7 @@ class InfiniteGridMenu {
     gl.useProgram(this.discProgram);
     gl.enable(gl.CULL_FACE);
     gl.enable(gl.DEPTH_TEST);
-
-    gl.clearColor(0, 0, 0, 0);
+    gl.clearColor(1, 0.8157, 0, 1); // alpha 1 = opaque
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     gl.uniformMatrix4fv(this.discLocations.uWorldMatrix, false, this.worldMatrix);
