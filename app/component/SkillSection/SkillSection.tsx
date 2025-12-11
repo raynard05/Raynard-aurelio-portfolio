@@ -10,6 +10,8 @@ import StarBorder from "@/components/StarBorder";
 import AnimatedContent  from "@/components/AnimatedContent"
 import { GridScan } from "@/components/GridScan";
 import CurvedLoop from "@/components/CurvedLoop"
+import { Suspense } from "react";
+
 interface ModelProps {
   path: string;
 }
@@ -18,6 +20,7 @@ function Model({ path }: ModelProps) {
   const { scene } = useGLTF(path);
   return <primitive object={scene} scale={1.1} />;
 }
+
 
 export default function skillsSection() {
   const assets = [
@@ -32,6 +35,16 @@ export default function skillsSection() {
     { name: "React", path: "/assets/9.glb" },
  
   ];
+
+  function Loader() {
+  return (
+    <div className="loader-3d">
+      <div className="spinner" />
+      <p>Loading 3D...</p>
+    </div>
+  );
+}
+
 
   return (
     <section className="skills-section">
@@ -83,13 +96,15 @@ export default function skillsSection() {
     >
       <div style={{ borderRadius: 16, overflow: "hidden" }}>
         <div className="r3f-wrapper">
-          <Canvas camera={{ position: [2, 2, 2], fov: 40 }}>
-            <ambientLight intensity={1} />
-            <directionalLight position={[1, 1, 1]} intensity={1} />
-            <Model path={a.path} />
-            <OrbitControls enableZoom={false} />
-            <Environment preset="studio" />
-          </Canvas>
+         <Suspense fallback={<Loader />}>
+  <Canvas camera={{ position: [2, 2, 2], fov: 40 }}>
+    <ambientLight intensity={1} />
+    <directionalLight position={[1, 1, 1]} intensity={1} />
+    <Model path={a.path} />
+    <OrbitControls enableZoom={false} />
+    <Environment preset="studio" />
+  </Canvas>
+</Suspense>
         </div>
 
         <p>{a.name}</p>
@@ -143,12 +158,9 @@ export default function skillsSection() {
   direction="right"
   interactive={true}
  
- 
 />
-
 </div>
-
-                              
+                         
               </section>
   );
 }

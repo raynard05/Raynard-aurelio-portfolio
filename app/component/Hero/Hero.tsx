@@ -15,7 +15,7 @@ export default function Hero() {
  <div className="absolute inset-0 -z-10">
         <Particles
     particleColors={['#FFD000', '#ffffff']}
-    particleCount={500}
+    particleCount={200}
     particleSpread={30}
     speed={0.5}
     particleBaseSize={550}
