@@ -1,0 +1,75 @@
+.contact-wrapper {
+  width: 100%;
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(to bottom, #000, #0a0a15);
+  color: white;
+}
+
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 1200px; /* sesuai permintaan */
+  gap: 40px;
+  align-items: start;
+}
+
+/* LEFT SIDE */
+.contact-left {
+  min-height: 300px;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+/* RIGHT SIDE */
+.contact-right {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 32px;
+}
+
+.contact-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.contact-title span {
+  color: #f5d142;
+}
+
+/* FORM */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  color: #ddd;
+  font-size: 14px;
+}
+
+.send-btn {
+  background: #f5d142;
+  color: #000;
+  font-weight: 600;
+  height: 48px;
+  margin-top: 5px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+}

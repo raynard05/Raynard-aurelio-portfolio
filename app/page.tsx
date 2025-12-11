@@ -4,6 +4,7 @@ import SkillsSection from "./component/SkillSection/SkillSection";
 import Marquee, { ScrollVelocity } from "./component/ScrollVelocity/ScrollVelocity";
 import CurvedLoop from "@/components/CurvedLoop"
 import ProjectPage  from "./component/ProjectSession/Projectpage";
+import ContactPage from "./component/ContactPage/ContactPage";
 export default function Home() {
   return (
     <>
@@ -44,6 +45,7 @@ export default function Home() {
      <section className="h-screen w-full">
         <ProjectPage />
       </section>
+      <ContactPage />
       
       <main>
       
