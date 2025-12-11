@@ -3,48 +3,62 @@
 import { motion, useScroll, useTransform, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import "./ProjectPage.css";
-import AirplaneMotion from "../ProjectSession/PlaneModel";
 
 export default function ProjectPage() {
   const { scrollYProgress } = useScroll();
   const controls = useAnimation();
-  const [hovered, setHovered] = useState(false);
+  const [circleFull, setCircleFull] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
+  const [hideVideo, setHideVideo] = useState(false);
 
-  // Circle mengikuti scroll
+  // ClipPath lingkaran
   const clipPathScroll = useTransform(
     scrollYProgress,
-    [0.2, 1],
+    [0.9, 1],
     ["circle(0% at 0% 0%)", "circle(150% at 0% 0%)"]
   );
 
-  // 🔥 Set true otomatis saat circle > 10%
+  // 🔥 Trigger saat lingkaran penuh (150%)
   useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (v) => {
-      if (v > 0.2 && !hovered) {
-        console.log("🔥 Circle > 10%, airplane mulai jalan");
-        setHovered(true);
-      } 
-      else if (v <= 0.2 && hovered) {
-        console.log("⭕ Circle < 10%, airplane reset");
-        setHovered(false);
+    return clipPathScroll.on("change", (v) => {
+      if (v.includes("150%") && !circleFull) {
+        setCircleFull(true);
+
+        // ⏳ 10 detik sebelum fade out
+        setTimeout(() => {
+          setFadeOut(true);
+
+          // ⏳ setelah fade-out selesai (1.5s)
+          setTimeout(() => {
+            setHideVideo(true);
+          }, 1500);
+
+        }, 15000); // 10 detik
       }
     });
-
-    return () => unsubscribe();
-  }, [scrollYProgress, hovered]);
+  }, [circleFull]);
 
   return (
     <section className="project-section">
 
-      {/* Background tetap pakai scroll */}
       <motion.div
         style={{ clipPath: clipPathScroll }}
+        animate={controls}
         className="project-animated-bg"
       />
 
-      {/* Pesawat bergerak mengikuti state hovered */}
-      <AirplaneMotion hovered={hovered} />
+      {/* ========== VIDEO ========== */}
+      {!hideVideo && circleFull && (
+        <video
+          className={`project-video-bg ${fadeOut ? "fade-out" : ""}`}
+          src="/video_1.mp4"
+          autoPlay
+          muted
+          playsInline
+        />
+      )}
 
+      <div className="project-content"></div>
     </section>
   );
 }
