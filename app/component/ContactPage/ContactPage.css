@@ -31,6 +31,14 @@
   padding: 32px;
   border-color: #f5d142;
 }
+.circular-text-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-40%, 15%);
+  z-index: 10;
+  pointer-events: none; /* agar tidak menghalangi klik form */
+}
 
 .contact-title {
   font-size: 36px;
