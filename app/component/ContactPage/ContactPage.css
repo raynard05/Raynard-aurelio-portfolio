@@ -21,6 +21,7 @@
   min-height: 300px;
   border-radius: 12px;
   padding: 60px;
+  position: relative;
 }
 
 /* RIGHT SIDE */
@@ -38,6 +39,16 @@
   transform: translate(-40%, 15%);
   z-index: 10;
   pointer-events: none; /* agar tidak menghalangi klik form */
+}
+
+.dot-grid-container{
+   position: absolute;
+  top: 50%;               
+  left: 0;
+  transform: translate(-1%, 120%);
+  z-index: 100;
+  opacity: 1;
+  pointer-events: none;
 }
 
 .contact-title {

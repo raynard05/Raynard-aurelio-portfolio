@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "@/app/component/Navbar";
 import Hero from "@/app/component/Hero/Hero";
 import SkillsSection from "./component/SkillSection/SkillSection";
@@ -5,7 +7,15 @@ import Marquee, { ScrollVelocity } from "./component/ScrollVelocity/ScrollVeloci
 import CurvedLoop from "@/components/CurvedLoop"
 import ProjectPage  from "./component/ProjectSession/Projectpage";
 import ContactPage from "./component/ContactPage/ContactPage";
+import FlowingMenu from "@/components/FlowingMenu";
 export default function Home() {
+
+  const demoItems = [
+  { link: '#', text: 'Mojave', image: 'https://picsum.photos/600/400?random=1' },
+  { link: '#', text: 'Sonoma', image: 'https://picsum.photos/600/400?random=2' },
+  { link: '#', text: 'Monterey', image: 'https://picsum.photos/600/400?random=3' },
+  { link: '#', text: 'Sequoia', image: 'https://picsum.photos/600/400?random=4' }
+];
   return (
     <>
       <Navbar />
@@ -46,6 +56,10 @@ export default function Home() {
         <ProjectPage />
       </section>
       <ContactPage />
+      
+<div style={{ height: '600px', position: 'relative' }}>
+  <FlowingMenu items={demoItems} />
+</div>
       
       <main>
       

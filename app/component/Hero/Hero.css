@@ -73,13 +73,31 @@
   color: #ccc;
   margin-bottom: 15px;
 }
+.hero-lock {
+  position: relative;
+  width: fit-content;   /* lock width exactly to its content */
+  max-width: 480px;
+}
 
+/* Ghost teks: ukur size final */
+.hero-ghost {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  white-space: normal;
+  line-height: 1.6;
+  max-width: 480px;
+  position: absolute;
+}
+
+/* TextType real content */
 .hero-desc {
   max-width: 480px;
-  opacity: 0.9;
   line-height: 1.6;
+  opacity: 0.9;
   margin-bottom: 25px;
 }
+
 
 /* SOCIAL ICONS */
 .hero-socials {

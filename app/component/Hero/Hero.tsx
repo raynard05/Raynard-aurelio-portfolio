@@ -59,15 +59,21 @@ export default function Hero() {
             direction="top"
             className="hero-role"    // tetap pakai CSS kamu
           />
+<div className="hero-lock">
+  <div className="hero-ghost">
+    Software engineer specializing in scalable architecture and high-impact features. I help teams move faster, reduce complexity, and ship products that perform reliably at scale.
+  </div>
 
-          <TextType 
-          text={`Software engineer specializing in scalable architecture and high-impact features. I help teams move faster, reduce complexity, and ship products that perform reliably at scale.`}
-          typingSpeed={30}
-          pauseDuration={6000}
-          showCursor={true}
-          cursorCharacter=">"
-          className="hero-desc"
-        />
+  <TextType
+    text={`Software engineer specializing in scalable architecture and high-impact features. I help teams move faster, reduce complexity, and ship products that perform reliably at scale.`}
+    typingSpeed={30}
+    pauseDuration={6000}
+    showCursor={true}
+    cursorCharacter=">"
+    className="hero-desc"
+  />
+</div>
+
 
           {/* SOCIAL ICONS */}
           <div className="hero-socials">

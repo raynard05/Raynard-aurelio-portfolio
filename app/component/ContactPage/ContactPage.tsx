@@ -8,13 +8,19 @@ import ProfileCard from "@/components/ProfileCards";
 import GlareHover from "@/components/GlareHover";
 import AnimatedContent from "@/components/AnimatedContent";
 import CircularText from "@/components/CircularText";
-
+import DotGrid from "@/components/DotGrid";
+import FlowingMenu from "@/components/FlowingMenu";
 export default function ContactPage() {
   return (
     <section className="contact-wrapper">
       <div className="contact-container">
+
+     
         {/* LEFT SECTION (kosong - kamu isi sendiri nanti) */}
         <div className="contact-left">
+          <div className="dot-grid-container">
+    <DotGrid />
+</div>
 
       <AnimatedContent
         distance={150}
