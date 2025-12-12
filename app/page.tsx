@@ -9,6 +9,7 @@ import ProjectPage  from "./component/ProjectSession/Projectpage";
 import ContactPage from "./component/ContactPage/ContactPage";
 import FlowingMenu from "@/components/FlowingMenu";
 import SecondContactPage from "./component/ContactPage/SecondContact";
+import EndPage from "./component/end/end";
 export default function Home() {
 
 
@@ -53,8 +54,7 @@ export default function Home() {
       </section>
       <ContactPage />
       <SecondContactPage/>
-
-      
+       <EndPage />
       <main>
       
       </main>

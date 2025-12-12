@@ -1,0 +1,25 @@
+.End-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* full screen */
+  overflow: hidden;
+
+}
+
+.end-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80vw;
+  height: 80vh;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  border: 3px solid #f5d142;
+  border-radius: 10px;
+}
+
+.end-content {
+  position: relative;
+  z-index: 10;
+}
