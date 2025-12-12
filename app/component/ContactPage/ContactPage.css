@@ -3,7 +3,7 @@
   padding: 80px 20px;
   display: flex;
   justify-content: center;
-  background: linear-gradient(to bottom, #000, #0a0a15);
+  background: black;
   color: white;
 }
 
@@ -22,6 +22,7 @@
   border-radius: 12px;
   padding: 60px;
   position: relative;
+   transform: translate( 1% ,-10%);
 }
 
 /* RIGHT SIDE */
@@ -36,7 +37,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  transform: translate(-40%, 15%);
+  transform: translate(-40%, 20%);
   z-index: 10;
   pointer-events: none; /* agar tidak menghalangi klik form */
 }
@@ -45,7 +46,7 @@
    position: absolute;
   top: 50%;               
   left: 0;
-  transform: translate(-1%, 120%);
+  transform: translate(-10%, 300%);
   z-index: 100;
   opacity: 1;
   pointer-events: none;

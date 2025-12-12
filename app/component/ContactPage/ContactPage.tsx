@@ -9,7 +9,7 @@ import GlareHover from "@/components/GlareHover";
 import AnimatedContent from "@/components/AnimatedContent";
 import CircularText from "@/components/CircularText";
 import DotGrid from "@/components/DotGrid";
-import FlowingMenu from "@/components/FlowingMenu";
+
 export default function ContactPage() {
   return (
     <section className="contact-wrapper">
@@ -18,9 +18,24 @@ export default function ContactPage() {
      
         {/* LEFT SECTION (kosong - kamu isi sendiri nanti) */}
         <div className="contact-left">
-          <div className="dot-grid-container">
+          
+<AnimatedContent
+  distance={150}
+  direction="vertical"
+  reverse={false}
+  duration={1.2}
+  ease="bounce.in"
+  initialOpacity={0.2}
+  animateOpacity
+  scale={1.1}
+  threshold={0.2}
+  delay={0.3}
+>
+   <div className="dot-grid-container">
     <DotGrid />
 </div>
+</AnimatedContent>
+        
 
       <AnimatedContent
         distance={150}

@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 12px;
   padding: 40px;
+  
 }
 
 .dot-row {
@@ -11,8 +12,8 @@
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 4px;
+  height: 4px;
   background-color: #edfe00; /* neon green */
   border-radius: 50%;
 }

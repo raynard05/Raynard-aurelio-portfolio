@@ -3,8 +3,8 @@
 
 import "./DotGrid.css";
 export default function DotGrid() {
-  const rows = 8;     // change: number of rows
-  const cols = 20;    // change: number of columns
+  const rows = 6;     // change: number of rows
+  const cols = 15;    // change: number of columns
 
 
   return (
