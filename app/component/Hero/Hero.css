@@ -1,4 +1,4 @@
-/* ===== HERO SECTION ===== */
+
 
 .hero-section {
    width: 100%;
@@ -7,7 +7,7 @@
   min-height: 100vh;
   background: transparent;
   color: white;
-  overflow: hidden; /* penting untuk canvas */
+
 }
 .hero-container {
   display: flex;
@@ -15,10 +15,10 @@
   justify-content: space-between;
   gap: 20px;
   width: 100%;
-  max-width: 1200px;    /* BATAS SUPAYA TIDAK MELAR */
+  max-width: 1200px;    
   margin: 0 auto;   
    position: relative;
-  z-index: 10;    /* center */
+  z-index: 10;   
 }
 
 

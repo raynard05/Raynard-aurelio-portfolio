@@ -1,48 +1,26 @@
 "use client";
 
 import "./EndPage.css";
-import FallingText from "@/components/FallingText";
+import { MaskContainer } from "@/components/ui/svg-mask-effect";
+
 export default function EndPage() {
   return (
     <section className="End-wrapper">
-    
-<FallingText
-  text={` Hire Me! `}
-  highlightWords={["Hire"]}
-  highlightClass="highlighted"
-  trigger="hover"
-  backgroundColor="transparent"
-  wireframes={true}
-  gravity={0.56}
-  fontSize="2rem"
-  mouseConstraintStiffness={0.9}
-/>
-
-<FallingText
-  text={` or I sleep again zzz... `}
-  highlightWords={[" zzz..."]}
-  highlightClass="highlighted"
-  trigger="hover"
-  backgroundColor="transparent"
-  wireframes={true}
-  gravity={0.56}
-  fontSize="2rem"
-  mouseConstraintStiffness={0.9}
-/>
-      {/* Background Video */}
-      <video
-        className="end-bg-video"
-        autoPlay
-        loop
-        muted
-        playsInline
-      >
-        <source src="/end.mp4" type="video/mp4" />
-      </video>
-
-      {/* Optional content */}
-      <div className="end-content">
-        {/* Tambahkan apa pun di sini */}
+      <div className="End-container">
+        <MaskContainer
+          revealText={
+            <p className="mx-auto max-w-4xl text-center text-4xl font-bold text-slate-800 dark:text-white">
+              The first rule of MRR Club is you do not talk about MRR Club. The
+              second rule of MRR Club is you DO NOT talk about MRR Club.
+            </p>
+          }
+          className="h-[40rem] rounded-md border text-white dark:text-black"
+        >
+          Discover the power of{" "}
+          <span className="text-blue-500">Tailwind CSS v4</span> with native CSS
+          variables and container queries with
+          <span className="text-blue-500"> {" "}advanced animations</span>.
+        </MaskContainer>
       </div>
     </section>
   );

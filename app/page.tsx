@@ -9,6 +9,7 @@ import ProjectPage  from "./component/ProjectSession/Projectpage";
 import ContactPage from "./component/ContactPage/ContactPage";
 import FlowingMenu from "@/components/FlowingMenu";
 import SecondContactPage from "./component/ContactPage/SecondContact";
+import { MaskContainer } from "@/components/ui/svg-mask-effect";
 import EndPage from "./component/end/end";
 export default function Home() {
 
@@ -41,7 +42,7 @@ export default function Home() {
   velocity={-100}   // arah kebalikannya
   parallaxStyle={{
     borderTop: "4px solid #FFD000",
-    borderBottom: "10px solid #FFD000",
+    borderBottom: "30px solid #FFD000",
     background: "#000",
     paddingTop: "40px",
     paddingBottom: "40px",

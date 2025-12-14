@@ -4,7 +4,7 @@ import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment, useGLTF } from "@react-three/drei";
 import "./Skills.css";
-import TargetCursor from "@/components/TargetCursor";
+
 import ElectricBorder from "@/components/ElectricBorder";
 import StarBorder from "@/components/StarBorder";
 import AnimatedContent  from "@/components/AnimatedContent"
@@ -63,11 +63,7 @@ export default function skillsSection() {
   />
       </div>
     
-        <TargetCursor 
-              spinDuration={4}
-              hideDefaultCursor={true}
-              parallaxOn={true}
-            />
+       
       <h2 className="title">
         Skills <span>& Technologies</span>
       </h2>

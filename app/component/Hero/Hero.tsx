@@ -6,7 +6,7 @@ import HeroModel from "../../component/HeroModel";
 import Particles from "@/app/component/Particles_background/background-particles";
 import BlurText from "@/components/BlurText";
 import TextType from "@/components/TextType"
-import TargetCursor from "@/components/TargetCursor";
+
 export default function Hero() {
   return (
     <section className="hero-section">
@@ -94,11 +94,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <TargetCursor 
-        spinDuration={4}
-        hideDefaultCursor={true}
-        parallaxOn={true}
-      />
+      
           {/* BUTTONS */}
           <div className="hero-buttons">
             <a href="#projects" className="btn-primary cursor-target">

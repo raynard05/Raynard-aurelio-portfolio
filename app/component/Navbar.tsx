@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
@@ -14,14 +14,19 @@ export default function Navbar() {
     { name: "Contact", href: "#contact" },
   ];
 
+  // 🔒 safety: close menu on resize (prevents invisible overlay)
+  useEffect(() => {
+    const close = () => setOpen(false);
+    window.addEventListener("resize", close);
+    return () => window.removeEventListener("resize", close);
+  }, []);
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-black border-b border-yellow-500/10">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
-        {/* LEFT LOGO + AVATAR */}
-        <div className="flex items-center gap-3 rounded-[]">
-         
-
+        {/* LEFT LOGO */}
+        <div className="flex items-center gap-3">
           <h1 className="text-yellow-400 font-bold text-xl">
             Raynard Aurelio.
           </h1>
@@ -36,7 +41,7 @@ export default function Navbar() {
               className="text-white hover:text-yellow-400 transition relative group"
             >
               {item.name}
-              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </div>
@@ -50,9 +55,9 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* MOBILE DROPDOWN */}
+      {/* MOBILE DROPDOWN (FIXED) */}
       {open && (
-        <div className="md:hidden bg-black px-6 pb-4">
+        <div className="md:hidden absolute top-16 left-0 w-full bg-black px-6 pb-4 z-50">
           <div className="flex flex-col space-y-4">
             {menu.map((item, i) => (
               <a
