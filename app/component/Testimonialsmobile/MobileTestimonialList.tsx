@@ -16,20 +16,17 @@ export default function MobileTestimonialList({
 }) {
   return (
     <section className="zigzag-wrapper">
-      {/* TITLE */}
-    
-
-      {/* LIST */}
       <div className="zigzag-list">
-          <motion.h1
-        className="zigzag-title"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        What They Say Client
-      </motion.h1>
+        <motion.h1
+          className="zigzag-title"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          client stories
+        </motion.h1>
+
         {testimonials.map((item, index) => (
           <motion.div
             key={index}
@@ -39,13 +36,24 @@ export default function MobileTestimonialList({
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <span className="quote">“</span>
+            {/* Doodle decoration */}
+            <div className="card-doodle"></div>
 
-            <p>{item.text}</p>
+            {/* Chat Bubble Tail */}
+            <div className="chat-tail"></div>
 
-            <div className="footer">
-              <strong>{item.name}</strong>
-              <span>{item.role}</span>
+            <div className="chat-header">
+              <div className="avatar-circle">
+                {item.name.charAt(0)}
+              </div>
+              <div className="user-info">
+                <strong>{item.name}</strong>
+                <span>{item.role}</span>
+              </div>
+            </div>
+
+            <div className="chat-body">
+              <p>{item.text}</p>
             </div>
           </motion.div>
         ))}

@@ -18,12 +18,12 @@ export default function SecondContactPage() {
       <div className="second-contact-grid">
 
         {/* LEFT SIDE */}
-      
+
         {/* RIGHT SIDE */}
-      
-<div style={{ height: '600px', position: 'relative' }}>
-  <FlowingMenu items={demoItems} />
-</div>
+
+        <div style={{ height: '600px', position: 'relative' }}>
+          <FlowingMenu items={demoItems} />
+        </div>
 
       </div>
     </section>

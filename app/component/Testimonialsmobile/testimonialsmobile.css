@@ -1,109 +1,188 @@
 /* WRAPPER */
 .zigzag-wrapper {
   width: 100%;
-  
+  background-color: #000;
+  overflow: hidden;
+  position: relative;
+
   /* BACKGROUND DOODLE */
   background-image: url("/doodle.png");
   background-repeat: repeat;
   background-size: 240px;
   background-position: center;
 
-  
+
 }
 
 /* TITLE */
 .zigzag-title {
   text-align: center;
-  color: #facc15; /* yellow-400 */
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 48px;
-  letter-spacing: 0.5px;
-  padding: 3px;
-  background-color: #000;
-
-
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+  text-transform: lowercase;
 }
 
+.zigzag-title::after {
+  content: ".";
+  color: #facc15;
+}
 
 /* CONTAINER */
 .zigzag-list {
   width: 100%;
-  padding: 80px 16px 160px;
+  padding: 60px 20px 100px;
   display: flex;
   flex-direction: column;
-  gap: 64px;
-
+  gap: 40px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-/* CARD BASE */
+/* CARD BASE - CHAT BUBBLE */
 .zigzag-card {
-    
   position: relative;
-  width: 72%;
-  background: #facc15; /* yellow-400 */
+  width: 85%;
+  background: #facc15;
+  /* Yellow-400 */
   color: #000;
-  border-radius: 22px;
-
-  padding: 40px 26px 28px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 12px;
+  border: 2px solid #000;
 }
 
-/* LEFT / RIGHT POSITION */
+/* DOODLE DECORATION */
+.card-doodle {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 40px;
+  height: 40px;
+  background-image: radial-gradient(circle, #000 2px, transparent 2.5px);
+  background-size: 8px 8px;
+  /* Polka dots */
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  border: 2px solid #000;
+  background-color: #fff;
+}
+
+/* CHAT TAIL */
+.chat-tail {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #facc15;
+  bottom: 0px;
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  z-index: 1;
+}
+
+/* LEFT / RIGHT POSITIONING */
 .zigzag-card.left {
   align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.zigzag-card.left .chat-tail {
+  left: -8px;
+  bottom: -2px;
+  transform: rotate(45deg);
+  display: none;
+  /* simple border radius hack looks better sometimes, but let's stick to shape */
 }
 
 .zigzag-card.right {
   align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  background-color: #fff;
+  /* Alternate color for visual interest */
+  border-color: #facc15;
 }
 
-/* QUOTE ICON */
-.zigzag-card .quote {
-  position: absolute;
-  top: -22px;
-  left: 18px;
-  font-size: 84px;
-  font-weight: 800;
-  color: rgba(0, 0, 0, 0.18);
-  line-height: 1;
+.zigzag-card.right .chat-tail {
+  right: -8px;
+  bottom: -2px;
+  transform: rotate(45deg);
+  display: none;
 }
 
-/* TEXT */
-.zigzag-card p {
-  font-size: 0.92rem;
-  line-height: 1.7;
-  margin-bottom: 28px;
+/* Re-doing tails properly with pseudo elements later if needed, but border radius + nice spacing works well for 'chat like' */
+
+/* CHAT HEADER */
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+  padding-bottom: 12px;
 }
 
-/* FOOTER */
-.zigzag-card .footer {
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  background: #000;
+  color: #facc15;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.2rem;
+  border: 2px solid #fff;
+}
+
+.user-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
-.zigzag-card .footer strong {
-  font-size: 0.9rem;
-  font-weight: 700;
+.user-info strong {
+  font-size: 1rem;
+  line-height: 1.1;
 }
 
-.zigzag-card .footer span {
-  font-size: 0.78rem;
+.user-info span {
+  font-size: 0.75rem;
   opacity: 0.7;
+  font-weight: 500;
 }
 
+/* CHAT BODY */
+.chat-body p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
 
-
+/* Alternate colors for 'right' aligned cards to look like a conversation */
 .zigzag-card.right {
-  transform: translateX(-4px);
-}
-.zigzag-card.left {
-  transform: translateX(4px);
+  background: #111;
+  color: #fff;
+  border: 1px solid #333;
 }
 
+.zigzag-card.right .avatar-circle {
+  background: #facc15;
+  color: #000;
+  border-color: #000;
+}
 
+.zigzag-card.right .chat-header {
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
+}
+
+.zigzag-card.right .card-doodle {
+  background-color: #facc15;
+  border-color: #fff;
+  background-image: radial-gradient(circle, #000 2px, transparent 2.5px);
+}

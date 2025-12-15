@@ -1,8 +1,21 @@
 .Secondcontact-wrapper {
-  width: 100%;
-  padding: 80px 20px;
-  display: flex;
-  justify-content: center;
-  background: linear-gradient(to bottom,#0a0a15,  #000);
-  color: white;
+    width: 100%;
+    padding: 80px 20px;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to bottom, #0a0a15, #000);
+    color: white;
+}
+
+.flow-menu-container {
+    height: 600px;
+    position: relative;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .flow-menu-container {
+        height: auto;
+        min-height: 400px;
+    }
 }

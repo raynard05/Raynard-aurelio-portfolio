@@ -94,7 +94,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ link, text, image }) => {
             {repeatedMarqueeContent}
             {repeatedMarqueeContent}
             {repeatedMarqueeContent}
-           
+
           </div>
         </div>
       </div>
