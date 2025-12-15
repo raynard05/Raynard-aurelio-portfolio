@@ -1,5 +1,5 @@
 .ray-footer {
-  background: linear-gradient(rgba(5, 5, 5, 0.95), rgba(211, 210, 210, 0.226)), url("/footer_doodle1.png");
+  background: linear-gradient(rgba(5, 5, 5, 0.4), rgba(5, 5, 5, 0.4)), url("/footer_doodle_yellow.png");
   background-size: 300px;
   background-repeat: repeat;
   color: #fff;
@@ -86,7 +86,6 @@
 .ray-footer__link:hover svg {
   transform: scale(1.1);
 }
-
 
 @media (max-width: 768px) {
   .ray-footer__inner {
