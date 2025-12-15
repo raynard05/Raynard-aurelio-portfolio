@@ -1,0 +1,66 @@
+.tm-marquee{
+  background: #000; /* black band */
+  padding: 20px 0 28px;
+  overflow: hidden;
+}
+.tm-header{max-width:1200px;margin:0 auto;padding:8px 18px 16px;text-align:center}
+.tm-header__title{color:#FFD000;margin:0;font-size:clamp(28px,5vw,56px);letter-spacing:0.6px;font-weight:900;line-height:1}
+
+.tm-marquee__viewport{overflow:hidden;margin-top:20px}
+.tm-marquee__track{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  will-change: transform;
+  animation: tm-scroll 20s linear infinite;
+  padding-left: 12px;
+}
+.tm-card{
+  background: #FFD000;
+  color: #000;
+  width: 360px;
+  height: 160px;
+  padding: 18px 20px 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.tm-card__text{
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: rgba(0,0,0,0.9);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+.tm-card__meta{display:flex;gap:8px;align-items:center;font-size:13px;font-weight:800}
+.tm-card__role{font-weight:600;color:rgba(0,0,0,0.7)}
+
+.tm-card:hover{transform: translateY(-8px) scale(1.02);transition:transform .18s ease}
+
+.tm-card__icon{position:absolute;left:12px;top:8px}
+.tm-comma{font-size:48px;line-height:1;color:rgba(0,0,0,0.12);font-weight:900}
+
+@keyframes tm-scroll{
+  0%{transform: translateX(0)}
+  100%{transform: translateX(-50%)}
+}
+
+/* pause animation on hover */
+.tm-marquee__track:hover{animation-play-state:paused}
+
+@media (prefers-reduced-motion: reduce){
+  .tm-marquee__track{animation:none}
+}
+
+@media (max-width: 640px){
+  .tm-marquee__track{animation-duration:24s}
+  .tm-card{width:300px;height:140px}
+}

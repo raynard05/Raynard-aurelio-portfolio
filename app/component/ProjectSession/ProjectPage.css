@@ -1,0 +1,274 @@
+/* Container utama halaman */
+.project-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #000;
+  overflow: hidden;
+}
+
+/* Layer animasi lingkaran */
+.project-animated-bg {
+  position: absolute;
+  inset: 0;
+  background: #facc15; /* yellow-400 */
+  pointer-events: none;
+}
+
+/* Desktop Title (Text) */
+.title {
+  position: relative;
+  z-index: 20;
+  text-align: center;
+  font-size: 42px;
+  font-weight: 700;
+  color: white;
+  padding: 40px 20px 20px;
+  margin: 0;
+}
+
+.title span {
+  color: #FFD000;
+}
+
+/* Project Title Image Wrapper - Mobile Only */
+.project-title-wrapper {
+  display: none; /* Hidden by default on desktop */
+}
+
+.project-title-image {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(255, 208, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.project-title-image:hover {
+  transform: scale(1.05);
+}
+
+/* Konten halaman */
+.project-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-content h1 {
+  color: white;
+  font-size: 2.5rem;
+}
+
+/* Video Background */
+.project-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 1.5s ease-in-out;
+}
+
+/* Efek saat di fade out */
+.fade-out {
+  opacity: 0;
+}
+
+/* Video Loader */
+.project-video-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  color: #FFD000;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #FFD000;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 12px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile Project List Styles */
+.mobile-project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 40px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.mobile-project-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.mobile-project-item:hover {
+  transform: translateY(-5px);
+  border-color: #FFD000;
+}
+
+.mobile-project-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.mobile-project-item h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #FFD000;
+  margin-bottom: 10px;
+}
+
+.mobile-project-item p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+  .project-title-image {
+    max-width: 400px;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 800px) {
+  .project-section {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    background: #000;
+    overflow: hidden;
+    padding: 60px 0;
+  }
+
+  /* Hide desktop title on mobile */
+  .title {
+    display: none;
+  }
+
+  /* Show image title on mobile */
+  .project-title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px 15px;
+    position: relative;
+    z-index: 20;
+    margin-top: -100px;
+  }
+
+  .project-title-image {
+    max-width: 350px;
+  }
+
+  .mobile-project-list {
+    padding: 40px 20px;
+    gap: 30px;
+    min-height: auto;
+  }
+
+  .mobile-project-item img {
+    height: 180px;
+  }
+
+  .mobile-project-item h3 {
+    font-size: 18px;
+  }
+
+  .mobile-project-item p {
+    font-size: 13px;
+  }
+
+  .project-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    min-height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: 20px;
+  }
+}
+
+/* Small Mobile Responsive */
+@media (max-width: 480px) {
+  .project-section {
+    padding: 40px 0;
+  }
+
+  .project-title-wrapper {
+    padding: 20px 10px 10px;
+  }
+
+  .project-title-image {
+    max-width: 280px;
+  }
+
+  .mobile-project-list {
+    gap: 45px;
+    padding: 20px 20px;
+  }
+
+  .mobile-project-item {
+    padding: 15px;
+  }
+
+  .mobile-project-item img {
+    height: 150px;
+  }
+
+  .mobile-project-item h3 {
+    font-size: 16px;
+  }
+
+  .mobile-project-item p {
+    font-size: 12px;
+  }
+}
+
+/* Very Small Mobile */
+@media (max-width: 360px) {
+  .project-title-image {
+    max-width: 240px;
+  }
+
+  .mobile-project-item img {
+    height: 130px;
+  }
+}

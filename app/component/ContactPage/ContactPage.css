@@ -1,0 +1,163 @@
+.contact-wrapper {
+  width: 100%;
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+  background: black;
+  color: white;
+}
+.mobile-only{
+  display: none;
+}
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 1200px; /* sesuai permintaan */
+  gap: 10px;
+  align-items: start;
+}
+
+/* LEFT SIDE */
+.contact-left {
+  min-height: 300px;
+  border-radius: 12px;
+  padding: 60px;
+  position: relative;
+   transform: translate( 1% ,-10%);
+    overflow: visible;
+    pointerEvents: auto;
+   
+}
+
+/* RIGHT SIDE */
+.contact-right {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 32px;
+  border-color: #f5d142;
+}
+.circular-text-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-40%, 20%);
+  z-index: 10;
+  pointer-events: none; /* agar tidak menghalangi klik form */
+}
+
+.dot-grid-container{
+   position: absolute;
+  top: 50%;               
+  left: 0;
+  transform: translate(-20%, 300%);
+  z-index: 100;
+  opacity: 1;
+  pointer-events: none;
+}
+/* Monitor besar */
+@media (min-width: 1440px) { 
+  .dot-grid-container{
+      transform: translate(-10%, 350%);
+  }
+}
+
+/* Monitor besar */
+@media (min-width: 1000px) { 
+  .dot-grid-container{
+      transform: translate(-8%, 350%);
+  }
+}
+
+.contact-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.contact-title span {
+  color: #f5d142;
+}
+
+/* FORM */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  color: #ddd;
+  font-size: 14px;
+}
+
+.send-btn {
+  background: #f5d142;
+  color: #000;
+  font-weight: 600;
+  height: 48px;
+  margin-top: 5px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .circular-text-container{
+   display:none
+    
+  }
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 800px) {
+  .contact-container {
+     touch-action: pan-y;
+         position: relative ;   
+    overflow: visible;  
+    pointerEvents: auto;
+ /* sudah full width */
+   grid-template-columns: 1fr; /* sudah full width */
+    justify-items: center;   
+       /* <-- center child horizontally */
+  }
+
+  .contact-left {
+    padding: 30px;
+    min-width: 300px;
+    min-height: 500px;
+    transform: rotate(-5deg);     /* optional, tetap ada rotasi */
+    margin-bottom: 30px;          /* jangan pakai % tinggi, cukup px */
+    justify-content: center;      /* hanya untuk flex children, optional */
+  }
+
+  .contact-right {
+        width: 100%;                  /* biar full width juga */
+    max-width: 400px;             
+     /* optional */
+  }
+  .dot-grid-container{
+padding: 3px;
+gap: -5px;
+ transform: rotate(5deg); 
+  }
+  .mobile-only{
+    display: flex;
+  }
+
+
+}
+
+@media (max-width: 370px) {
+.contact-title{
+  font-size: 35px;
+}
+
+
+}
