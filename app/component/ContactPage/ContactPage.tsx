@@ -10,9 +10,11 @@ import "./ContactPage.css";
 import ProfileCard from "@/components/ProfileCards";
 import AnimatedContent from "@/components/AnimatedContent";
 import CircularText from "@/components/CircularText";
+import { useDevice } from "@/app/useDevice";
 import DotGrid from "@/components/DotGrid";
 
 export default function ContactPage() {
+  const { isWidthScreen } = useDevice();
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
@@ -94,14 +96,16 @@ export default function ContactPage() {
             threshold={0.2}
             delay={0.3}
           >
-            <div className="dot-grid-container">
-              <DotGrid />
-              <div className="mobile-only">
+            {!isWidthScreen && (
+              <div className="dot-grid-container">
                 <DotGrid />
+                <div className="mobile-only">
+                  <DotGrid />
+                </div>
+
+
               </div>
-
-
-            </div>
+            )}
           </AnimatedContent>
 
           <AnimatedContent

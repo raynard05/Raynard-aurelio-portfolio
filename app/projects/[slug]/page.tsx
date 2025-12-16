@@ -34,7 +34,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
     return (
         <div className="min-h-screen w-full bg-black text-white selection:bg-[#FFD000] selection:text-black font-sans overflow-x-hidden flex flex-col">
 
-            <main className="container mx-auto px-4 pt-32 pb-24 flex-grow flex flex-col items-center justify-center relative">
+            <main className="container mx-auto px-4 pt-40 pb-12 md:pt-32 md:pb-24 flex-grow flex flex-col items-center justify-center relative">
 
                 {/* Back to Home Button */}
                 <div className="absolute top-24 left-4 md:left-8 z-50">
@@ -45,11 +45,11 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                         <div className="p-2 rounded-full border border-white/10 bg-white/5 group-hover:border-[#FFD000]/50 transition-all">
                             <ArrowLeft className="w-5 h-5 group-transform group-hover:-translate-x-1 transition-transform" />
                         </div>
-                        <span className="text-sm font-medium tracking-wide hidden sm:block">Back</span>
+                        <span className="text-sm font-medium tracking-wide block">Back</span>
                     </button>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full max-w-7xl mb-24 relative">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full max-w-7xl lg:max-w-6xl xl:max-w-7xl mb-12 md:mb-24 relative lg:scale-90 lg:origin-center xl:scale-100 transition-transform duration-500">
 
                     {/* Left Column: Content */}
                     <motion.div
@@ -67,7 +67,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                                     {project.year}
                                 </span>
                             </div>
-                            <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 leading-tight">
+                            <h1 className="text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60 leading-tight">
                                 {project.title}
                             </h1>
                         </div>
@@ -85,21 +85,21 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                         initial={{ opacity: 0, scale: 0.8, y: 50 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         transition={{ duration: 1, ease: "circOut", delay: 0.2 }}
-                        className="order-1 lg:order-2 flex justify-center items-center w-full relative"
+                        className="order-1 lg:order-2 flex justify-center items-center w-full relative mb-32 lg:mb-0"
                     >
                         {/* Screenshot Carousel Controls (Flanking the Mockup) */}
                         <button
                             onClick={prevImage}
-                            className="absolute left-2 lg:left-4 xl:-left-16 top-1/2 -translate-y-1/2 z-40 p-3 rounded-full border border-white/10 bg-black/50 backdrop-blur-sm hover:border-[#FFD000]/50 text-white/70 hover:text-[#FFD000] transition-all"
+                            className="absolute left-2 lg:left-4 xl:-left-16 top-1/2 -translate-y-1/2 z-40 p-2 md:p-3 rounded-full border border-white/10 bg-black/50 backdrop-blur-sm hover:border-[#FFD000]/50 text-white/70 hover:text-[#FFD000] transition-all"
                         >
-                            <ArrowLeft className="w-6 h-6" />
+                            <ArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
                         </button>
 
                         <button
                             onClick={nextImage}
-                            className="absolute right-2 lg:right-4 xl:-right-16 top-1/2 -translate-y-1/2 z-40 p-3 rounded-full border border-white/10 bg-black/50 backdrop-blur-sm hover:border-[#FFD000]/50 text-white/70 hover:text-[#FFD000] transition-all"
+                            className="absolute right-2 lg:right-4 xl:-right-16 top-1/2 -translate-y-1/2 z-40 p-2 md:p-3 rounded-full border border-white/10 bg-black/50 backdrop-blur-sm hover:border-[#FFD000]/50 text-white/70 hover:text-[#FFD000] transition-all"
                         >
-                            <ArrowRight className="w-6 h-6" />
+                            <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
                         </button>
 
                         <div className="relative w-full flex justify-center perspective-1000">
