@@ -49,7 +49,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                     </button>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full max-w-7xl lg:max-w-6xl xl:max-w-7xl mb-12 md:mb-24 relative lg:scale-90 lg:origin-center xl:scale-100 transition-transform duration-500">
+                <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20 items-center w-full max-w-7xl lg:max-w-6xl xl:max-w-7xl mb-12 md:mb-24 relative lg:scale-90 lg:origin-center xl:scale-100 transition-transform duration-500">
 
                     {/* Left Column: Content */}
                     <motion.div

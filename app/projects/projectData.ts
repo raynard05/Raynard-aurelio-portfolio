@@ -33,7 +33,7 @@ export const projects: ProjectData[] = [
     },
     {
         slug: "shrimpscale",
-        title: "ShrimpScale",
+        title: "ShrimpScale Enterprise",
         category: "Desktop App",
         year: "2025",
         description:
@@ -44,7 +44,11 @@ export const projects: ProjectData[] = [
             "/Project/Shrimpscale/screen1.png",
             "/Project/Shrimpscale/screen2.png",
             "/Project/Shrimpscale/screen3.png",
-            "/Project/Shrimpscale/screen4.png"
+            "/Project/Shrimpscale/screen4.png",
+            "/Project/Shrimpscale/screen5.png",
+            "/Project/Shrimpscale/screen6.png",
+            "/Project/Shrimpscale/screen7.png",
+            "/Project/Shrimpscale/screen8.png"
         ],
         icon: "/project2.png",
         type: "desktop",
@@ -55,7 +59,7 @@ export const projects: ProjectData[] = [
         category: "Web Development",
         year: "2025",
         description:
-            "Tourism website for cultural destinations in Lidah Wetan developed with Next.js.",
+            "Tourism website for cultural destinations in Lidah Wetan developed with Next.js. visit on desawisatabudayalidahwetan.site",
         details:
             "A web-based tourism platform developed for two cultural tourism destinations in Lidah Wetan: Makam Sawunggaling and Pasar Lidah Ndonowati. The website allows visitors to access information easily, including through QR code scanning on-site. Built using Next.js with TypeScript, styled with Tailwind CSS, and deployed on Vercel for optimal performance and scalability.",
         images: [
