@@ -146,6 +146,20 @@
     justify-items: center;
   }
 
+  /* Laptop adjustment */
+  @media (min-width: 1024px) and (max-width: 1300px) {
+    .contact-left {
+      padding: 40px;
+      transform: none;
+      /* Remove offset to prevent overlap */
+    }
+
+    .contact-container {
+      gap: 30px;
+      /* Ensure gap exists */
+    }
+  }
+
   .contact-left {
     padding: 30px;
     min-width: 300px;
