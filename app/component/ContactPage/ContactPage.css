@@ -50,7 +50,7 @@
 }
 
 .contact-right {
-  background: rgba(255, 255, 255, 0.03);
+  background: #000;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   padding: 32px;
@@ -180,5 +180,14 @@
 @media (max-width: 370px) {
   .contact-title {
     font-size: 35px;
+  }
+}
+
+@media (min-width: 801px) {
+  .contact-wrapper {
+    background: url('/assets/doodle-face2.png');
+    background-size: 240px;
+    background-repeat: repeat;
+    background-position: center;
   }
 }

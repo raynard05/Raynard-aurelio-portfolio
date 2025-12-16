@@ -1,66 +1,167 @@
-.tm-marquee{
-  background: #000; /* black band */
-  padding: 20px 0 28px;
+.tm-marquee {
+  background: #ffd00079 url('/assets/doodle-pattern2.png');
+  background-size: cover;
+  background-position: center;
+  padding: 300px 0 300px;
   overflow: hidden;
+  position: relative;
+  border-top: 4px solid #000;
 }
-.tm-header{max-width:1200px;margin:0 auto;padding:8px 18px 16px;text-align:center}
-.tm-header__title{color:#FFD000;margin:0;font-size:clamp(28px,5vw,56px);letter-spacing:0.6px;font-weight:900;line-height:1}
 
-.tm-marquee__viewport{overflow:hidden;margin-top:20px}
-.tm-marquee__track{
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  will-change: transform;
-  animation: tm-scroll 20s linear infinite;
-  padding-left: 12px;
+.tm-header {
+  max-width: 1200px;
+  /* margin: 0 auto; */
+  padding: 0 18px 40px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
 }
-.tm-card{
-  background: #FFD000;
+
+.tm-header__title {
+  color: #FFD000;
+  background: #000;
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 0;
+  margin: 0;
+  font-size: clamp(32px, 6vw, 64px);
+  letter-spacing: -1px;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  /* Removed text-stroke and shadow for clean yellow-on-black look */
+}
+
+.tm-marquee__viewport {
+  overflow: hidden;
+  margin-top: 20px;
+  /* Steeper slope based on sketch */
+  transform: rotate(-5deg);
+}
+
+.tm-marquee__track {
+  display: flex;
+  gap: 32px;
+  align-items: stretch;
+  /* Cards same height */
+  will-change: transform;
+  animation: tm-scroll 25s linear infinite;
+  padding: 20px 0;
+  /* Space for shadows */
+}
+
+.tm-card {
+  background: #fff;
   color: #000;
-  width: 360px;
-  height: 160px;
-  padding: 18px 20px 16px 20px;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.28);
+  width: 400px;
+  min-height: 220px;
+  /* Taller for content */
+  padding: 24px;
+  border-radius: 24px;
+  border: 4px solid #000;
+  box-shadow: 8px 8px 0px 0px #000;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   flex: 0 0 auto;
   position: relative;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
 }
 
-.tm-card__text{
-  font-size: 14px;
-  line-height: 1.4;
+.tm-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0px 0px #000;
+}
+
+.tm-card__icon {
+  /* position: absolute; top: 16px; left: 16px; */
+  /* Make comma cleaner */
+  margin-bottom: -10px;
+}
+
+.tm-comma {
+  font-size: 64px;
+  line-height: 0.5;
+  color: #FFD000;
+  font-weight: 900;
+  -webkit-text-stroke: 2px #000;
+  /* Black outline for yellow comma */
+  text-stroke: 2px #000;
+}
+
+.tm-card__text {
+  font-size: 16px;
+  line-height: 1.5;
   font-weight: 600;
-  color: rgba(0,0,0,0.9);
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
+  color: #000;
+  flex-grow: 1;
 }
-.tm-card__meta{display:flex;gap:8px;align-items:center;font-size:13px;font-weight:800}
-.tm-card__role{font-weight:600;color:rgba(0,0,0,0.7)}
 
-.tm-card:hover{transform: translateY(-8px) scale(1.02);transition:transform .18s ease}
+.tm-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+  font-weight: 800;
+  border-top: 3px solid #000;
+  padding-top: 12px;
+}
 
-.tm-card__icon{position:absolute;left:12px;top:8px}
-.tm-comma{font-size:48px;line-height:1;color:rgba(0,0,0,0.12);font-weight:900}
+.tm-card__name {
+  font-size: 18px;
+  text-transform: uppercase;
+}
 
-@keyframes tm-scroll{
-  0%{transform: translateX(0)}
-  100%{transform: translateX(-50%)}
+.tm-card__role {
+  font-weight: 600;
+  color: #666;
+  /* Slightly lighter for hierarchy */
+  font-size: 13px;
+}
+
+@keyframes tm-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* pause animation on hover */
-.tm-marquee__track:hover{animation-play-state:paused}
-
-@media (prefers-reduced-motion: reduce){
-  .tm-marquee__track{animation:none}
+.tm-marquee__track:hover {
+  animation-play-state: paused;
 }
 
-@media (max-width: 640px){
-  .tm-marquee__track{animation-duration:24s}
-  .tm-card{width:300px;height:140px}
+@media (prefers-reduced-motion: reduce) {
+  .tm-marquee__track {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .tm-marquee__track {
+    animation-duration: 20s;
+  }
+
+  .tm-card {
+    width: 280px;
+    min-height: 200px;
+    padding: 20px;
+  }
+
+  .tm-header__title {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 801px) {
+  .tm-marquee {
+    background-image: url('/assets/doodle-face2.png');
+    background-size: 240px;
+    /* Fixed size for neatly tiling pattern */
+    background-repeat: repeat;
+    background-position: center;
+  }
 }

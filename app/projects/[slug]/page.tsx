@@ -76,11 +76,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                             {project.details}
                         </p>
 
-                        <div className="flex gap-4 pt-4">
-                            <button className="px-8 py-3 bg-[#FFD000] text-black font-bold rounded-full hover:bg-[#FFD000]/90 transition-colors shadow-[0_0_20px_rgba(255,208,0,0.3)] hover:shadow-[0_0_30px_rgba(255,208,0,0.5)]">
-                                Visit Live Site
-                            </button>
-                        </div>
+
                     </motion.div>
 
 
@@ -136,7 +132,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                                                 transition={{ duration: 0.3 }}
                                                 src={project.images[currentImageIndex]}
                                                 alt={`${project.title} screenshot ${currentImageIndex + 1}`}
-                                                className="w-full h-auto object-cover"
+                                                className="w-full h-full object-cover"
                                             />
                                         </AnimatePresence>
                                     </LaptopMockup>

@@ -76,7 +76,7 @@ export default function ProjectPage() {
 
   /* Mapped from projectData.ts */
   const items = projects.map(p => ({
-    image: p.images[0],
+    image: p.icon,
     title: p.title,
     category: p.category,
     year: p.year,
@@ -85,7 +85,7 @@ export default function ProjectPage() {
   }));
 
   const items2 = projects.map(p => ({
-    image: p.images[0],
+    image: p.icon,
     link: `/projects/${p.slug}`,
     title: p.title,
     description: p.description
