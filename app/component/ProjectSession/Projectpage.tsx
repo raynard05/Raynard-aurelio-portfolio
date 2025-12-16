@@ -84,14 +84,14 @@ export default function ProjectPage() {
       image: "/project2.png",
       title: "ShrimpScale",
       category: "Desktop App",
-      year: "2023",
+      year: "2025",
       description: "Freelance Desktop app for Pt. Wirontono Baru Jakarta.",
     },
     {
       image: "/project3.png",
       title: "Unesa Eco-edu",
       category: "Web Development",
-      year: "2023",
+      year: "2025",
       description:
         "Freelance Unesa eco-edu tourism website for the cultural village of Lidah Wetan based on Next.js",
     },
@@ -99,7 +99,7 @@ export default function ProjectPage() {
       image: "/project4.png",
       title: "Talent-Go",
       category: "Web Platform",
-      year: "2024",
+      year: "2025",
       description:
         "Internship for PT Vascomm Sidoarjo – Laravel + MySQL website",
     },
@@ -107,7 +107,7 @@ export default function ProjectPage() {
       image: "/project5.jpg",
       title: "One-Click",
       category: "Inventory System",
-      year: "2023",
+      year: "2025",
       description:
         "Freelance MIT inventory application from health information students",
     },
@@ -232,18 +232,51 @@ export default function ProjectPage() {
 
       {/* VIDEO - Desktop Only */}
       {!isSmallScreen && !hideVideo && (
-        <video
-          className={`project-video-bg ${fadeOut ? "fade-out" : ""}`}
-          src="/video_2.mp4"
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          onEnded={() => {
-            setFadeOut(true);
-            setTimeout(() => setHideVideo(true), 1500);
-          }}
-        />
+        <>
+          {/* Window Shutter Animation */}
+          <motion.div
+            initial={{ height: "50%" }}
+            whileInView={{ height: "0%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 2.5, ease: "easeInOut" }}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              background: "#000",
+              zIndex: 30,
+              pointerEvents: "none"
+            }}
+          />
+          <motion.div
+            initial={{ height: "50%" }}
+            whileInView={{ height: "0%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 2.5, ease: "easeInOut" }}
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              background: "#000",
+              zIndex: 30,
+              pointerEvents: "none"
+            }}
+          />
+          <video
+            className={`project-video-bg ${fadeOut ? "fade-out" : ""}`}
+            src="/video_2.mp4"
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            onEnded={() => {
+              setFadeOut(true);
+              setTimeout(() => setHideVideo(true), 1500);
+            }}
+          />
+        </>
       )}
     </section>
   );

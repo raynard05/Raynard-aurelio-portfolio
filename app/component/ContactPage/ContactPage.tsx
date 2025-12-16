@@ -81,7 +81,7 @@ export default function ContactPage() {
       <div className="contact-container">
         {/* LEFT SECTION */}
         <div className="contact-left">
-          
+
           <AnimatedContent
             distance={150}
             direction="vertical"
@@ -97,13 +97,13 @@ export default function ContactPage() {
             <div className="dot-grid-container">
               <DotGrid />
               <div className="mobile-only">
-              <DotGrid />
+                <DotGrid />
               </div>
-          
-             
+
+
             </div>
           </AnimatedContent>
-        
+
           <AnimatedContent
             distance={150}
             direction="horizontal"
@@ -129,7 +129,7 @@ export default function ContactPage() {
               enableTilt={false}
               enableMobileTilt={false}
               behindGlowEnabled={false}
-             
+
             />
           </AnimatedContent>
         </div>

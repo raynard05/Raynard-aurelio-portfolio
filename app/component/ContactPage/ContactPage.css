@@ -6,31 +6,49 @@
   background: black;
   color: white;
 }
-.mobile-only{
+
+.mobile-only {
   display: none;
 }
+
+/* Desktop Grid Offsets - Visible only on wider screens */
+.desktop-grid-offset-1,
+.desktop-grid-offset-2 {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.desktop-grid-offset-1 {
+  transform: translate(45%, 250%) scale(0.9);
+}
+
+.desktop-grid-offset-2 {
+  transform: translate(-45%, 400%) scale(0.9);
+}
+
 .contact-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
-  max-width: 1200px; /* sesuai permintaan */
+  max-width: 1200px;
   gap: 10px;
   align-items: start;
 }
 
-/* LEFT SIDE */
 .contact-left {
   min-height: 300px;
   border-radius: 12px;
   padding: 60px;
   position: relative;
-   transform: translate( 1% ,-10%);
-    overflow: visible;
-    pointerEvents: auto;
-   
+  transform: translate(1%, -10%);
+  overflow: visible;
+  pointerEvents: auto;
 }
 
-/* RIGHT SIDE */
 .contact-right {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -38,35 +56,37 @@
   padding: 32px;
   border-color: #f5d142;
 }
+
 .circular-text-container {
   position: absolute;
   top: 0;
   right: 0;
   transform: translate(-40%, 20%);
   z-index: 10;
-  pointer-events: none; /* agar tidak menghalangi klik form */
+  pointer-events: none;
 }
 
-.dot-grid-container{
-   position: absolute;
-  top: 50%;               
+.dot-grid-container {
+  position: absolute;
+  top: 50%;
   left: 0;
   transform: translate(-20%, 300%);
   z-index: 100;
   opacity: 1;
   pointer-events: none;
 }
-/* Monitor besar */
-@media (min-width: 1440px) { 
-  .dot-grid-container{
-      transform: translate(-10%, 350%);
+
+/* Monitor besar 1440px+ */
+@media (min-width: 1440px) {
+  .dot-grid-container {
+    transform: translate(-10%, 350%);
   }
 }
 
-/* Monitor besar */
-@media (min-width: 1000px) { 
-  .dot-grid-container{
-      transform: translate(-8%, 350%);
+/* Monitor besar 1000px+ */
+@media (min-width: 1000px) {
+  .dot-grid-container {
+    transform: translate(-8%, 350%);
   }
 }
 
@@ -80,7 +100,6 @@
   color: #f5d142;
 }
 
-/* FORM */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -108,56 +127,58 @@
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-  .circular-text-container{
-   display:none
-    
+  .circular-text-container {
+    display: none
   }
+
   .contact-container {
     grid-template-columns: 1fr;
   }
 }
+
 @media (max-width: 800px) {
   .contact-container {
-     touch-action: pan-y;
-         position: relative ;   
-    overflow: visible;  
+    touch-action: pan-y;
+    position: relative;
+    overflow: visible;
     pointerEvents: auto;
- /* sudah full width */
-   grid-template-columns: 1fr; /* sudah full width */
-    justify-items: center;   
-       /* <-- center child horizontally */
+    grid-template-columns: 1fr;
+    justify-items: center;
   }
 
   .contact-left {
     padding: 30px;
     min-width: 300px;
     min-height: 500px;
-    transform: rotate(-5deg);     /* optional, tetap ada rotasi */
-    margin-bottom: 30px;          /* jangan pakai % tinggi, cukup px */
-    justify-content: center;      /* hanya untuk flex children, optional */
+    transform: rotate(-5deg);
+    margin-bottom: 30px;
+    justify-content: center;
   }
 
   .contact-right {
-        width: 100%;                  /* biar full width juga */
-    max-width: 400px;             
-     /* optional */
+    width: 100%;
+    max-width: 400px;
   }
-  .dot-grid-container{
-padding: 3px;
-gap: -5px;
- transform: rotate(5deg); 
+
+  .dot-grid-container {
+    padding: 3px;
+    gap: -5px;
+    transform: rotate(5deg);
   }
-  .mobile-only{
+
+  .mobile-only {
     display: flex;
   }
 
-
+  /* Hide desktop grids on mobile just in case */
+  .desktop-grid-offset-1,
+  .desktop-grid-offset-2 {
+    display: none;
+  }
 }
 
 @media (max-width: 370px) {
-.contact-title{
-  font-size: 35px;
-}
-
-
+  .contact-title {
+    font-size: 35px;
+  }
 }
