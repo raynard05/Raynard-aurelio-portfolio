@@ -10,18 +10,18 @@ import TextType from "@/components/TextType"
 export default function Hero() {
   return (
     <section id="home" className="hero-section">
-      
+
       {/* BACKGROUND GALAXY */}
- <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10">
         <Particles
-    particleColors={['#FFD000', '#ffffff']}
-    particleCount={200}
-    particleSpread={30}
-    speed={0.5}
-    particleBaseSize={550}
-    moveParticlesOnHover={true}
-    alphaParticles={true}
-    disableRotation={false}
+          particleColors={['#FFD000', '#ffffff']}
+          particleCount={200}
+          particleSpread={30}
+          speed={0.5}
+          particleBaseSize={550}
+          moveParticlesOnHover={true}
+          alphaParticles={true}
+          disableRotation={false}
         />
       </div>
 
@@ -43,7 +43,7 @@ export default function Hero() {
             />
           </div>
 
-                <BlurText
+          <BlurText
             text="Raynard Aurelio"
             delay={120}
             animateBy="words"
@@ -59,20 +59,20 @@ export default function Hero() {
             direction="top"
             className="hero-role"    // tetap pakai CSS kamu
           />
-<div className="hero-lock">
-  <div className="hero-ghost">
-    Software engineer specializing in scalable architecture and high-impact features. I help teams move faster, reduce complexity, and ship products that perform reliably at scale.
-  </div>
+          <div className="hero-lock">
+            <div className="hero-ghost">
+              Software engineer specializing in scalable architecture and high-impact features. I help teams move faster, reduce complexity, and ship products that perform reliably at scale.
+            </div>
 
-  <TextType
-    text={`Software engineer specializing in scalable architecture and high-impact features. I help teams move faster, reduce complexity, and ship products that perform reliably at scale.`}
-    typingSpeed={30}
-    pauseDuration={6000}
-    showCursor={true}
-    cursorCharacter=">"
-    className="hero-desc"
-  />
-</div>
+            <TextType
+              text={`Software engineer specializing in scalable architecture and high-impact features. I help teams move faster, reduce complexity, and ship products that perform reliably at scale.`}
+              typingSpeed={30}
+              pauseDuration={6000}
+              showCursor={true}
+              cursorCharacter=">"
+              className="hero-desc"
+            />
+          </div>
 
 
           {/* SOCIAL ICONS */}
@@ -89,12 +89,12 @@ export default function Hero() {
               <Mail size={18} />
             </a>
 
-            <a href="/cv.pdf" target="_blank" className="social-icon cursor-target">
+            <a href="/raynard_cvlama.pdf" download="Raynard_Aurelio_CV.pdf" className="social-icon cursor-target">
               <FileText size={18} />
             </a>
           </div>
 
-      
+
           {/* BUTTONS */}
           <div className="hero-buttons">
             <a href="#projects" className="btn-primary cursor-target">

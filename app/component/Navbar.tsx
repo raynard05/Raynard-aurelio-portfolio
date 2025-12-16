@@ -3,10 +3,13 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const pathname = usePathname();
+  const router = useRouter();
 
   const menu = [
     { name: "Home", href: "#home" },
@@ -47,6 +50,19 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    if (pathname === "/") {
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      router.push("/" + href);
+    }
+    setOpen(false);
+  };
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-black border-b border-yellow-500/10">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -66,13 +82,7 @@ export default function Navbar() {
               <a
                 key={i}
                 href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  const target = document.querySelector(item.href);
-                  if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className={`text-white hover:text-yellow-400 transition relative group ${isActive ? 'text-yellow-400' : ''}`}
               >
                 {item.name}
@@ -101,14 +111,7 @@ export default function Navbar() {
                 <a
                   key={i}
                   href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const target = document.querySelector(item.href);
-                    if (target) {
-                      target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                    setOpen(false);
-                  }}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className={`text-white py-2 border-b border-white/10 ${isActive ? 'text-yellow-400' : ''}`}
                 >
                   {item.name}

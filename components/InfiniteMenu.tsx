@@ -1,5 +1,6 @@
 import { FC, useRef, useState, useEffect, MutableRefObject } from 'react';
 import { mat4, quat, vec2, vec3 } from 'gl-matrix';
+import { useRouter } from 'next/navigation';
 
 const discVertShaderSource = `#version 300 es
 
@@ -1053,6 +1054,7 @@ interface InfiniteMenuProps {
 }
 
 const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
+  const router = useRouter();
   const canvasRef = useRef<HTMLCanvasElement | null>(null) as MutableRefObject<HTMLCanvasElement | null>;
   const [activeItem, setActiveItem] = useState<MenuItem | null>(null);
   const [isMoving, setIsMoving] = useState<boolean>(false);
@@ -1092,7 +1094,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
     if (activeItem.link.startsWith('http')) {
       window.open(activeItem.link, '_blank');
     } else {
-      console.log('Internal route:', activeItem.link);
+      router.push(activeItem.link);
     }
   };
 
@@ -1127,11 +1129,10 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           rounded-[20px]
           py-[0.2em]
           px-[0.4em]
-          ${
-            isMoving
-              ? 'opacity-0 pointer-events-none duration-[100ms]'
-              : 'opacity-100 pointer-events-auto duration-[500ms]'
-          }
+          ${isMoving
+                ? 'opacity-0 pointer-events-none duration-[100ms]'
+                : 'opacity-100 pointer-events-auto duration-[500ms]'
+              }
         `}
           >
             {activeItem.title}
@@ -1150,11 +1151,10 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
           text-black
-          ${
-            isMoving
-              ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-60%] -translate-y-1/2'
-              : 'opacity-100 pointer-events-auto duration-[500ms] translate-x-[-90%] -translate-y-1/2'
-          }
+          ${isMoving
+                ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-60%] -translate-y-1/2'
+                : 'opacity-100 pointer-events-auto duration-[500ms] translate-x-[-90%] -translate-y-1/2'
+              }
         `}
           >
             {activeItem.description}
@@ -1178,11 +1178,10 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
           cursor-pointer
           transition-all
           ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${
-            isMoving
-              ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
-              : 'bottom-[3.8em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
-          }
+          ${isMoving
+                ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
+                : 'bottom-[3.8em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
+              }
         `}
           >
             <p className="select-none relative text-[#060010] top-[2px] text-[26px]">&#x2197;</p>

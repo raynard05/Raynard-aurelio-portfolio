@@ -6,6 +6,8 @@ import "./ProjectPage.css";
 import InfiniteMenu from "@/components/InfiniteMenu";
 import { useDevice } from "@/app/useDevice";
 import AnimatedContent from "@/components/AnimatedContent"
+import Link from "next/link";
+import { projects } from "@/app/projects/projectData";
 
 type ProjectItem = {
   image: string;
@@ -13,6 +15,7 @@ type ProjectItem = {
   description: string;
   category: string;
   year: string;
+  slug: string;
 };
 
 function MobileProjectList({ items }: { items: ProjectItem[] }) {
@@ -41,12 +44,12 @@ function MobileProjectList({ items }: { items: ProjectItem[] }) {
             <p>{item.description}</p>
 
             <div className="mobile-project-footer">
-              <span className="project-link-btn">
+              <Link href={`/projects/${item.slug}`} className="project-link-btn">
                 View Case Study
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1 11L11 1M11 1H3M11 1V9" stroke="#FFD000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </span>
+              </Link>
             </div>
           </div>
         </motion.div>
@@ -71,84 +74,22 @@ export default function ProjectPage() {
     ["circle(0% at 0% 0%)", "circle(150% at 0% 0%)"]
   );
 
-  const items = [
-    {
-      image: "/project1.png",
-      title: "Smarthouse App",
-      category: "Mobile App",
-      year: "2024",
-      description:
-        "Smarthouse mobile application for monitoring home security based on MQTT, Firebase and Flutter",
-    },
-    {
-      image: "/project2.png",
-      title: "ShrimpScale",
-      category: "Desktop App",
-      year: "2025",
-      description: "Freelance Desktop app for Pt. Wirontono Baru Jakarta.",
-    },
-    {
-      image: "/project3.png",
-      title: "Unesa Eco-edu",
-      category: "Web Development",
-      year: "2025",
-      description:
-        "Freelance Unesa eco-edu tourism website for the cultural village of Lidah Wetan based on Next.js",
-    },
-    {
-      image: "/project4.png",
-      title: "Talent-Go",
-      category: "Web Platform",
-      year: "2025",
-      description:
-        "Internship for PT Vascomm Sidoarjo – Laravel + MySQL website",
-    },
-    {
-      image: "/project5.jpg",
-      title: "One-Click",
-      category: "Inventory System",
-      year: "2025",
-      description:
-        "Freelance MIT inventory application from health information students",
-    },
-  ];
+  /* Mapped from projectData.ts */
+  const items = projects.map(p => ({
+    image: p.images[0],
+    title: p.title,
+    category: p.category,
+    year: p.year,
+    description: p.description,
+    slug: p.slug
+  }));
 
-  const items2 = [
-    {
-      image: "/project1.png",
-      link: "#",
-      title: "Smarthouse App",
-      description:
-        "Smarthouse mobile application for monitoring home security based on MQTT, Firebase and Flutter",
-    },
-    {
-      image: "/project2.png",
-      link: "#",
-      title: "ShrimpScale",
-      description: "Freelance Desktop app for Pt. Wirontono Baru Jakarta.",
-    },
-    {
-      image: "/project3.png",
-      link: "#",
-      title: "Unesa Eco-edu",
-      description:
-        "Freelance Unesa eco-edu tourism website for the cultural village of Lidah Wetan based on next.js",
-    },
-    {
-      image: "/project4.png",
-      link: "#",
-      title: "Talent-Go",
-      description:
-        "internship for pt.vascomm sidoarjo - Talent-Go laravel mysql & website",
-    },
-    {
-      image: "/project5.jpg",
-      link: "#",
-      title: "One-Click",
-      description:
-        "Freelance MIT inventory application from polytechnic health information management students",
-    },
-  ];
+  const items2 = projects.map(p => ({
+    image: p.images[0],
+    link: `/projects/${p.slug}`,
+    title: p.title,
+    description: p.description
+  }));
 
   // Mobile: Skip video and show content immediately
   useEffect(() => {
