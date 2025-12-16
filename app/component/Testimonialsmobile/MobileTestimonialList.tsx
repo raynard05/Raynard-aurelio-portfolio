@@ -18,7 +18,7 @@ export default function MobileTestimonialList({
     <section className="zigzag-wrapper">
       <div className="zigzag-list">
         <motion.h1
-          className="zigzag-title"
+          className="zigzag-title bg-black py-2"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

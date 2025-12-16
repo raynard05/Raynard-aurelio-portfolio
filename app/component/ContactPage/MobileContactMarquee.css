@@ -1,0 +1,86 @@
+/* Mobile Contact Grid Styles */
+.mobile-contact-wrapper {
+    width: 100%;
+    background: #000;
+    padding: 60px 20px;
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid rgba(255, 208, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 208, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mobile-contact-title {
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    opacity: 0.6;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 400px;
+    /* Constrain width for better look */
+}
+
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 24px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    aspect-ratio: 1/1;
+    /* Square cards look modern */
+}
+
+.contact-card:hover,
+.contact-card:active {
+    background: #FFD000;
+    border-color: #FFD000;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px -5px rgba(255, 208, 0, 0.3);
+}
+
+.contact-card span {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.contact-card:hover span,
+.contact-card:active span {
+    color: #000;
+}
+
+.contact-card img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: invert(1);
+    /* White icons on dark */
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.contact-card:hover img,
+.contact-card:active img {
+    filter: invert(0);
+    /* Black icons on yellow */
+    transform: scale(1.1);
+}

@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import "./ProjectPage.css";
 import InfiniteMenu from "@/components/InfiniteMenu";
 import { useDevice } from "@/app/useDevice";
-import AnimatedContent  from "@/components/AnimatedContent"
+import AnimatedContent from "@/components/AnimatedContent"
 
 type ProjectItem = {
   image: string;
   title: string;
   description: string;
+  category: string;
+  year: string;
 };
 
 function MobileProjectList({ items }: { items: ProjectItem[] }) {
@@ -20,13 +22,33 @@ function MobileProjectList({ items }: { items: ProjectItem[] }) {
         <motion.div
           key={i}
           className="mobile-project-item"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.1, duration: 0.5 }}
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ delay: i * 0.1, duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
         >
-          <img src={item.image} alt={item.title} loading="lazy" />
-          <h3>{item.title}</h3>
-          <p>{item.description}</p>
+          <div className="mobile-project-image-wrapper">
+            <img src={item.image} alt={item.title} loading="lazy" />
+          </div>
+
+          <div className="mobile-project-content-wrapper">
+            <span className="mobile-project-category">{item.category} • {item.year}</span>
+
+            <div className="mobile-project-header">
+              <h3>{item.title}</h3>
+            </div>
+
+            <p>{item.description}</p>
+
+            <div className="mobile-project-footer">
+              <span className="project-link-btn">
+                View Case Study
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 11L11 1M11 1H3M11 1V9" stroke="#FFD000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+            </div>
+          </div>
         </motion.div>
       ))}
     </div>
@@ -53,29 +75,39 @@ export default function ProjectPage() {
     {
       image: "/project1.png",
       title: "Smarthouse App",
+      category: "Mobile App",
+      year: "2024",
       description:
         "Smarthouse mobile application for monitoring home security based on MQTT, Firebase and Flutter",
     },
     {
       image: "/project2.png",
       title: "ShrimpScale",
+      category: "Desktop App",
+      year: "2023",
       description: "Freelance Desktop app for Pt. Wirontono Baru Jakarta.",
     },
     {
       image: "/project3.png",
       title: "Unesa Eco-edu",
+      category: "Web Development",
+      year: "2023",
       description:
         "Freelance Unesa eco-edu tourism website for the cultural village of Lidah Wetan based on Next.js",
     },
     {
       image: "/project4.png",
       title: "Talent-Go",
+      category: "Web Platform",
+      year: "2024",
       description:
         "Internship for PT Vascomm Sidoarjo – Laravel + MySQL website",
     },
     {
       image: "/project5.jpg",
       title: "One-Click",
+      category: "Inventory System",
+      year: "2023",
       description:
         "Freelance MIT inventory application from health information students",
     },
@@ -151,33 +183,33 @@ export default function ProjectPage() {
     <section id="projects" className={`project-section ${deviceClass}`}>
       {/* BACKGROUND CIRCLE */}
       {isSmallScreen ? (
-  // Mobile: Image
-    <AnimatedContent
+        // Mobile: Image
+        <AnimatedContent
           distance={150}
-    direction="horizontal"
-    reverse={true}
-    duration={1.3}
-    ease="power3.in"
-    initialOpacity={1}
-    animateOpacity
-    scale={0.1}
-    threshold={0.2}
-    delay={0.5}>
-  <div className="project-title-wrapper">
-    <img src="/figma1.png" />
-  </div>
-  </AnimatedContent>
-) : (
-  // Desktop: Text
-""
-)}
+          direction="horizontal"
+          reverse={true}
+          duration={1.3}
+          ease="power3.in"
+          initialOpacity={1}
+          animateOpacity
+          scale={0.1}
+          threshold={0.2}
+          delay={0.5}>
+          <div className="project-title-wrapper">
+            <img src="/figma1.png" />
+          </div>
+        </AnimatedContent>
+      ) : (
+        // Desktop: Text
+        ""
+      )}
       <motion.div
         style={{
           clipPath: isSmallScreen
             ? "circle(150% at 0% 0%)" // Always full on mobile
             : freezeBG
-            ? "circle(150% at 0% 0%)"
-            : clipPathScroll,
+              ? "circle(150% at 0% 0%)"
+              : clipPathScroll,
         }}
         className="project-animated-bg"
       />
