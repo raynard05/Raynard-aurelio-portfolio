@@ -312,11 +312,11 @@ export default function skillsSection() {
       <div className="curvedloop-wrapper " >
         <CurvedLoop
           marqueeText="Hire Me ✦ Let's Work Together ✦ Connect with me ✦ "
-          speed={2}
+          speed={3}
           curveAmount={250}
           direction="right"
           interactive={true}
-
+          variant="groovy"
         />
       </div>
 

@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 export type DeviceType = "smallscreen" | "widthscreen";
 
 const getDeviceType = (width: number): DeviceType => {
-  if (width < 800) return "smallscreen";
-  return "widthscreen"; // everything >= 800
+  if (width < 600) return "smallscreen";
+  return "widthscreen"; // everything >= 600
 };
 
 export const useDevice = () => {

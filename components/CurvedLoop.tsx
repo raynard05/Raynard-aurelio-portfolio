@@ -11,6 +11,7 @@ interface CurvedLoopProps {
   curveAmount?: number;
   direction?: 'left' | 'right';
   interactive?: boolean;
+  variant?: 'default' | 'groovy';
 }
 
 const CurvedLoop: FC<CurvedLoopProps> = ({
@@ -19,7 +20,8 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
   className,
   curveAmount = 400,
   direction = 'left',
-  interactive = true
+  interactive = true,
+  variant = 'default'
 }) => {
   const text = useMemo(() => {
     const hasTrailing = /\s|\u00A0$/.test(marqueeText);
@@ -33,7 +35,11 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
   const [offset, setOffset] = useState(0);
   const uid = useId();
   const pathId = `curve-${uid}`;
-  const pathD = `M-100,40 Q500,${40 + curveAmount} 1540,40`;
+
+  // Groovy wave path vs simple curve
+  const pathD = variant === 'groovy'
+    ? "M0,60 C360,160 720,-40 1080,60 C1440,160 1800,-40 2160,60"
+    : `M-100,40 Q500,${40 + curveAmount} 1540,40`;
 
   const dragRef = useRef(false);
   const lastXRef = useRef(0);
@@ -42,9 +48,9 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
 
   const textLength = spacing;
   const totalText = textLength
-    ? Array(Math.ceil(1800 / textLength) + 2)
-        .fill(text)
-        .join('')
+    ? Array(Math.ceil(2200 / textLength) + 2) // Increased buffer for wider wave
+      .fill(text)
+      .join('')
     : text;
   const ready = spacing > 0;
 
@@ -72,7 +78,11 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
         const wrapPoint = spacing;
         if (newOffset <= -wrapPoint) newOffset += wrapPoint;
         if (newOffset > 0) newOffset -= wrapPoint;
+
+        // Update main ref directly for speed
         textPathRef.current.setAttribute('startOffset', newOffset + 'px');
+
+        // Trigger re-render to update other layers (State update drives the other prop-based offsets)
         setOffset(newOffset);
       }
       frame = requestAnimationFrame(step);
@@ -121,7 +131,8 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
       onPointerLeave={endDrag}
     >
       <svg
-        className="select-none w-full overflow-visible block aspect-[100/12] text-[12rem]  sm:text-[5rem] md:text-[5rem] lg:text-[5rem]  xl:text-[5rem] font-bold uppercase leading-none"
+        className={`select-none w-full overflow-visible block aspect-[100/12] font-bold uppercase leading-none lg:mt-[80px] ${className?.includes('text-') ? '' : 'text-[12rem] sm:text-[5rem] md:text-[5rem] lg:text-[5rem] xl:text-[5rem]' // Default sizes if not provided
+          }`}
         viewBox="0 0 1440 120"
       >
         <text ref={measureRef} xmlSpace="preserve" style={{ visibility: 'hidden', opacity: 0, pointerEvents: 'none' }}>
@@ -131,11 +142,38 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
           <path ref={pathRef} id={pathId} d={pathD} fill="none" stroke="transparent" />
         </defs>
         {ready && (
-          <text xmlSpace="preserve" className={`fill-yellow-400 ${className ?? ''}`}>
-            <textPath ref={textPathRef} href={`#${pathId}`} startOffset={offset + 'px'} xmlSpace="preserve">
-              {totalText}
-            </textPath>
-          </text>
+          <>
+            {variant === 'groovy' ? (
+              <>
+                {/* Layer 1: Yellow Outline (Background) */}
+                <text className={className}>
+                  <textPath href={`#${pathId}`} startOffset={offset + 'px'} stroke="#FFD000" strokeWidth="28" strokeLinejoin="round" fill="none">
+                    {totalText}
+                  </textPath>
+                </text>
+
+                {/* Layer 2: Black Outline (Middle) */}
+                <text className={className}>
+                  <textPath href={`#${pathId}`} startOffset={offset + 'px'} stroke="#000000" strokeWidth="14" strokeLinejoin="round" fill="none">
+                    {totalText}
+                  </textPath>
+                </text>
+
+                {/* Layer 3: Yellow Fill (Foreground) */}
+                <text className={className}>
+                  <textPath ref={textPathRef} href={`#${pathId}`} startOffset={offset + 'px'} fill="#FFD000">
+                    {totalText}
+                  </textPath>
+                </text>
+              </>
+            ) : (
+              <text xmlSpace="preserve" className={`fill-yellow-400 ${className ?? ''}`}>
+                <textPath ref={textPathRef} href={`#${pathId}`} startOffset={offset + 'px'} xmlSpace="preserve">
+                  {totalText}
+                </textPath>
+              </text>
+            )}
+          </>
         )}
       </svg>
     </div>

@@ -60,31 +60,31 @@ export default function Home() {
     <>
       <Navbar />
       <Hero />
-      <div className="border-t-[1px] sm:border-t-[3px] md:border-t-4 lg:border-t-[5px] border-b-2 sm:border-b-[3px] md:border-b-4 lg:border-b-[5px] border-[#FFD000] bg-[#FFD000]">
-        <ScrollVelocity
-          texts={[
-            "IOT ENTHUSIAST ✦ WEB DEVELOPER ✦ MOBILE DEVELOPER ✦ DESKTOP APP DEVELOPER ✦",
-          ]}
-          className="text-black text-[20px] sm:text-[48px] md:text-[64px] lg:text-[80px] py-4 sm:py-6 md:py-8 lg:py-10"
-          velocity={100}
-          parallaxStyle={{
-            background: "#FFD000",
-          }}
-        />
-      </div>
-
-      {/* Second section with different border */}
-      <div className="border-b-[2px] sm:border-t-[3px] md:border-t-4 lg:border-t-[5px] border-b-4 sm:border-b-[6px] md:border-b-8 lg:border-b-[10px] border-[#FFD000] bg-black">
-        <ScrollVelocity
-          texts={[
-            "MOBILE DEVELOPER ✦ DESKTOP APP DEVELOPER ✦ IOT ENTHUSIAST ✦ WEB DEVELOPER ✦",
-          ]}
-          className="text-yellow-400 text-[20px] sm:text-[48px] md:text-[64px] lg:text-[80px] py-4 sm:py-6 md:py-8 lg:py-10"
-          velocity={-100}
-          parallaxStyle={{
-            background: "#000",
-          }}
-        />
+      <div className="w-full bg-transparent overflow-hidden pt-32 pb-0 md:py-32 relative z-20">
+        <div className="hero-comic-marquee">
+          <ScrollVelocity
+            texts={[
+              "WEB DEVELOPER ✦ MOBILE DEVELOPER ✦ IOT ENTHUSIAST ✦ DESKTOP APP DEVELOPER ✦",
+            ]}
+            className="text-black font-black text-[28px] sm:text-[48px] md:text-[64px] lg:text-[80px] py-6 uppercase"
+            velocity={100}
+            parallaxStyle={{
+              background: "transparent",
+            }}
+          />
+        </div>
+        <div className="hero-comic-marquee-inverse">
+          <ScrollVelocity
+            texts={[
+              "MOBILE DEVELOPER ✦ DESKTOP APP DEVELOPER ✦ IOT ENTHUSIAST ✦ WEB DEVELOPER ✦",
+            ]}
+            className="text-[#FFD000] font-black text-[28px] sm:text-[48px] md:text-[64px] lg:text-[80px] py-6 uppercase"
+            velocity={-100}
+            parallaxStyle={{
+              background: "transparent",
+            }}
+          />
+        </div>
       </div>
       <SkillsSection />
 

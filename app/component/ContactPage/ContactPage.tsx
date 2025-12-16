@@ -84,29 +84,7 @@ export default function ContactPage() {
         {/* LEFT SECTION */}
         <div className="contact-left">
 
-          <AnimatedContent
-            distance={150}
-            direction="vertical"
-            reverse={false}
-            duration={1.2}
-            ease="bounce.in"
-            initialOpacity={0.2}
-            animateOpacity
-            scale={1.1}
-            threshold={0.2}
-            delay={0.3}
-          >
-            {!isWidthScreen && (
-              <div className="dot-grid-container">
-                <DotGrid />
-                <div className="mobile-only">
-                  <DotGrid />
-                </div>
 
-
-              </div>
-            )}
-          </AnimatedContent>
 
           <AnimatedContent
             distance={150}
@@ -133,7 +111,7 @@ export default function ContactPage() {
               enableTilt={false}
               enableMobileTilt={false}
               behindGlowEnabled={false}
-
+              className="cartoon-card"
             />
           </AnimatedContent>
         </div>
@@ -155,14 +133,7 @@ export default function ContactPage() {
             <h2 className="contact-title">
               Get In <span>Touch</span>
             </h2>
-            <div className="circular-text-container">
-              <CircularText
-                text="TOUCH>ME>HERE>"
-                onHover="pause"
-                spinDuration={4}
-                className="text-white text-[6px] border-4 border-yellow-400"
-              />
-            </div>
+
 
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
