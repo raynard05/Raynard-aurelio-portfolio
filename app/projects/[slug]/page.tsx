@@ -90,14 +90,14 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                         {/* Screenshot Carousel Controls (Flanking the Mockup) */}
                         <button
                             onClick={prevImage}
-                            className="absolute left-2 lg:left-4 xl:-left-16 top-1/2 -translate-y-1/2 z-40 p-2 md:p-3 rounded-full border border-white/10 bg-black/50 backdrop-blur-sm hover:border-[#FFD000]/50 text-white/70 hover:text-[#FFD000] transition-all"
+                            className="absolute left-2 lg:left-4 xl:left-4 2xl:-left-16 top-1/2 -translate-y-1/2 z-40 p-2 md:p-3 rounded-full border border-white/10 bg-black/50 backdrop-blur-sm hover:border-[#FFD000]/50 text-white/70 hover:text-[#FFD000] transition-all"
                         >
                             <ArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
                         </button>
 
                         <button
                             onClick={nextImage}
-                            className="absolute right-2 lg:right-4 xl:-right-16 top-1/2 -translate-y-1/2 z-40 p-2 md:p-3 rounded-full border border-white/10 bg-black/50 backdrop-blur-sm hover:border-[#FFD000]/50 text-white/70 hover:text-[#FFD000] transition-all"
+                            className="absolute right-2 lg:right-4 xl:right-4 2xl:-right-16 top-1/2 -translate-y-1/2 z-40 p-2 md:p-3 rounded-full border border-white/10 bg-black/50 backdrop-blur-sm hover:border-[#FFD000]/50 text-white/70 hover:text-[#FFD000] transition-all"
                         >
                             <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
                         </button>

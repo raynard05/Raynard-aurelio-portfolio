@@ -11,15 +11,16 @@ export interface ProjectData {
     icon: string; // Original icon/thumbnail for the menu
     type: ProjectType;
 }
-
 export const projects: ProjectData[] = [
     {
         slug: "smarthouse-app",
         title: "Smarthouse App",
         category: "Mobile App",
         year: "2024",
-        description: "Smarthouse mobile application for monitoring home security based on MQTT, Firebase and Flutter",
-        details: "A comprehensive smart home security solution. This mobile application allows users to monitor their home security in real-time using MQTT protocol for low-latency communication. It integrates with Firebase for secure authentication and real-time database updates, ensuring that users are always instantly notified of any security events. Built with Flutter for a smooth cross-platform experience.",
+        description:
+            "A mobile application for monitoring home security and environmental conditions.",
+        details:
+            "A university project developed in the 3rd semester focusing on smart home security monitoring. The application monitors fire smoke detection, door status, smoke indicator lights, and real-time weather conditions using a weather API. It utilizes MQTT broker for real-time device communication, Firebase for data handling, and Flutter for cross-platform mobile development. Built using Android Studio with a strong focus on real-time monitoring and reliability.",
         images: [
             "/Project/Smarthouse/screen1.png",
             "/Project/Smarthouse/screen2.png",
@@ -35,8 +36,10 @@ export const projects: ProjectData[] = [
         title: "ShrimpScale",
         category: "Desktop App",
         year: "2025",
-        description: "Freelance Desktop app for Pt. Wirontono Baru Jakarta.",
-        details: "A specialized desktop application designed for industrial scale management at PT. Wirontono Baru wkwkwk. This application interfaces with digital scales to automate weight recording, improving accuracy and efficiency in the shrimp processing line. Features include real-time data logging, reporting, and integration with existing inventory systems.",
+        description:
+            "Enterprise desktop application for industrial data management at PT Wirontono Baru.",
+        details:
+            "An enterprise-level desktop application developed for PT Wirontono Baru Jakarta. The system is used for comprehensive data management including payroll processing, work tracking, employee account management, inventory of incoming and outgoing goods, and other operational management features. Designed with a minimalist user interface while maintaining complex and efficient business logic. Developed using Java (NetBeans) and MySQL for robust data handling.",
         images: [
             "/Project/Shrimpscale/screen1.png",
             "/Project/Shrimpscale/screen2.png",
@@ -51,8 +54,10 @@ export const projects: ProjectData[] = [
         title: "Unesa Eco-edu",
         category: "Web Development",
         year: "2025",
-        description: "Freelance Unesa eco-edu tourism website for the cultural village of Lidah Wetan based on Next.js",
-        details: "An interactive educational tourism website for the Lidah Wetan Cultural Village. Developed using Next.js for high performance and SEO optimization. The platform showcases the village's cultural heritage, offers booking capabilities for tours, and provides educational resources for visitors. Features a modern, responsive design with rich media galleries.",
+        description:
+            "Tourism website for cultural destinations in Lidah Wetan developed with Next.js.",
+        details:
+            "A web-based tourism platform developed for two cultural tourism destinations in Lidah Wetan: Makam Sawunggaling and Pasar Lidah Ndonowati. The website allows visitors to access information easily, including through QR code scanning on-site. Built using Next.js with TypeScript, styled with Tailwind CSS, and deployed on Vercel for optimal performance and scalability.",
         images: [
             "/Project/eco-eduunesa/screen1.png",
             "/Project/eco-eduunesa/screen2.png",
@@ -68,8 +73,10 @@ export const projects: ProjectData[] = [
         title: "Talent-Go",
         category: "Web Platform",
         year: "2025",
-        description: "Internship for PT Vascomm Sidoarjo – Laravel + MySQL website",
-        details: "A robust talent management platform built during an internship at PT Vascomm. This web application streamlines the recruitment and talent acquisition process. Backend powered by Laravel and MySQL ensures data integrity and scalability, while the frontend provides an intuitive interface for both HR managers and candidates.",
+        description:
+            "Internship for PT Vascomm Sidoarjo – Laravel + MySQL website",
+        details:
+            "A robust talent management platform built during an internship at PT Vascomm. This web application streamlines the recruitment and talent acquisition process. Backend powered by Laravel and MySQL ensures data integrity and scalability, while the frontend provides an intuitive interface for both HR managers and candidates.",
         images: [
             "/Project/talentgo/screen1.png",
             "/Project/talentgo/screen2.png",
@@ -85,8 +92,10 @@ export const projects: ProjectData[] = [
         title: "One-Click",
         category: "Inventory System",
         year: "2025",
-        description: "Freelance MIT inventory application from health information students",
-        details: "A mobile-first inventory management system developed for health information students. 'One-Click' simplifies the tracking of medical supplies and equipment. Designed for speed and ease of use on mobile devices, allowing students to quickly scan and update inventory records in a clinical setting.",
+        description:
+            "Mobile healthcare service application with patient and payment management.",
+        details:
+            "A collaborative project developed for Health Information Management students. In this project, I contributed to solving complex application flows related to payment systems and patient management. The application functions as an online dental service booking system, allowing dentists to visit patients directly. Developed using Supabase, Next.js, and MIT Inventory, with a focus on improving system usability and workflow efficiency.",
         images: [
             "/Project/one-click/screen1.png",
             "/Project/one-click/screen2.png",
