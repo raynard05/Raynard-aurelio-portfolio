@@ -3,7 +3,7 @@
 import { use, useState } from "react";
 import { notFound, useRouter } from "next/navigation";
 import { projects } from "../projectData";
-import SafariMockup from "@/components/ui/safari-mockup";
+import LaptopMockup from "@/components/ui/laptop-mockup";
 import AndroidMockup from "@/components/ui/android-mockup";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -126,7 +126,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                                 </div>
                             ) : (
                                 <div className="w-full transform hover:scale-[1.02] transition-transform duration-500">
-                                    <SafariMockup url={`https://${project.slug}.com`}>
+                                    <LaptopMockup>
                                         <AnimatePresence mode="wait">
                                             <motion.img
                                                 key={currentImageIndex}
@@ -139,7 +139,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                                                 className="w-full h-auto object-cover"
                                             />
                                         </AnimatePresence>
-                                    </SafariMockup>
+                                    </LaptopMockup>
                                 </div>
                             )}
 
