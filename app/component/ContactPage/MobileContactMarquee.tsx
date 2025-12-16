@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import "./MobileContactMarquee.css";
 
 type ContactItem = {
@@ -19,22 +20,31 @@ export default function MobileContactMarquee() {
 
     return (
         <section className="mobile-contact-wrapper">
-            <div className="mobile-contact-title">Lets Connect</div>
+            <motion.div
+                initial={{ scaleY: 0, opacity: 0 }}
+                whileInView={{ scaleY: 1, opacity: 1 }}
+                transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, amount: 0.2 }}
+                style={{ transformOrigin: "center" }}
+                className="w-full flex flex-col items-center"
+            >
+                <div className="mobile-contact-title">Lets Connect</div>
 
-            <div className="contact-grid">
-                {items.map((item, index) => (
-                    <a
-                        key={index}
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="contact-card"
-                    >
-                        <img src={item.image} alt={item.text} />
-                        <span>{item.text}</span>
-                    </a>
-                ))}
-            </div>
+                <div className="contact-grid">
+                    {items.map((item, index) => (
+                        <a
+                            key={index}
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="contact-card"
+                        >
+                            <img src={item.image} alt={item.text} />
+                            <span>{item.text}</span>
+                        </a>
+                    ))}
+                </div>
+            </motion.div>
         </section>
     );
 }
