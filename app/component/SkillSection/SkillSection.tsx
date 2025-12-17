@@ -21,9 +21,25 @@ interface ModelProps {
   path: string;
 }
 
+import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+
 function Model({ path }: ModelProps) {
   const { scene } = useGLTF(path);
-  return <primitive object={scene} scale={1.1} />;
+  const ref = useRef<THREE.Group>(null);
+
+  // Cozy "Greeting" Animation (Idle)
+  useFrame((state) => {
+    const t = state.clock.getElapsedTime();
+    if (ref.current) {
+      // Gentle floating (bobbing)
+      ref.current.position.y = Math.sin(t * 1) * 0.1;
+      // Slow continuous rotation
+      ref.current.rotation.y = t * 0.2;
+    }
+  });
+
+  return <primitive ref={ref} object={scene} scale={1.1} />;
 }
 
 function CountUp({ to, suffix = "", duration = 2 }: { to: number; suffix?: string; duration?: number }) {
