@@ -149,71 +149,42 @@ export default function skillsSection() {
         let rotateYVal = 0;
 
         // Custom animation logic based on column
+        // Custom animation logic based on column
         if (col === 0) {
           // Left Column -> Flow Left
           xVal = -400;
           rotateYVal = -30;
           opacityVal = 0;
-
-          // Slight rotation for the model too
-          const r3f = card.querySelector(".r3f-wrapper");
-          if (r3f) {
-            gsap.to(r3f, {
-              rotationY: -45,
-              ease: "power1.inOut",
-              scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top center",
-                end: "bottom top",
-                scrub: 1,
-              }
-            });
-          }
-
         } else if (col === 1) {
-          // Middle Column -> EXPLOSIVE (Zoom Forward + Spin + Pop Out)
+          // Middle Column -> Zoom Forward
           zVal = 1000;
           scaleVal = 2;
           opacityVal = 0;
-
-          // Target the 3D wrapper specifically for the "Pop out & Spin" effect
-          const r3f = card.querySelector(".r3f-wrapper");
-          if (r3f) {
-            gsap.to(r3f, {
-              z: 800, // Pop out further
-              rotation: 720, // Spin faster (2 full spins)
-              scale: 2.5, // Grow much bigger
-              opacity: 0, // Fade out at the very end
-              ease: "power2.inOut", // More dynamic ease
-              zIndex: 100, // Ensure it's on top
-              scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top center",
-                end: "bottom top",
-                scrub: 1,
-              }
-            });
-          }
-
         } else if (col === 2) {
           // Right Column -> Flow Right
           xVal = 400;
           rotateYVal = 30;
           opacityVal = 0;
+        }
 
-          const r3f = card.querySelector(".r3f-wrapper");
-          if (r3f) {
-            gsap.to(r3f, {
-              rotationY: 45,
-              ease: "power1.inOut",
-              scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top center",
-                end: "bottom top",
-                scrub: 1,
-              }
-            });
-          }
+        // Apply "Pop Out" effect to ALL 3D models (r3f-wrapper)
+        const r3f = card.querySelector(".r3f-wrapper");
+        if (r3f) {
+          gsap.to(r3f, {
+            z: 600,       // Pop out forward
+            scale: 2,     // Grow bigger
+            opacity: 0,   // Fade out at end
+            rotation: 0,  // keeping it steady
+            y: -50,       // Slight lift
+            ease: "power2.inOut",
+            zIndex: 100,
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top center",
+              end: "bottom top",
+              scrub: 1,
+            }
+          });
         }
 
         gsap.to(card, {
