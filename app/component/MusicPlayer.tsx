@@ -19,11 +19,27 @@ export default function MusicPlayer() {
         setIsPlaying(!isPlaying);
     };
 
+    // Custom Loop Logic (18s - 40s)
+    useEffect(() => {
+        const audio = audioRef.current;
+        if (!audio) return;
+
+        const handleTimeUpdate = () => {
+            // Loop interval: 18s to 40s
+            if (audio.currentTime >= 40) {
+                audio.currentTime = 18;
+            }
+        };
+
+        audio.addEventListener("timeupdate", handleTimeUpdate);
+        return () => audio.removeEventListener("timeupdate", handleTimeUpdate);
+    }, []);
+
     // Play audio when Preloader finishes
     useEffect(() => {
         const handlePreloaderComplete = () => {
             if (audioRef.current) {
-                audioRef.current.currentTime = 10;
+                audioRef.current.currentTime = 18; // Start at 18s
                 audioRef.current.volume = 0.4;
                 audioRef.current.play()
                     .then(() => setIsPlaying(true))
