@@ -154,16 +154,64 @@ export default function skillsSection() {
           xVal = -400;
           rotateYVal = -30;
           opacityVal = 0;
+
+          // Slight rotation for the model too
+          const r3f = card.querySelector(".r3f-wrapper");
+          if (r3f) {
+            gsap.to(r3f, {
+              rotationY: -45,
+              ease: "power1.inOut",
+              scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top center",
+                end: "bottom top",
+                scrub: 1,
+              }
+            });
+          }
+
         } else if (col === 1) {
-          // Middle Column -> Zoom Forward/Dissolve
+          // Middle Column -> EXPLOSIVE (Zoom Forward + Spin + Pop Out)
           zVal = 1000;
           scaleVal = 2;
           opacityVal = 0;
+
+          // Target the 3D wrapper specifically for the "Pop out & Spin" effect
+          const r3f = card.querySelector(".r3f-wrapper");
+          if (r3f) {
+            gsap.to(r3f, {
+              z: 500, // Pop out of card
+              rotation: 360, // Spin 360
+              scale: 1.5, // Grow even bigger independent of card
+              ease: "power1.inOut",
+              scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top center",
+                end: "bottom top",
+                scrub: 1,
+              }
+            });
+          }
+
         } else if (col === 2) {
           // Right Column -> Flow Right
           xVal = 400;
           rotateYVal = 30;
           opacityVal = 0;
+
+          const r3f = card.querySelector(".r3f-wrapper");
+          if (r3f) {
+            gsap.to(r3f, {
+              rotationY: 45,
+              ease: "power1.inOut",
+              scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top center",
+                end: "bottom top",
+                scrub: 1,
+              }
+            });
+          }
         }
 
         gsap.to(card, {
