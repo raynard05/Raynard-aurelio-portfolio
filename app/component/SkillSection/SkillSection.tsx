@@ -171,11 +171,10 @@ export default function skillsSection() {
         const r3f = card.querySelector(".r3f-wrapper");
         if (r3f) {
           gsap.to(r3f, {
-            z: 600,       // Pop out forward
-            scale: 2,     // Grow bigger
-            opacity: 0,   // Fade out at end
-            rotation: 0,  // keeping it steady
-            y: -50,       // Slight lift
+            z: 800,       // Pop out further
+            scale: 2.5,   // Grow bigger
+            rotation: 0,
+            y: -50,
             ease: "power2.inOut",
             zIndex: 100,
             scrollTrigger: {
@@ -191,6 +190,7 @@ export default function skillsSection() {
           x: xVal,
           y: yVal,
           z: zVal,
+          zIndex: 100, // Ensure the wrapper is on top of siblings
           scale: scaleVal,
           opacity: opacityVal,
           rotationY: rotateYVal,
@@ -274,12 +274,13 @@ export default function skillsSection() {
 
       <p className="subtitle"> </p>
 
-      <div className="grid-container" ref={containerRef}>
+      <div className="grid-container" ref={containerRef} style={{ overflow: "visible" }}>
         {assets.map((a, i) => (
           <div
             key={i}
             ref={el => { cardsRef.current[i] = el }}
             className="skill-card-wrapper"
+            style={{ overflow: "visible" }}
           >
             <AnimatedContent
               distance={150}
@@ -293,7 +294,7 @@ export default function skillsSection() {
               threshold={0.2}
               delay={0.5}
             >
-              <div className="card cursor-target">
+              <div className="card cursor-target" style={{ overflow: "visible" }}>
                 <div></div>
                 {!isSmallScreen && (
                   <ElectricBorder
@@ -301,6 +302,7 @@ export default function skillsSection() {
                     speed={0.6}
                     chaos={0.5}
                     thickness={4}
+                    style={{ overflow: "visible" }}
                   >
                     <div style={{ borderRadius: 16, overflow: "visible" }}>
                       <div className="r3f-wrapper">
