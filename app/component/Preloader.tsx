@@ -3,45 +3,80 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useProgress } from "@react-three/drei";
 
 const Preloader = () => {
     const [loading, setLoading] = useState(true);
-    const [progress, setProgress] = useState(0);
+    // Split Progress Tracking
+    const { progress: modelProgress, active: modelActive } = useProgress(); // 0 to 100
+    const [interfaceProgress, setInterfaceProgress] = useState(0); // 0 to 100
 
+    const displayProgress = Math.floor((modelProgress + interfaceProgress) / 2);
+
+    const [loadingText, setLoadingText] = useState("Preparing 3D Asset...");
+
+    const messages = [
+        "Preparing 3D Asset...",
+        "Checking Responsive Layout...",
+        "Preparing Song...",
+        "Preparing Best Experience...",
+        "Preparing Me To Work For You..."
+    ];
+
+    // Message Cycle
     useEffect(() => {
-        // If usage of document.readyState is not enough, we can also bind window loaded event
-        // But since this component mounts, we start tracking.
+        let msgIndex = 0;
+        const msgInterval = setInterval(() => {
+            msgIndex = (msgIndex + 1) % messages.length;
+            setLoadingText(messages[msgIndex]);
+        }, 800);
+        return () => clearInterval(msgInterval);
+    }, []);
 
-        // Simulate initial progress to show it's working
+    // Interface / DOM Loading Logic
+    useEffect(() => {
+        // Simulate checking the DOM/Layout
         const interval = setInterval(() => {
-            setProgress((prev) => {
-                // cap at 90% until actually loaded
-                if (prev >= 90) return 90;
-                return prev + 1; // slow increment
+            setInterfaceProgress((prev) => {
+                if (prev >= 90) return 90; // Wait for real window load
+                return prev + 1;
             });
-        }, 50);
+        }, 30);
 
         const handleLoad = () => {
-            // jump to 100
-            setProgress(100);
+            setInterfaceProgress(100);
             clearInterval(interval);
-            // slight delay to let user see 100%
-            setTimeout(() => {
-                setLoading(false);
-            }, 500);
         };
 
-        // Check if already loaded
         if (document.readyState === "complete") {
             handleLoad();
         } else {
             window.addEventListener("load", handleLoad);
-            return () => {
-                window.removeEventListener("load", handleLoad);
-                clearInterval(interval);
-            };
         }
+
+        return () => {
+            window.removeEventListener("load", handleLoad);
+            clearInterval(interval);
+        };
     }, []);
+
+    // Completion Check
+    useEffect(() => {
+        // Only finish if BOTH are 100% (or effectively done)
+        // Safety: If no 3D models are loading (active=false), treat 3D as ready?
+        const is3DReady = modelProgress === 100 || (modelProgress === 0 && !modelActive);
+        const isDOMReady = interfaceProgress === 100;
+
+        if (is3DReady && isDOMReady) {
+            // Give a small delay for "100%" to be seen
+            const timer = setTimeout(() => {
+                setLoading(false);
+                // Dispatch event for Music Player
+                window.dispatchEvent(new Event("preloader-complete"));
+            }, 800);
+            return () => clearTimeout(timer);
+        }
+    }, [modelProgress, modelActive, interfaceProgress]);
 
     return (
         <AnimatePresence mode="wait">
@@ -66,13 +101,32 @@ const Preloader = () => {
                         <motion.div
                             className="h-full bg-[#F4D03F]"
                             initial={{ width: 0 }}
-                            animate={{ width: `${progress}%` }}
+                            animate={{ width: `${displayProgress}%` }}
                             transition={{ ease: "linear", duration: 0.2 }}
                         />
                     </div>
-                    <p className="mt-4 font-mono font-bold text-lg md:text-xl">
-                        {progress}%
-                    </p>
+
+                    <div className="mt-4 flex flex-col items-center gap-1 font-mono text-center">
+                        <p className="font-bold text-lg md:text-xl">
+                            {displayProgress}%
+                        </p>
+
+                        <motion.p
+                            key={loadingText}
+                            initial={{ opacity: 0, y: 5 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -5 }}
+                            className="text-sm opacity-80"
+                        >
+                            {loadingText}
+                        </motion.p>
+
+                        {/* Debug logic for Split Loader visualization (Optional/Subtle) */}
+                        <div className="flex gap-4 text-[10px] opacity-50 mt-2 uppercase tracking-widest">
+                            <span>Assets: {Math.round(modelProgress)}%</span>
+                            <span>Interface: {interfaceProgress}%</span>
+                        </div>
+                    </div>
                 </motion.div>
             )}
         </AnimatePresence>

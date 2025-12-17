@@ -5,7 +5,7 @@ import { Play, Pause, Music } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function MusicPlayer() {
-    const [isPlaying, setIsPlaying] = useState(true); // Auto-play requested
+    const [isPlaying, setIsPlaying] = useState(false); // Wait for preloader
     const audioRef = useRef<HTMLAudioElement>(null);
 
     // Handle Play/Pause
@@ -19,14 +19,23 @@ export default function MusicPlayer() {
         setIsPlaying(!isPlaying);
     };
 
-    // Attempt Autoplay on mount
+    // Play audio when Preloader finishes
     useEffect(() => {
-        if (audioRef.current) {
-            audioRef.current.volume = 0.4; // Valid volume
-            audioRef.current.play().catch(() => {
-                setIsPlaying(false); // If autoplay blocked, update state
-            });
-        }
+        const handlePreloaderComplete = () => {
+            if (audioRef.current) {
+                audioRef.current.currentTime = 10;
+                audioRef.current.volume = 0.4;
+                audioRef.current.play()
+                    .then(() => setIsPlaying(true))
+                    .catch((e) => {
+                        console.log("Autoplay blocked:", e);
+                        setIsPlaying(false);
+                    });
+            }
+        };
+
+        window.addEventListener("preloader-complete", handlePreloaderComplete);
+        return () => window.removeEventListener("preloader-complete", handlePreloaderComplete);
     }, []);
 
     return (
