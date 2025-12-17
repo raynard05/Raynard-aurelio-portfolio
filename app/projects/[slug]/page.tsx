@@ -3,7 +3,6 @@
 import { use, useState } from "react";
 import { notFound, useRouter } from "next/navigation";
 import { projects } from "../projectData";
-import LaptopMockup from "@/components/ui/laptop-mockup";
 import AndroidMockup from "@/components/ui/android-mockup";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -122,7 +121,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                                 </div>
                             ) : (
                                 <div className="w-full transform hover:scale-[1.02] transition-transform duration-500">
-                                    <LaptopMockup>
+                                    <div className="rounded-xl overflow-hidden border-4 border-black shadow-2xl">
                                         <AnimatePresence mode="wait">
                                             <motion.img
                                                 key={currentImageIndex}
@@ -132,10 +131,10 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                                                 transition={{ duration: 0.3 }}
                                                 src={project.images[currentImageIndex]}
                                                 alt={`${project.title} screenshot ${currentImageIndex + 1}`}
-                                                className="w-full h-full object-cover"
+                                                className="w-full h-auto object-cover"
                                             />
                                         </AnimatePresence>
-                                    </LaptopMockup>
+                                    </div>
                                 </div>
                             )}
 
