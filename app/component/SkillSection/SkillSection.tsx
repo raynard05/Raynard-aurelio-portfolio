@@ -180,10 +180,12 @@ export default function skillsSection() {
           const r3f = card.querySelector(".r3f-wrapper");
           if (r3f) {
             gsap.to(r3f, {
-              z: 500, // Pop out of card
-              rotation: 360, // Spin 360
-              scale: 1.5, // Grow even bigger independent of card
-              ease: "power1.inOut",
+              z: 800, // Pop out further
+              rotation: 720, // Spin faster (2 full spins)
+              scale: 2.5, // Grow much bigger
+              opacity: 0, // Fade out at the very end
+              ease: "power2.inOut", // More dynamic ease
+              zIndex: 100, // Ensure it's on top
               scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top center",
@@ -329,7 +331,7 @@ export default function skillsSection() {
                     chaos={0.5}
                     thickness={4}
                   >
-                    <div style={{ borderRadius: 16, overflow: "hidden" }}>
+                    <div style={{ borderRadius: 16, overflow: "visible" }}>
                       <div className="r3f-wrapper">
                         <Suspense fallback={<Loader />}>
                           <Canvas camera={{ position: [2, 2, 2], fov: 40 }}>
