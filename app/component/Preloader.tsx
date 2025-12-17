@@ -60,23 +60,28 @@ const Preloader = () => {
         };
     }, []);
 
+    const [showEnterButton, setShowEnterButton] = useState(false);
+
     // Completion Check
     useEffect(() => {
         // Only finish if BOTH are 100% (or effectively done)
-        // Safety: If no 3D models are loading (active=false), treat 3D as ready?
         const is3DReady = modelProgress === 100 || (modelProgress === 0 && !modelActive);
         const isDOMReady = interfaceProgress === 100;
 
         if (is3DReady && isDOMReady) {
-            // Give a small delay for "100%" to be seen
+            // Show "Enter" button instead of auto-hiding
             const timer = setTimeout(() => {
-                setLoading(false);
-                // Dispatch event for Music Player
-                window.dispatchEvent(new Event("preloader-complete"));
-            }, 800);
+                setShowEnterButton(true);
+            }, 500);
             return () => clearTimeout(timer);
         }
     }, [modelProgress, modelActive, interfaceProgress]);
+
+    const handleEnter = () => {
+        setLoading(false);
+        // Dispatch event for Music Player (Now trusted because of click)
+        window.dispatchEvent(new Event("preloader-complete"));
+    };
 
     return (
         <AnimatePresence mode="wait">
@@ -97,36 +102,50 @@ const Preloader = () => {
                         />
                     </div>
 
-                    <div className="w-64 h-1 bg-gray-800 rounded-full overflow-hidden mt-4">
-                        <motion.div
-                            className="h-full bg-[#F4D03F]"
-                            initial={{ width: 0 }}
-                            animate={{ width: `${displayProgress}%` }}
-                            transition={{ ease: "linear", duration: 0.2 }}
-                        />
-                    </div>
+                    {!showEnterButton ? (
+                        <>
+                            <div className="w-64 h-1 bg-gray-800 rounded-full overflow-hidden mt-4">
+                                <motion.div
+                                    className="h-full bg-[#F4D03F]"
+                                    initial={{ width: 0 }}
+                                    animate={{ width: `${displayProgress}%` }}
+                                    transition={{ ease: "linear", duration: 0.2 }}
+                                />
+                            </div>
 
-                    <div className="mt-4 flex flex-col items-center gap-1 font-mono text-center">
-                        <p className="font-bold text-lg md:text-xl">
-                            {displayProgress}%
-                        </p>
+                            <div className="mt-4 flex flex-col items-center gap-1 font-mono text-center">
+                                <p className="font-bold text-lg md:text-xl">
+                                    {displayProgress}%
+                                </p>
 
-                        <motion.p
-                            key={loadingText}
-                            initial={{ opacity: 0, y: 5 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -5 }}
-                            className="text-sm opacity-80"
+                                <motion.p
+                                    key={loadingText}
+                                    initial={{ opacity: 0, y: 5 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -5 }}
+                                    className="text-sm opacity-80"
+                                >
+                                    {loadingText}
+                                </motion.p>
+
+                                <div className="flex gap-4 text-[10px] opacity-50 mt-2 uppercase tracking-widest">
+                                    <span>Assets: {Math.round(modelProgress)}%</span>
+                                    <span>Interface: {interfaceProgress}%</span>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <motion.button
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={handleEnter}
+                            className="mt-8 px-8 py-3 bg-[#F4D03F] text-black font-bold text-lg rounded-full shadow-[0_0_20px_rgba(244,208,63,0.4)] hover:shadow-[0_0_30px_rgba(244,208,63,0.6)] transition-all"
                         >
-                            {loadingText}
-                        </motion.p>
-
-                        {/* Debug logic for Split Loader visualization (Optional/Subtle) */}
-                        <div className="flex gap-4 text-[10px] opacity-50 mt-2 uppercase tracking-widest">
-                            <span>Assets: {Math.round(modelProgress)}%</span>
-                            <span>Interface: {interfaceProgress}%</span>
-                        </div>
-                    </div>
+                            ENTER EXPERIENCE
+                        </motion.button>
+                    )}
                 </motion.div>
             )}
         </AnimatePresence>
