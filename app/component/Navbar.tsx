@@ -1,8 +1,8 @@
 "use client";
 
+import MusicPlayer from "./MusicPlayer";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
@@ -92,13 +92,18 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* MOBILE BUTTON */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        {/* RIGHT SIDE (MUSIC + MOBILE TOGGLE) */}
+        <div className="flex items-center gap-4">
+          <MusicPlayer />
+
+          {/* MOBILE BUTTON */}
+          <button
+            className="md:hidden text-white"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
       {/* MOBILE DROPDOWN (FIXED) */}
