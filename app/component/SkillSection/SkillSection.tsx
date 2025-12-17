@@ -147,7 +147,57 @@ export default function skillsSection() {
     }
   ];
 
-  // GSAP animations removed - back to normal CSS-based interactions
+  /* === GSAP DIRECTIONAL ANIMATION (Based on Sketch) === */
+  useLayoutEffect(() => {
+    if (!isWidthScreen || !containerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      cardsRef.current.forEach((card, i) => {
+        if (!card) return;
+
+        const col = i % 3; // 0 (left), 1 (middle), 2 (right)
+
+        // Animation based on column position (matching sketch)
+        let animation = {};
+
+        if (col === 0) {
+          // Left column (1, 4, 7) → Fly LEFT
+          animation = {
+            x: -600,
+            opacity: 0,
+            rotationY: -45,
+          };
+        } else if (col === 1) {
+          // Middle column (2, 5, 8) → Subtle scale
+          animation = {
+            scale: 0.8,
+            opacity: 0.3,
+          };
+        } else if (col === 2) {
+          // Right column (3, 6, 9) → Fly RIGHT
+          animation = {
+            x: 600,
+            opacity: 0,
+            rotationY: 45,
+          };
+        }
+
+        gsap.to(card, {
+          ...animation,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top center",
+            end: "bottom top",
+            scrub: 1.5,
+            toggleActions: "play reverse play reverse",
+          },
+        });
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [isWidthScreen, assets.length]);
 
 
 
