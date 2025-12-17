@@ -11,6 +11,10 @@ import AnimatedContent from "@/components/AnimatedContent"
 import { GridScan } from "@/components/GridScan";
 import CurvedLoop from "@/components/CurvedLoop"
 import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLayoutEffect } from "react";
+gsap.registerPlugin(ScrollTrigger);
 
 import { useDevice } from "@/app/useDevice";
 interface ModelProps {
@@ -74,8 +78,11 @@ export default function skillsSection() {
   const images = slugs.map(
     (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
   )
-  const { deviceClass, isSmallScreen } = useDevice();
+  const { deviceClass, isSmallScreen, isWidthScreen } = useDevice();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
+  /* === ASSETS DEFINITION === */
   const assets = [
     {
       name: "Firebase",
@@ -122,7 +129,67 @@ export default function skillsSection() {
       path: "/assets/9.glb",
       image: "https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg"
     }
-  ]
+  ];
+
+  /* === GSAP ANIMATION LOGIC === */
+  useLayoutEffect(() => {
+    if (!isWidthScreen || !containerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      cardsRef.current.forEach((card, i) => {
+        if (!card) return;
+
+        const col = i % 3; // 0, 1, 2
+
+        let xVal = 0;
+        let yVal = 0;
+        let zVal = 0;
+        let scaleVal = 1;
+        let opacityVal = 1;
+        let rotateYVal = 0;
+
+        // Custom animation logic based on column
+        if (col === 0) {
+          // Left Column -> Flow Left
+          xVal = -400;
+          rotateYVal = -30;
+          opacityVal = 0;
+        } else if (col === 1) {
+          // Middle Column -> Zoom Forward/Dissolve
+          zVal = 1000;
+          scaleVal = 2;
+          opacityVal = 0;
+        } else if (col === 2) {
+          // Right Column -> Flow Right
+          xVal = 400;
+          rotateYVal = 30;
+          opacityVal = 0;
+        }
+
+        gsap.to(card, {
+          x: xVal,
+          y: yVal,
+          z: zVal,
+          scale: scaleVal,
+          opacity: opacityVal,
+          rotationY: rotateYVal,
+          ease: "power1.inOut",
+          scrollTrigger: {
+            trigger: containerRef.current, // trigger based on container
+            start: "top center", // start when container top hits center
+            end: "bottom top",
+            scrub: 1, // smooth scrub
+            toggleActions: "play reverse play reverse",
+          },
+        });
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [isWidthScreen, assets.length]);
+
+
+
 
 
   function Loader() {
@@ -186,31 +253,52 @@ export default function skillsSection() {
 
       <p className="subtitle"> </p>
 
-      <div className="grid-container">
+      <div className="grid-container" ref={containerRef}>
         {assets.map((a, i) => (
-          <AnimatedContent
-            distance={150}
-            direction="vertical"
-            reverse={false}
-            duration={1.2}
-            ease="bounce.out"
-            initialOpacity={0.2}
-            animateOpacity
-            scale={1.1}
-            threshold={0.2}
-            delay={0.5}
+          <div
+            key={i}
+            ref={el => { cardsRef.current[i] = el }}
+            className="skill-card-wrapper"
           >
-            <div className="card cursor-target" key={i}>
-              <div>
-
-              </div>
-              {!isSmallScreen && (
-                <ElectricBorder
-                  color="#FFD000"
-                  speed={0.6}
-                  chaos={0.5}
-                  thickness={4}
-                >
+            <AnimatedContent
+              distance={150}
+              direction="vertical"
+              reverse={false}
+              duration={1.2}
+              ease="bounce.out"
+              initialOpacity={0.2}
+              animateOpacity
+              scale={1.1}
+              threshold={0.2}
+              delay={0.5}
+            >
+              <div className="card cursor-target">
+                <div></div>
+                {!isSmallScreen && (
+                  <ElectricBorder
+                    color="#FFD000"
+                    speed={0.6}
+                    chaos={0.5}
+                    thickness={4}
+                  >
+                    <div style={{ borderRadius: 16, overflow: "hidden" }}>
+                      <div className="r3f-wrapper">
+                        <Suspense fallback={<Loader />}>
+                          <Canvas camera={{ position: [2, 2, 2], fov: 40 }}>
+                            <ambientLight intensity={1} />
+                            <directionalLight position={[1, 1, 1]} intensity={1} />
+                            <Model path={a.path} />
+                            <OrbitControls enableZoom={false} />
+                            <Environment preset="studio" />
+                          </Canvas>
+                        </Suspense>
+                      </div>
+                      <img src={a.image} alt={a.name} className="skill-image" />
+                      <p>{a.name}</p>
+                    </div>
+                  </ElectricBorder>
+                )}
+                {isSmallScreen && (
                   <div style={{ borderRadius: 16, overflow: "hidden" }}>
                     <div className="r3f-wrapper">
                       <Suspense fallback={<Loader />}>
@@ -224,32 +312,12 @@ export default function skillsSection() {
                       </Suspense>
                     </div>
                     <img src={a.image} alt={a.name} className="skill-image" />
-
                     <p>{a.name}</p>
                   </div>
-                </ElectricBorder>
-              )}
-              {isSmallScreen && (
-                <div style={{ borderRadius: 16, overflow: "hidden" }}>
-                  <div className="r3f-wrapper">
-                    <Suspense fallback={<Loader />}>
-                      <Canvas camera={{ position: [2, 2, 2], fov: 40 }}>
-                        <ambientLight intensity={1} />
-                        <directionalLight position={[1, 1, 1]} intensity={1} />
-                        <Model path={a.path} />
-                        <OrbitControls enableZoom={false} />
-                        <Environment preset="studio" />
-                      </Canvas>
-                    </Suspense>
-                  </div>
-                  <img src={a.image} alt={a.name} className="skill-image" />
-                  <p>{a.name}</p>
-                </div>
-              )}
-            </div>
-          </AnimatedContent>
-
-
+                )}
+              </div>
+            </AnimatedContent>
+          </div>
         ))}
       </div>
       {/* Static Stats */}
