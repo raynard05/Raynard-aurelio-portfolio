@@ -923,7 +923,7 @@ class InfiniteGridMenu {
     gl.useProgram(this.discProgram);
     gl.enable(gl.CULL_FACE);
     gl.enable(gl.DEPTH_TEST);
-    gl.clearColor(1, 0.8157, 0, 1); // alpha 1 = opaque
+    gl.clearColor(0, 0, 0, 1); // black background
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     gl.uniformMatrix4fv(this.discLocations.uWorldMatrix, false, this.worldMatrix);
@@ -1099,94 +1099,53 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full min-h-screen bg-black text-[#FFD000]">
       <canvas
         id="infinite-grid-menu-canvas"
         ref={canvasRef}
-        className="cursor-grab w-full h-full overflow-hidden relative outline-none active:cursor-grabbing text-black"
+        className="cursor-grab w-full h-full overflow-hidden relative outline-none active:cursor-grabbing"
       />
 
+      <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-none transition-opacity duration-300 ${isMoving ? 'opacity-0' : 'opacity-100'} z-20`}>
+        <div className="text-[#FFD000]/70 text-sm font-medium tracking-[0.3em] uppercase animate-pulse whitespace-nowrap">
+          Click & Swipe to Explore
+        </div>
+      </div>
+
       {activeItem && (
-        <>
-          <h1
-            className={`
-          select-none
-          absolute
-          font-black
-          [font-size:4rem]
-          left-[1.6em]
-          top-1/2
-          transform
-          translate-x-[20%]
-          -translate-y-1/2
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          text-black
-          bg-yellow-400
-          border-[5px]
-          border-black
-          border-round-[20px]
-          rounded-[20px]
-          py-[0.2em]
-          px-[0.4em]
-          ${isMoving
-                ? 'opacity-0 pointer-events-none duration-[100ms]'
-                : 'opacity-100 pointer-events-auto duration-[500ms]'
-              }
-        `}
-          >
-            {activeItem.title}
-          </h1>
-
-          <h3
-            className={`
-              
-    
-          select-none
-          absolute
-          max-w-[10ch]
-          text-[1.5rem]
-          top-1/2
-          right-[5%]
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          text-black
-          ${isMoving
-                ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-60%] -translate-y-1/2'
-                : 'opacity-100 pointer-events-auto duration-[500ms] translate-x-[-90%] -translate-y-1/2'
-              }
-        `}
-          >
-            {activeItem.description}
-          </h3>
-
-          <div
-            onClick={handleButtonClick}
-            className={`
-          absolute
-          left-1/2
-          z-10
-          w-[60px]
-          h-[60px]
-          grid
-          cursor-target
-          place-items-center
-          bg-yellow-400
-          border-[5px]
-          border-black
-          rounded-full
-          cursor-pointer
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${isMoving
-                ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
-                : 'bottom-[3.8em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
-              }
-        `}
-          >
-            <p className="select-none relative text-[#060010] top-[2px] text-[26px]">&#x2197;</p>
+        <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-8 md:p-14 lg:p-20">
+          <div className="flex justify-between items-start w-full border-b border-[#FFD000]/20 pb-4">
+            <div className={`transition-opacity duration-500 ${isMoving ? 'opacity-0' : 'opacity-100'} text-[#FFD000]/70 font-bold text-xs tracking-[0.2em] uppercase`}>
+              Selected Work
+            </div>
+            <div className={`transition-opacity duration-500 ${isMoving ? 'opacity-0' : 'opacity-100'} text-[#FFD000]/70 font-bold text-xs tracking-[0.2em] uppercase`}>
+              ( {items.indexOf(activeItem) + 1} / {items.length} )
+            </div>
           </div>
-        </>
+
+          <div className={`flex flex-col md:flex-row items-end justify-between gap-12 w-full transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${isMoving ? 'opacity-0 translate-y-10' : 'opacity-100 translate-y-0'}`}>
+
+            <div className="flex-1 relative z-10">
+              <h1 className="text-[#FFD000] text-6xl md:text-8xl lg:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mix-blend-screen drop-shadow-[0_0_15px_rgba(255,208,0,0.3)]">
+                {activeItem.title}
+              </h1>
+            </div>
+
+            <div className="flex flex-col items-end gap-8 relative z-10 max-w-md text-right">
+              <h3 className="text-[#FFD000] text-lg md:text-2xl font-medium leading-relaxed tracking-wide">
+                {activeItem.description}
+              </h3>
+
+              <div
+                onClick={handleButtonClick}
+                className="pointer-events-auto cursor-pointer group flex items-center gap-4 text-[#FFD000] hover:text-white transition-colors duration-300"
+              >
+                <span className="font-bold text-sm tracking-[0.2em] uppercase border-b-2 border-[#FFD000] pb-1 group-hover:border-white">View Project</span>
+                <span className="text-3xl group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300">&#x2197;</span>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
