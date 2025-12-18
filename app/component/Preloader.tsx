@@ -102,14 +102,14 @@ const Preloader = () => {
 
     const displayProgress = Math.floor((modelProgress + interfaceProgress) / 2);
 
-    const [loadingText, setLoadingText] = useState("Initializing Experience...");
+    const [loadingText, setLoadingText] = useState("Preparing 3D Asset...");
 
     const messages = [
-        "Initializing Experience...",
-        "Loading 3D Assets...",
-        "Preparing Interface...",
-        "Optimizing Performance...",
-        "Almost Ready..."
+        "Preparing 3D Asset...",
+        "Checking Responsive Layout...",
+        "Preparing Song...",
+        "Preparing Best Experience...",
+        "Preparing Me To Work For You..."
     ];
 
     // Detect mobile
@@ -128,7 +128,7 @@ const Preloader = () => {
         const msgInterval = setInterval(() => {
             msgIndex = (msgIndex + 1) % messages.length;
             setLoadingText(messages[msgIndex]);
-        }, 1200);
+        }, 800);
         return () => clearInterval(msgInterval);
     }, []);
 
@@ -184,8 +184,9 @@ const Preloader = () => {
                 <motion.div
                     key="preloader"
                     initial={{ opacity: 1 }}
-                    exit={{ opacity: 0, transition: { duration: 1, ease: "easeInOut" } }}
-                    className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gradient-to-b from-black via-gray-900 to-black text-white overflow-hidden"
+                    exit={{ y: "-100%", transition: { duration: 0.8, ease: "easeInOut" } }}
+                    className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center text-white overflow-hidden ${isMobile ? 'bg-black' : 'bg-gradient-to-b from-black via-gray-900 to-black'
+                        }`}
                 >
                     {/* Animated Background Grid */}
                     <div className="absolute inset-0 opacity-20">
@@ -300,9 +301,9 @@ const Preloader = () => {
                             </motion.div>
                         </div>
                     ) : (
-                        /* Mobile: Simple Image Design */
+                        /* Mobile: Original Simple Design */
                         <div className="flex flex-col items-center justify-center">
-                            <div className="relative w-64 h-64 mb-8">
+                            <div className="relative w-64 h-64 md:w-80 md:h-80 mb-8">
                                 <Image
                                     src="/assets/preloader-cartoon-no-text.png"
                                     alt="Loading..."
@@ -324,7 +325,7 @@ const Preloader = () => {
                                     </div>
 
                                     <div className="mt-4 flex flex-col items-center gap-1 font-mono text-center">
-                                        <p className="font-bold text-lg text-[#F4D03F]">
+                                        <p className="font-bold text-lg md:text-xl text-[#F4D03F]">
                                             {displayProgress}%
                                         </p>
 
@@ -333,10 +334,15 @@ const Preloader = () => {
                                             initial={{ opacity: 0, y: 5 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: -5 }}
-                                            className="text-sm opacity-80"
+                                            className="text-sm opacity-80 text-[#F4D03F]"
                                         >
                                             {loadingText}
                                         </motion.p>
+
+                                        <div className="flex gap-4 text-[10px] opacity-50 mt-2 uppercase tracking-widest text-[#F4D03F]">
+                                            <span>Assets: {Math.round(modelProgress)}%</span>
+                                            <span>Interface: {interfaceProgress}%</span>
+                                        </div>
                                     </div>
                                 </>
                             ) : (
