@@ -159,9 +159,62 @@ const Preloader = () => {
     }, []);
 
     const [showEnterButton, setShowEnterButton] = useState(false);
+    const [songProgress, setSongProgress] = useState(0);
+    const [songReady, setSongReady] = useState(false);
 
-    // Completion Check
+    // Check if song is ready (Mobile) - Simplified to avoid audio conflict
     useEffect(() => {
+        if (isMobile) {
+            console.log("Mobile: Simulating song loading...");
+
+            // Simulate loading progress
+            const progressInterval = setInterval(() => {
+                setSongProgress(prev => {
+                    if (prev >= 100) {
+                        clearInterval(progressInterval);
+                        return 100;
+                    }
+                    return prev + 5;
+                });
+            }, 100);
+
+            // Mark as ready after 2 seconds
+            const readyTimer = setTimeout(() => {
+                console.log("Mobile: Song marked as ready");
+                setSongProgress(100);
+                setSongReady(true);
+            }, 2000);
+
+            return () => {
+                clearInterval(progressInterval);
+                clearTimeout(readyTimer);
+            };
+        }
+    }, [isMobile]);
+
+    // Show Enter button when song is ready (Mobile)
+    useEffect(() => {
+        console.log("Mobile button check:", {
+            isMobile,
+            songReady,
+            songProgress,
+            interfaceProgress,
+            shouldShow: isMobile && songReady && songProgress === 100 && interfaceProgress === 100
+        });
+
+        if (isMobile && songReady && songProgress === 100 && interfaceProgress === 100) {
+            const timer = setTimeout(() => {
+                console.log("Mobile: Song ready AND interface loaded, showing Enter button");
+                setShowEnterButton(true);
+            }, 500);
+            return () => clearTimeout(timer);
+        }
+    }, [isMobile, songReady, songProgress, interfaceProgress]);
+
+    // Completion Check (Desktop only)
+    useEffect(() => {
+        if (isMobile) return; // Skip for mobile
+
         const is3DReady = modelProgress === 100 || (modelProgress === 0 && !modelActive);
         const isDOMReady = interfaceProgress === 100;
 
@@ -171,11 +224,22 @@ const Preloader = () => {
             }, 500);
             return () => clearTimeout(timer);
         }
-    }, [modelProgress, modelActive, interfaceProgress]);
+    }, [modelProgress, modelActive, interfaceProgress, isMobile]);
 
     const handleEnter = () => {
+        console.log("handleEnter called - setting loading to false");
         setLoading(false);
-        window.dispatchEvent(new Event("preloader-complete"));
+
+        // Dispatch event for music autoplay (both mobile and desktop)
+        if (typeof window !== 'undefined') {
+            try {
+                const event = new Event("preloader-complete");
+                window.dispatchEvent(event);
+                console.log("preloader-complete event dispatched - music should autoplay");
+            } catch (e) {
+                console.error("Error dispatching preloader-complete event:", e);
+            }
+        }
     };
 
     return (
@@ -286,12 +350,17 @@ const Preloader = () => {
                                     </>
                                 ) : (
                                     <motion.button
+                                        type="button"
                                         initial={{ opacity: 0, scale: 0.8 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         whileHover={{ scale: 1.1 }}
                                         whileTap={{ scale: 0.95 }}
                                         onClick={handleEnter}
-                                        className="relative px-12 py-4 bg-[#FFD000] text-black font-bold text-xl rounded-full overflow-hidden group"
+                                        onTouchEnd={(e) => {
+                                            e.preventDefault();
+                                            handleEnter();
+                                        }}
+                                        className="relative px-12 py-4 bg-[#FFD000] text-black font-bold text-xl rounded-full overflow-hidden group cursor-pointer touch-manipulation"
                                     >
                                         <span className="relative z-10">ENTER EXPERIENCE</span>
                                         <motion.div
@@ -324,14 +393,14 @@ const Preloader = () => {
                                         <motion.div
                                             className="h-full bg-[#F4D03F]"
                                             initial={{ width: 0 }}
-                                            animate={{ width: `${displayProgress}%` }}
+                                            animate={{ width: `${Math.floor((songProgress + interfaceProgress) / 2)}%` }}
                                             transition={{ ease: "linear", duration: 0.2 }}
                                         />
                                     </div>
 
                                     <div className="mt-4 flex flex-col items-center gap-1 font-mono text-center">
                                         <p className="font-bold text-lg md:text-xl text-[#F4D03F]">
-                                            {displayProgress}%
+                                            {Math.floor((songProgress + interfaceProgress) / 2)}%
                                         </p>
 
                                         <motion.p
@@ -345,19 +414,29 @@ const Preloader = () => {
                                         </motion.p>
 
                                         <div className="flex gap-4 text-[10px] opacity-50 mt-2 uppercase tracking-widest text-[#F4D03F]">
-                                            <span>Assets: {Math.round(modelProgress)}%</span>
-                                            <span>Interface: {interfaceProgress}%</span>
+                                            <span>Song: {Math.round(songProgress)}%</span>
+                                            <span>Content: {interfaceProgress}%</span>
                                         </div>
                                     </div>
                                 </>
                             ) : (
                                 <motion.button
+                                    type="button"
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    onClick={handleEnter}
-                                    className="mt-8 px-8 py-3 bg-[#F4D03F] text-black font-bold text-lg rounded-full shadow-[0_0_20px_rgba(244,208,63,0.4)]"
+                                    onClick={(e) => {
+                                        console.log("Mobile button CLICKED!", e);
+                                        handleEnter();
+                                    }}
+                                    onTouchStart={() => console.log("Touch started on button")}
+                                    onTouchEnd={(e) => {
+                                        console.log("Touch ended on button", e);
+                                        e.preventDefault();
+                                        handleEnter();
+                                    }}
+                                    className="mt-8 px-8 py-3 bg-[#F4D03F] text-black font-bold text-lg rounded-full shadow-[0_0_20px_rgba(244,208,63,0.4)] cursor-pointer touch-manipulation relative z-[10000]"
                                 >
                                     ENTER EXPERIENCE
                                 </motion.button>

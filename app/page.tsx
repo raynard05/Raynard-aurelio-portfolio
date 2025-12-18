@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import Navbar from "@/app/component/Navbar";
 import Hero from "@/app/component/Hero/Hero";
 import SkillsSection from "./component/SkillSection/SkillSection";
 import Marquee, { ScrollVelocity } from "./component/ScrollVelocity/ScrollVelocity";
@@ -67,7 +66,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
+      {/* Navbar is in layout.tsx, no need to duplicate here */}
 
 
 
