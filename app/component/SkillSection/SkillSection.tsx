@@ -28,7 +28,7 @@ function Model({ path }: ModelProps) {
   const { scene } = useGLTF(path);
   const ref = useRef<THREE.Group>(null);
 
-  return <primitive ref={ref} object={scene} scale={1.1} />;
+  return <primitive ref={ref} object={scene} scale={1.4} />;
 }
 
 function CountUp({ to, suffix = "", duration = 2 }: { to: number; suffix?: string; duration?: number }) {
@@ -176,28 +176,13 @@ export default function skillsSection() {
       <h2 className="title-session">
         Skills <span className="mobile-text-tech">& Technologies</span>
       </h2>
-      <AnimatedContent
-        distance={150}
-        direction="horizontal"
-        reverse={true}
-        duration={1.2}
-        ease="power3.in"
-        initialOpacity={1}
-        animateOpacity
-        scale={2}
-        threshold={0.2}
-        delay={0.4}>
-
-        <div className={`relative flex size-full items-center justify-center overflow-hidden 
-            ${isSmallScreen ? "" : "hidden"
-          }
-            
-            `}>
-          <IconCloud images={images} />
-        </div>
-
-
-      </AnimatedContent>
+      <div className={`relative flex size-full items-center justify-center overflow-hidden 
+          ${isSmallScreen ? "" : "hidden"
+        }
+          
+          `}>
+        <IconCloud images={images} />
+      </div>
 
       <p className="subtitle"> </p>
 

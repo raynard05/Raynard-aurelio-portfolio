@@ -30,7 +30,6 @@ export default function Home() {
   const projectsRef = useRef<HTMLElement>(null);
   const testimonialsRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
-  const footerRef = useRef<HTMLElement>(null);
 
   const testimonials = [
     {
@@ -70,16 +69,7 @@ export default function Home() {
     <>
       <Navbar />
 
-      {/* Airplane 3D Animation - Desktop Only */}
-      {!isSmallScreen && (
-        <AirplaneScene
-          heroRef={heroRef}
-          skillsRef={skillsRef}
-          projectsRef={projectsRef}
-          testimonialsRef={testimonialsRef}
-          contactRef={contactRef}
-        />
-      )}
+
 
       <section ref={heroRef}>
         <Hero />
@@ -152,18 +142,16 @@ export default function Home() {
         <ContactPage />
       </section>
 
-      <section ref={footerRef}>
-        {isSmallScreen ? (
-          <MobileContactMarquee />
-        ) : (
-          <SecondContactPage />
-        )}
-        <EndPage />
-        <main>
+      {isSmallScreen ? (
+        <MobileContactMarquee />
+      ) : (
+        <SecondContactPage />
+      )}
+      <EndPage />
+      <main>
 
-        </main>
-        <Footer />
-      </section>
+      </main>
+      <Footer />
     </>
   );
 }

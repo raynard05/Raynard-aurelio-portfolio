@@ -1,15 +1,14 @@
 "use client";
 
-import React, { useRef, useEffect, useLayoutEffect, Suspense, useState } from "react";
+import React, { useRef, useEffect, useLayoutEffect, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Environment } from "@react-three/drei";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import * as THREE from "three";
 import "./AirplaneScene.css";
 
-gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
 interface AirplaneSceneProps {
     heroRef: React.RefObject<HTMLElement | null>;
@@ -55,83 +54,192 @@ useGLTF.preload("/pesawat.glb");
 function AirplaneCanvas({ planeRef, ...props }: AirplaneSceneProps & { planeRef: React.RefObject<THREE.Group | null> }) {
     const { heroRef, skillsRef, projectsRef, testimonialsRef, contactRef } = props;
 
-    // GSAP MotionPath Animation with Custom SVG Path
+    // GSAP ScrollTrigger Animation Timeline
     useLayoutEffect(() => {
-        if (!planeRef.current || !contactRef.current) return;
+        if (!planeRef.current) return;
 
         const plane = planeRef.current;
 
-        // Set initial scale
+        // Set initial position (Hero section)
+        gsap.set(plane.position, { x: -2, y: 0, z: 2 });
+        gsap.set(plane.rotation, { x: 0, y: Math.PI / 4, z: 0 });
         gsap.set(plane.scale, { x: 3, y: 3, z: 3 });
 
-        // Custom SVG Path: M 11 6 L 0 10 L 11 13 L -1 23 L 23 23
-        // Normalized to 3D space coordinates
-        const pathPoints = [
-            { x: 1.1, y: 0.6, z: 2 },    // M 11 6 (start - Hero)
-            { x: 0, y: 1.0, z: 1 },      // L 0 10 (Skills)
-            { x: 1.1, y: 1.3, z: 0 },    // L 11 13 (Projects)
-            { x: -0.1, y: 2.3, z: -1 },  // L -1 23 (Testimonials)
-            { x: 2.3, y: 2.3, z: -2 },   // L 23 23 (Contact)
-        ];
-
         const ctx = gsap.context(() => {
-            // Main path animation synced to scroll
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: document.body,
-                    start: "top top",
-                    end: () => `+=${contactRef.current?.offsetTop || 5000}`,
-                    scrub: 1.5,
-                    onUpdate: (self) => {
-                        // Auto-rotate airplane to face direction of movement
-                        const progress = self.progress;
-                        const currentIndex = Math.floor(progress * (pathPoints.length - 1));
-                        const nextIndex = Math.min(currentIndex + 1, pathPoints.length - 1);
-
-                        if (currentIndex < pathPoints.length - 1) {
-                            const current = pathPoints[currentIndex];
-                            const next = pathPoints[nextIndex];
-                            const angle = Math.atan2(next.x - current.x, next.z - current.z);
-                            plane.rotation.y = angle;
-                        }
+            // Scene 1: Hero → Skills Transition
+            if (skillsRef.current) {
+                gsap.to(plane.position, {
+                    x: 3,
+                    y: 1,
+                    z: 0,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: skillsRef.current,
+                        start: "top bottom",
+                        end: "top center",
+                        scrub: 1.5,
                     },
-                },
-            });
+                });
 
-            // Animate through each point
-            pathPoints.forEach((point, index) => {
-                if (index === 0) {
-                    gsap.set(plane.position, point);
-                } else {
-                    tl.to(plane.position, {
-                        x: point.x,
-                        y: point.y,
-                        z: point.z,
-                        duration: 1,
-                        ease: "power2.inOut",
-                    }, index - 1);
-                }
-            });
+                gsap.to(plane.rotation, {
+                    x: -0.2,
+                    y: Math.PI / 6,
+                    z: 0.15,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: skillsRef.current,
+                        start: "top bottom",
+                        end: "top center",
+                        scrub: 1.5,
+                    },
+                });
+            }
 
-            // Exit animation - fly to the right and disappear
-            tl.to(plane.position, {
-                x: 15,
-                y: 2.5,
-                z: -3,
-                duration: 0.5,
-                ease: "expo.in",
-            }, pathPoints.length - 1);
+            // Scene 2: Skills → Projects Transition
+            if (projectsRef.current) {
+                gsap.to(plane.position, {
+                    x: -1,
+                    y: 0.8,
+                    z: -0.5,
+                    ease: "expo.out",
+                    scrollTrigger: {
+                        trigger: projectsRef.current,
+                        start: "top bottom",
+                        end: "top center",
+                        scrub: 1.5,
+                    },
+                });
 
-            tl.to(plane.rotation, {
-                y: Math.PI / 2,
-                z: 0.4,
-                duration: 0.5,
-                ease: "expo.in",
-            }, pathPoints.length - 1);
+                gsap.to(plane.rotation, {
+                    x: 0,
+                    y: -Math.PI / 8,
+                    z: 0,
+                    ease: "expo.out",
+                    scrollTrigger: {
+                        trigger: projectsRef.current,
+                        start: "top bottom",
+                        end: "top center",
+                        scrub: 1.5,
+                    },
+                });
+            }
+
+            // Scene 3: Projects → Testimonials Transition
+            if (testimonialsRef.current) {
+                gsap.to(plane.position, {
+                    x: 0,
+                    y: 1.2,
+                    z: 1,
+                    ease: "power2.inOut",
+                    scrollTrigger: {
+                        trigger: testimonialsRef.current,
+                        start: "top bottom",
+                        end: "top center",
+                        scrub: 1.5,
+                    },
+                });
+
+                gsap.to(plane.rotation, {
+                    x: 0.1,
+                    y: 0,
+                    z: 0,
+                    ease: "power2.inOut",
+                    scrollTrigger: {
+                        trigger: testimonialsRef.current,
+                        start: "top bottom",
+                        end: "top center",
+                        scrub: 1.5,
+                    },
+                });
+
+                gsap.to(plane.scale, {
+                    x: 1.2,
+                    y: 1.2,
+                    z: 1.2,
+                    ease: "power2.inOut",
+                    scrollTrigger: {
+                        trigger: testimonialsRef.current,
+                        start: "top bottom",
+                        end: "top center",
+                        scrub: 1.5,
+                    },
+                });
+            }
+
+            // Scene 4: Testimonials → Contact Transition
+            if (contactRef.current) {
+                gsap.to(plane.position, {
+                    x: 1.5,
+                    y: 0.5,
+                    z: 0.5,
+                    ease: "power2.inOut",
+                    scrollTrigger: {
+                        trigger: contactRef.current,
+                        start: "top bottom",
+                        end: "top center",
+                        scrub: 1.5,
+                    },
+                });
+
+                gsap.to(plane.rotation, {
+                    x: 0,
+                    y: Math.PI / 4,
+                    z: 0,
+                    ease: "power2.inOut",
+                    scrollTrigger: {
+                        trigger: contactRef.current,
+                        start: "top bottom",
+                        end: "top center",
+                        scrub: 1.5,
+                    },
+                });
+
+                gsap.to(plane.scale, {
+                    x: 1.0,
+                    y: 1.0,
+                    z: 1.0,
+                    ease: "power2.inOut",
+                    scrollTrigger: {
+                        trigger: contactRef.current,
+                        start: "top bottom",
+                        end: "top center",
+                        scrub: 1.5,
+                    },
+                });
+            }
+
+            // Scene 5: Contact → Exit Animation
+            if (contactRef.current) {
+                gsap.to(plane.position, {
+                    x: 10,
+                    y: 2,
+                    z: -3,
+                    ease: "expo.in",
+                    scrollTrigger: {
+                        trigger: contactRef.current,
+                        start: "center center",
+                        end: "bottom top",
+                        scrub: 0.8,
+                    },
+                });
+
+                gsap.to(plane.rotation, {
+                    x: 0,
+                    y: Math.PI / 2,
+                    z: 0.3,
+                    ease: "expo.in",
+                    scrollTrigger: {
+                        trigger: contactRef.current,
+                        start: "center center",
+                        end: "bottom top",
+                        scrub: 0.8,
+                    },
+                });
+            }
         });
 
         return () => ctx.revert();
-    }, [planeRef, contactRef]);
+    }, [planeRef, heroRef, skillsRef, projectsRef, testimonialsRef, contactRef]);
 
     return (
         <Canvas
@@ -171,19 +279,9 @@ function AirplaneCanvas({ planeRef, ...props }: AirplaneSceneProps & { planeRef:
 
 export default function AirplaneScene(props: AirplaneSceneProps) {
     const planeRef = useRef<THREE.Group>(null);
-    const [isMounted, setIsMounted] = useState(false);
-
-    // Only render on client-side to prevent hydration mismatch
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
-    if (!isMounted) {
-        return null; // Don't render anything on server
-    }
 
     return (
-        <div className="airplane-scene-container" suppressHydrationWarning>
+        <div className="airplane-scene-container">
             <AirplaneCanvas planeRef={planeRef} {...props} />
         </div>
     );
