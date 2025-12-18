@@ -147,7 +147,7 @@ export default function skillsSection() {
     }
   ];
 
-  /* === GSAP DIRECTIONAL ANIMATION (Based on Sketch) === */
+  /* === GSAP DIRECTIONAL ANIMATION (Based on Sketch) ===2*/
   useLayoutEffect(() => {
     if (!isWidthScreen || !containerRef.current) return;
 
