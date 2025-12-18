@@ -184,9 +184,14 @@ const Preloader = () => {
                 <motion.div
                     key="preloader"
                     initial={{ opacity: 1 }}
-                    exit={{ y: "-100%", transition: { duration: 0.8, ease: "easeInOut" } }}
+                    exit={{
+                        opacity: 0,
+                        y: isMobile ? 0 : "-100%",
+                        transition: { duration: isMobile ? 0.5 : 0.8, ease: "easeInOut" }
+                    }}
                     className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center text-white overflow-hidden ${isMobile ? 'bg-black' : 'bg-gradient-to-b from-black via-gray-900 to-black'
                         }`}
+                    style={{ pointerEvents: loading ? 'auto' : 'none' }}
                 >
                     {/* Animated Background Grid */}
                     <div className="absolute inset-0 opacity-20">
