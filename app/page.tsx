@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import Navbar from "@/app/component/Navbar";
 import Hero from "@/app/component/Hero/Hero";
 import SkillsSection from "./component/SkillSection/SkillSection";
@@ -17,10 +18,19 @@ import Footer from "@/components/Footer";
 import TestimonialMarquee from "@/components/TestimonialMarquee";
 import MobileTestimonialList from "./component/Testimonialsmobile/MobileTestimonialList";
 import { useDevice } from "./useDevice";
+import AirplaneScene from "./component/AirplaneScene/AirplaneScene";
 
 
 export default function Home() {
   const { deviceClass, isSmallScreen } = useDevice();
+
+  // Refs for ScrollTrigger targeting
+  const heroRef = useRef<HTMLElement>(null);
+  const skillsRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement>(null);
+  const testimonialsRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
+  const footerRef = useRef<HTMLElement>(null);
 
   const testimonials = [
     {
@@ -59,7 +69,21 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <Hero />
+
+      {/* Airplane 3D Animation - Desktop Only */}
+      {!isSmallScreen && (
+        <AirplaneScene
+          heroRef={heroRef}
+          skillsRef={skillsRef}
+          projectsRef={projectsRef}
+          testimonialsRef={testimonialsRef}
+          contactRef={contactRef}
+        />
+      )}
+
+      <section ref={heroRef}>
+        <Hero />
+      </section>
       <div className="w-full bg-transparent overflow-hidden pt-32 pb-0 md:py-32 relative z-20">
         <div className="hero-comic-marquee">
           <ScrollVelocity
@@ -86,22 +110,28 @@ export default function Home() {
           />
         </div>
       </div>
-      <SkillsSection />
+      <section ref={skillsRef}>
+        <SkillsSection />
+      </section>
 
-      <ProjectPage />
-      <div className={`
-  ${isSmallScreen ? "hidden" : ""
+      <section ref={projectsRef}>
+        <ProjectPage />
+      </section>
+      <section ref={testimonialsRef}>
+        <div className={`
+    ${isSmallScreen ? "hidden" : ""
 
-        }
-  
-  
-  
-  `}>
+          }
+    
+    
+    
+    `}>
 
-        <TestimonialMarquee />
+          <TestimonialMarquee />
 
 
-      </div>
+        </div>
+      </section>
 
       <div className={`
   ${isSmallScreen ? "" : "hidden"
@@ -118,18 +148,22 @@ export default function Home() {
 
       </div>
 
-      <ContactPage />
+      <section ref={contactRef}>
+        <ContactPage />
+      </section>
 
-      {isSmallScreen ? (
-        <MobileContactMarquee />
-      ) : (
-        <SecondContactPage />
-      )}
-      <EndPage />
-      <main>
+      <section ref={footerRef}>
+        {isSmallScreen ? (
+          <MobileContactMarquee />
+        ) : (
+          <SecondContactPage />
+        )}
+        <EndPage />
+        <main>
 
-      </main>
-      <Footer />
+        </main>
+        <Footer />
+      </section>
     </>
   );
 }
