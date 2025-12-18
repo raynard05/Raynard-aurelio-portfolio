@@ -147,7 +147,7 @@ export default function skillsSection() {
     }
   ];
 
-  /* === GSAP DIRECTIONAL ANIMATION (Based on Sketch) ===2*/
+  /* === GSAP ANIMATION LOGIC === */
   useLayoutEffect(() => {
     if (!isWidthScreen || !containerRef.current) return;
 
@@ -155,40 +155,68 @@ export default function skillsSection() {
       cardsRef.current.forEach((card, i) => {
         if (!card) return;
 
-        const col = i % 3; // 0 (left), 1 (middle), 2 (right)
+        // Calculate position in 3x3 grid
+        const row = Math.floor(i / 3); // 0, 1, 2
+        const col = i % 3; // 0, 1, 2
 
-        // Animation based on column position (matching sketch)
-        let animation = {};
+        // Directional animation values
+        let xVal = 0;
+        let yVal = 0;
+        let zVal = 0;
+        let scaleVal = 1;
 
-        if (col === 0) {
-          // Left column (1, 4, 7) → Fly LEFT
-          animation = {
-            x: -600,
-            opacity: 0,
-            rotationY: -45,
-          };
-        } else if (col === 1) {
-          // Middle column (2, 5, 8) → Subtle scale
-          animation = {
-            scale: 0.8,
-            opacity: 0.3,
-          };
-        } else if (col === 2) {
-          // Right column (3, 6, 9) → Fly RIGHT
-          animation = {
-            x: 600,
-            opacity: 0,
-            rotationY: 45,
-          };
+        // 9-position directional matrix
+        if (row === 0 && col === 0) {
+          // Top-Left → Diagonal top-left
+          xVal = -800;
+          yVal = -600;
+        } else if (row === 0 && col === 1) {
+          // Top-Center → Straight up
+          xVal = 0;
+          yVal = -800;
+        } else if (row === 0 && col === 2) {
+          // Top-Right → Diagonal top-right
+          xVal = 800;
+          yVal = -600;
+        } else if (row === 1 && col === 0) {
+          // Middle-Left → Straight left
+          xVal = -800;
+          yVal = 0;
+        } else if (row === 1 && col === 1) {
+          // Center → Forward burst (Z-axis)
+          xVal = 0;
+          yVal = 0;
+          zVal = 2000;
+          scaleVal = 3;
+        } else if (row === 1 && col === 2) {
+          // Middle-Right → Straight right
+          xVal = 800;
+          yVal = 0;
+        } else if (row === 2 && col === 0) {
+          // Bottom-Left → Diagonal bottom-left
+          xVal = -800;
+          yVal = 600;
+        } else if (row === 2 && col === 1) {
+          // Bottom-Center → Straight down
+          xVal = 0;
+          yVal = 800;
+        } else if (row === 2 && col === 2) {
+          // Bottom-Right → Diagonal bottom-right
+          xVal = 800;
+          yVal = 600;
         }
 
+        // Animate the card wrapper (NO OPACITY)
         gsap.to(card, {
-          ...animation,
-          ease: "power2.inOut",
+          x: xVal,
+          y: yVal,
+          z: zVal,
+          scale: scaleVal,
+          ease: "expo.out",
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top center",
-            end: "bottom top",
+            end: "bottom center",
             scrub: 1.5,
             toggleActions: "play reverse play reverse",
           },
@@ -297,7 +325,7 @@ export default function skillsSection() {
                     <div style={{ borderRadius: 16, overflow: "visible" }}>
                       <div className="r3f-wrapper">
                         <Suspense fallback={<Loader />}>
-                          <Canvas camera={{ position: [2, 2, 2], fov: 40 }}>
+                          <Canvas camera={{ position: [2, 2, 2], fov: 50, far: 5000 }}>
                             <ambientLight intensity={1} />
                             <directionalLight position={[1, 1, 1]} intensity={1} />
                             <Model path={a.path} />
@@ -315,7 +343,7 @@ export default function skillsSection() {
                   <div style={{ borderRadius: 16, overflow: "hidden" }}>
                     <div className="r3f-wrapper">
                       <Suspense fallback={<Loader />}>
-                        <Canvas camera={{ position: [2, 2, 2], fov: 40 }}>
+                        <Canvas camera={{ position: [2, 2, 2], fov: 50, far: 5000 }}>
                           <ambientLight intensity={1} />
                           <directionalLight position={[1, 1, 1]} intensity={1} />
                           <Model path={a.path} />
