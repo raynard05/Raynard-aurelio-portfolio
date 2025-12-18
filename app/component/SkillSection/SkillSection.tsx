@@ -28,7 +28,7 @@ function Model({ path }: ModelProps) {
   const { scene } = useGLTF(path);
   const ref = useRef<THREE.Group>(null);
 
-  return <primitive ref={ref} object={scene} scale={2.0} />;
+  return <primitive ref={ref} object={scene} scale={1.1} />;
 }
 
 function CountUp({ to, suffix = "", duration = 2 }: { to: number; suffix?: string; duration?: number }) {
