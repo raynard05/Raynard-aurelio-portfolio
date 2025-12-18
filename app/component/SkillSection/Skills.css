@@ -144,8 +144,8 @@
 .grid-container {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(5, 200px);
-  gap: 30px;
+  grid-template-columns: repeat(5, 280px);
+  gap: 40px;
   margin-top: 50px;
   overflow: visible;
   perspective: 2000px;
@@ -160,7 +160,7 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 18px;
-  padding: 20px;
+  padding: 30px;
   text-align: center;
   transition: 0.3s;
   overflow: visible;
@@ -189,7 +189,7 @@
 /* R3F WRAPPER */
 .r3f-wrapper {
   width: 100%;
-  height: 150px;
+  height: 250px;
   overflow: visible;
   transform-style: preserve-3d;
 }
@@ -197,7 +197,7 @@
 /* RESPONSIVE BREAKPOINTS */
 @media (min-width: 1100px) {
   .grid-container {
-    grid-template-columns: repeat(3, 180px);
+    grid-template-columns: repeat(3, 280px);
   }
 
   .curvedloop-wrapper {
@@ -208,7 +208,7 @@
 
 @media (max-width: 768px) {
   .grid-container {
-    grid-template-columns: repeat(2, 160px);
+    grid-template-columns: repeat(2, 180px);
     margin-top: -1px;
   }
 
@@ -220,8 +220,8 @@
 
 @media (max-width: 480px) {
   .grid-container {
-    grid-template-columns: repeat(2, 160px);
-    gap: 20px;
+    grid-template-columns: repeat(2, 180px);
+    gap: 25px;
     margin-top: -1px;
 
 
@@ -248,7 +248,7 @@
 @media (max-width: 768px) {
 
   .grid-container {
-    grid-template-columns: repeat(2, 160px);
+    grid-template-columns: repeat(2, 180px);
     margin-top: -1px;
   }
 
@@ -258,8 +258,8 @@
 
   .skill-image {
     display: block;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto;
     object-fit: contain;
   }
@@ -406,8 +406,8 @@
 
   /* Ensure icons are sized well in the modern card */
   .skill-image {
-    width: 52px;
-    height: 52px;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
   }

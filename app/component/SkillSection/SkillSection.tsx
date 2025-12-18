@@ -28,18 +28,7 @@ function Model({ path }: ModelProps) {
   const { scene } = useGLTF(path);
   const ref = useRef<THREE.Group>(null);
 
-  // Cozy "Greeting" Animation (Idle)
-  useFrame((state) => {
-    const t = state.clock.getElapsedTime();
-    if (ref.current) {
-      // Gentle floating (bobbing)
-      ref.current.position.y = Math.sin(t * 1) * 0.1;
-      // Slow continuous rotation
-      ref.current.rotation.y = t * 0.2;
-    }
-  });
-
-  return <primitive ref={ref} object={scene} scale={1.1} />;
+  return <primitive ref={ref} object={scene} scale={2.0} />;
 }
 
 function CountUp({ to, suffix = "", duration = 2 }: { to: number; suffix?: string; duration?: number }) {
@@ -95,8 +84,6 @@ export default function skillsSection() {
     (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
   )
   const { deviceClass, isSmallScreen, isWidthScreen } = useDevice();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   /* === ASSETS DEFINITION === */
   const assets = [
@@ -147,85 +134,7 @@ export default function skillsSection() {
     }
   ];
 
-  /* === GSAP ANIMATION LOGIC === */
-  useLayoutEffect(() => {
-    if (!isWidthScreen || !containerRef.current) return;
 
-    const ctx = gsap.context(() => {
-      cardsRef.current.forEach((card, i) => {
-        if (!card) return;
-
-        // Calculate position in 3x3 grid
-        const row = Math.floor(i / 3); // 0, 1, 2
-        const col = i % 3; // 0, 1, 2
-
-        // Directional animation values
-        let xVal = 0;
-        let yVal = 0;
-        let zVal = 0;
-        let scaleVal = 1;
-
-        // 9-position directional matrix
-        if (row === 0 && col === 0) {
-          // Top-Left → Diagonal top-left
-          xVal = -800;
-          yVal = -600;
-        } else if (row === 0 && col === 1) {
-          // Top-Center → Straight up
-          xVal = 0;
-          yVal = -800;
-        } else if (row === 0 && col === 2) {
-          // Top-Right → Diagonal top-right
-          xVal = 800;
-          yVal = -600;
-        } else if (row === 1 && col === 0) {
-          // Middle-Left → Straight left
-          xVal = -800;
-          yVal = 0;
-        } else if (row === 1 && col === 1) {
-          // Center → Forward burst (Z-axis)
-          xVal = 0;
-          yVal = 0;
-          zVal = 2000;
-          scaleVal = 3;
-        } else if (row === 1 && col === 2) {
-          // Middle-Right → Straight right
-          xVal = 800;
-          yVal = 0;
-        } else if (row === 2 && col === 0) {
-          // Bottom-Left → Diagonal bottom-left
-          xVal = -800;
-          yVal = 600;
-        } else if (row === 2 && col === 1) {
-          // Bottom-Center → Straight down
-          xVal = 0;
-          yVal = 800;
-        } else if (row === 2 && col === 2) {
-          // Bottom-Right → Diagonal bottom-right
-          xVal = 800;
-          yVal = 600;
-        }
-
-        // Animate the card wrapper (NO OPACITY)
-        gsap.to(card, {
-          x: xVal,
-          y: yVal,
-          z: zVal,
-          scale: scaleVal,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top center",
-            end: "bottom center",
-            scrub: 1.5,
-            toggleActions: "play reverse play reverse",
-          },
-        });
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [isWidthScreen, assets.length]);
 
 
 
@@ -292,55 +201,24 @@ export default function skillsSection() {
 
       <p className="subtitle"> </p>
 
-      <div className="grid-container" ref={containerRef} style={{ overflow: "visible" }}>
+      <div className="grid-container" style={{ overflow: "visible" }}>
         {assets.map((a, i) => (
           <div
             key={i}
-            ref={el => { cardsRef.current[i] = el }}
             className="skill-card-wrapper"
             style={{ overflow: "visible" }}
           >
-            <AnimatedContent
-              distance={150}
-              direction="vertical"
-              reverse={false}
-              duration={1.2}
-              ease="bounce.out"
-              initialOpacity={0.2}
-              animateOpacity
-              scale={1.1}
-              threshold={0.2}
-              delay={0.5}
-            >
-              <div className="card cursor-target" style={{ overflow: "visible" }}>
-                <div></div>
-                {!isSmallScreen && (
-                  <ElectricBorder
-                    color="#FFD000"
-                    speed={0.6}
-                    chaos={0.5}
-                    thickness={4}
-                    style={{ overflow: "visible" }}
-                  >
-                    <div style={{ borderRadius: 16, overflow: "visible" }}>
-                      <div className="r3f-wrapper">
-                        <Suspense fallback={<Loader />}>
-                          <Canvas camera={{ position: [2, 2, 2], fov: 50, far: 5000 }}>
-                            <ambientLight intensity={1} />
-                            <directionalLight position={[1, 1, 1]} intensity={1} />
-                            <Model path={a.path} />
-                            <OrbitControls enableZoom={false} />
-                            <Environment preset="studio" />
-                          </Canvas>
-                        </Suspense>
-                      </div>
-                      <img src={a.image} alt={a.name} className="skill-image" />
-                      <p>{a.name}</p>
-                    </div>
-                  </ElectricBorder>
-                )}
-                {isSmallScreen && (
-                  <div style={{ borderRadius: 16, overflow: "hidden" }}>
+            <div className="card cursor-target" style={{ overflow: "visible" }}>
+              <div></div>
+              {!isSmallScreen && (
+                <ElectricBorder
+                  color="#FFD000"
+                  speed={0.6}
+                  chaos={0.5}
+                  thickness={4}
+                  style={{ overflow: "visible" }}
+                >
+                  <div style={{ borderRadius: 16, overflow: "visible" }}>
                     <div className="r3f-wrapper">
                       <Suspense fallback={<Loader />}>
                         <Canvas camera={{ position: [2, 2, 2], fov: 50, far: 5000 }}>
@@ -355,9 +233,26 @@ export default function skillsSection() {
                     <img src={a.image} alt={a.name} className="skill-image" />
                     <p>{a.name}</p>
                   </div>
-                )}
-              </div>
-            </AnimatedContent>
+                </ElectricBorder>
+              )}
+              {isSmallScreen && (
+                <div style={{ borderRadius: 16, overflow: "hidden" }}>
+                  <div className="r3f-wrapper">
+                    <Suspense fallback={<Loader />}>
+                      <Canvas camera={{ position: [2, 2, 2], fov: 50, far: 5000 }}>
+                        <ambientLight intensity={1} />
+                        <directionalLight position={[1, 1, 1]} intensity={1} />
+                        <Model path={a.path} />
+                        <OrbitControls enableZoom={false} />
+                        <Environment preset="studio" />
+                      </Canvas>
+                    </Suspense>
+                  </div>
+                  <img src={a.image} alt={a.name} className="skill-image" />
+                  <p>{a.name}</p>
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>
