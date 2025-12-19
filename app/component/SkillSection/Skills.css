@@ -326,7 +326,20 @@
         /* yellow-400 */
         #000000 100%);
     padding-bottom: 60px;
+
+    .card img {
+      transition: transform 0.3s ease-in-out;
+
+
+    }
+
+    .card:hover img {
+      transform: rotate(360deg);
+    }
+
+
   }
+
 
   .skills-section .title-session {
     font-size: 36px;
