@@ -108,8 +108,8 @@ export default function Navbar() {
 
       {/* MOBILE DROPDOWN (FIXED) */}
       {open && (
-        <div className="md:hidden absolute top-16 left-0 w-full bg-black px-6 pb-4 z-50">
-          <div className="flex flex-col space-y-4">
+        <div className="md:hidden absolute top-16 left-0 w-full bg-black border-b border-yellow-500/30 shadow-lg shadow-black/50 z-[100]">
+          <div className="flex flex-col space-y-4 px-6 py-6">
             {menu.map((item, i) => {
               const isActive = activeSection === item.href.substring(1) || (item.name === "Home" && !activeSection);
               return (
@@ -117,7 +117,8 @@ export default function Navbar() {
                   key={i}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`text-white py-2 border-b border-white/10 ${isActive ? 'text-yellow-400' : ''}`}
+                  className={`text-lg font-medium py-3 border-b border-white/10 transition-colors ${isActive ? 'text-yellow-400' : 'text-white hover:text-yellow-400'
+                    }`}
                 >
                   {item.name}
                 </a>
