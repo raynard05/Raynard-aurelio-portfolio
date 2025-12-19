@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navbar from "@/app/component/Navbar";
 import Preloader from "@/app/component/Preloader";
 import { JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
@@ -15,6 +16,10 @@ export const metadata: Metadata = {
   description: "My modern portfolio website",
 };
 
+export const viewport: Viewport = {
+  themeColor: "#FFD000",
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -23,6 +28,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-black text-white ${jetbrains.variable}`}>
+        {/* Inject theme-color meta tag */}
+        <Script
+          id="theme-color-meta"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var meta = document.createElement('meta');
+                meta.name = 'theme-color';
+                meta.content = '#FFD000';
+                document.head.appendChild(meta);
+              })();
+            `,
+          }}
+        />
+
         <Preloader />
         {/* Navbar selalu tampil */}
         <Navbar />

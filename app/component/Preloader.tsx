@@ -103,11 +103,14 @@ const Preloader = () => {
     const displayProgress = Math.floor((modelProgress + interfaceProgress) / 2);
 
     const [loadingText, setLoadingText] = useState("Preparing 3D Asset...");
+    const [videoLagCheck, setVideoLagCheck] = useState(false);
+    const [videoPerformance, setVideoPerformance] = useState<'checking' | 'good' | 'poor'>('checking');
 
     const messages = [
         "Preparing 3D Asset...",
         "Checking Responsive Layout...",
         "Preparing Song...",
+        "Checking Video Performance...",
         "Preparing Best Experience...",
         "Preparing Me To Work For You..."
     ];
@@ -120,6 +123,51 @@ const Preloader = () => {
         checkMobile();
         window.addEventListener("resize", checkMobile);
         return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    // Video Performance Check (Detect Lag)
+    useEffect(() => {
+        let frameCount = 0;
+        let lastTime = performance.now();
+        let animationId: number;
+
+        const checkFrameRate = () => {
+            const currentTime = performance.now();
+            const deltaTime = currentTime - lastTime;
+
+            frameCount++;
+
+            // Check every 60 frames
+            if (frameCount >= 60) {
+                const fps = (frameCount / deltaTime) * 1000;
+
+                // Good performance: 50+ fps, Poor: below 30 fps
+                if (fps >= 50) {
+                    setVideoPerformance('good');
+                } else if (fps < 30) {
+                    setVideoPerformance('poor');
+                    console.warn(`Low frame rate detected: ${fps.toFixed(2)} FPS`);
+                } else {
+                    setVideoPerformance('good'); // Acceptable
+                }
+
+                setVideoLagCheck(true);
+                frameCount = 0;
+                lastTime = currentTime;
+            }
+
+            animationId = requestAnimationFrame(checkFrameRate);
+        };
+
+        // Start checking after 1 second
+        const timer = setTimeout(() => {
+            animationId = requestAnimationFrame(checkFrameRate);
+        }, 1000);
+
+        return () => {
+            clearTimeout(timer);
+            if (animationId) cancelAnimationFrame(animationId);
+        };
     }, []);
 
     // Message Cycle
@@ -199,17 +247,19 @@ const Preloader = () => {
             songReady,
             songProgress,
             interfaceProgress,
-            shouldShow: isMobile && songReady && songProgress === 100 && interfaceProgress === 100
+            videoLagCheck,
+            videoPerformance,
+            shouldShow: isMobile && songReady && songProgress === 100 && interfaceProgress === 100 && videoLagCheck
         });
 
-        if (isMobile && songReady && songProgress === 100 && interfaceProgress === 100) {
+        if (isMobile && songReady && songProgress === 100 && interfaceProgress === 100 && videoLagCheck) {
             const timer = setTimeout(() => {
-                console.log("Mobile: Song ready AND interface loaded, showing Enter button");
+                console.log("Mobile: All checks passed (song, interface, video), showing Enter button");
                 setShowEnterButton(true);
             }, 500);
             return () => clearTimeout(timer);
         }
-    }, [isMobile, songReady, songProgress, interfaceProgress]);
+    }, [isMobile, songReady, songProgress, interfaceProgress, videoLagCheck]);
 
     // Completion Check (Desktop only)
     useEffect(() => {
@@ -217,14 +267,18 @@ const Preloader = () => {
 
         const is3DReady = modelProgress === 100 || (modelProgress === 0 && !modelActive);
         const isDOMReady = interfaceProgress === 100;
+        const isVideoReady = videoLagCheck;
 
-        if (is3DReady && isDOMReady) {
+        console.log("Desktop completion check:", { is3DReady, isDOMReady, isVideoReady, videoPerformance });
+
+        if (is3DReady && isDOMReady && isVideoReady) {
             const timer = setTimeout(() => {
+                console.log("Desktop: All checks passed, showing Enter button");
                 setShowEnterButton(true);
             }, 500);
             return () => clearTimeout(timer);
         }
-    }, [modelProgress, modelActive, interfaceProgress, isMobile]);
+    }, [modelProgress, modelActive, interfaceProgress, isMobile, videoLagCheck, videoPerformance]);
 
     const handleEnter = () => {
         console.log("handleEnter called - setting loading to false");
