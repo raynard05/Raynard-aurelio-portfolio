@@ -64,52 +64,19 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-black border-b border-yellow-500/10">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <>
+      <nav className="fixed top-0 left-0 w-full z-50 bg-black border-b border-yellow-500/10">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
-        {/* LEFT LOGO */}
-        <div className="flex items-center gap-3">
-          <h1 className="text-yellow-400 font-bold text-xl">
-            Raynard Aurelio.
-          </h1>
-        </div>
+          {/* LEFT LOGO */}
+          <div className="flex items-center gap-3">
+            <h1 className="text-yellow-400 font-bold text-xl">
+              Raynard Aurelio.
+            </h1>
+          </div>
 
-        {/* DESKTOP MENU */}
-        <div className="hidden md:flex items-center space-x-10">
-          {menu.map((item, i) => {
-            const isActive = activeSection === item.href.substring(1) || (item.name === "Home" && !activeSection);
-            return (
-              <a
-                key={i}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`text-white hover:text-yellow-400 transition relative group ${isActive ? 'text-yellow-400' : ''}`}
-              >
-                {item.name}
-                <span className={`absolute left-0 -bottom-1 h-[2px] bg-yellow-400 transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`} />
-              </a>
-            );
-          })}
-        </div>
-
-        {/* RIGHT SIDE (MUSIC + MOBILE TOGGLE) */}
-        <div className="flex items-center gap-4">
-          <MusicPlayer />
-
-          {/* MOBILE BUTTON */}
-          <button
-            className="md:hidden text-white"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
-      </div>
-
-      {/* MOBILE DROPDOWN (FIXED) */}
-      {open && (
-        <div className="md:hidden absolute top-16 left-0 w-full bg-black border-b border-yellow-500/30 shadow-lg shadow-black/50 z-[100]">
-          <div className="flex flex-col space-y-4 px-6 py-6">
+          {/* DESKTOP MENU */}
+          <div className="hidden md:flex items-center space-x-10">
             {menu.map((item, i) => {
               const isActive = activeSection === item.href.substring(1) || (item.name === "Home" && !activeSection);
               return (
@@ -117,7 +84,43 @@ export default function Navbar() {
                   key={i}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`text-lg font-medium py-3 border-b border-white/10 transition-colors ${isActive ? 'text-yellow-400' : 'text-white hover:text-yellow-400'
+                  className={`text-white hover:text-yellow-400 transition relative group ${isActive ? 'text-yellow-400' : ''}`}
+                >
+                  {item.name}
+                  <span className={`absolute left-0 -bottom-1 h-[2px] bg-yellow-400 transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                </a>
+              );
+            })}
+          </div>
+
+          {/* RIGHT SIDE (MUSIC + MOBILE TOGGLE) */}
+          <div className="flex items-center gap-4">
+            <MusicPlayer />
+
+            {/* MOBILE BUTTON */}
+            <button
+              className="md:hidden text-white"
+              onClick={() => setOpen(!open)}
+              aria-label="Toggle menu"
+            >
+              {open ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* MOBILE DROPDOWN (SEPARATE FIXED ELEMENT) */}
+      {open && (
+        <div className="md:hidden fixed top-16 left-0 w-full bg-black border-b border-yellow-500/30 shadow-2xl z-[60]">
+          <div className="flex flex-col px-6 py-6">
+            {menu.map((item, i) => {
+              const isActive = activeSection === item.href.substring(1) || (item.name === "Home" && !activeSection);
+              return (
+                <a
+                  key={i}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={`text-lg font-medium py-4 border-b border-white/10 transition-colors ${isActive ? 'text-yellow-400' : 'text-white hover:text-yellow-400'
                     }`}
                 >
                   {item.name}
@@ -127,6 +130,6 @@ export default function Navbar() {
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 }
