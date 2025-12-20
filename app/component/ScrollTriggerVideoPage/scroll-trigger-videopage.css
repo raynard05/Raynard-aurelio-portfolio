@@ -68,9 +68,10 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 1024px) {
+@media (max-width: 1400px) {
     .scroll-video-wrapper {
         max-width: 85%;
+        transform: translateY(-30%);
     }
 
     .scroll-video-container {
@@ -100,18 +101,20 @@
 @media (max-width: 480px) {
     .scroll-video-wrapper {
         max-width: 100%;
+        transform: translateY(-80%);
     }
 
     .scroll-video-container {
         padding: 0.5rem;
-        min-height: 200vh;
+        min-height: 30vh;
     }
 
     .scroll-video-frame {
         border-radius: 10px;
+
     }
 
     .scroll-video {
-        max-height: 60vh;
+        max-height: 200vh;
     }
 }

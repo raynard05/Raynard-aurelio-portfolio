@@ -121,7 +121,7 @@ export default function Home() {
             texts={[
               "MOBILE DEVELOPER ✦ DESKTOP APP DEVELOPER ✦ IOT ENTHUSIAST ✦ WEB DEVELOPER ✦",
             ]}
-            className="text-[#FFD000] font-black text-[28px] sm:text-[48px] md:text-[64px] lg:text-[80px] py-16 uppercase"
+            className="text-[#FFD000] font-black text-[45px] sm:text-[48px] md:text-[64px] lg:text-[80px] lg:py-16 uppercase"
             velocity={-100}
             parallaxStyle={{
               background: "transparent",
@@ -135,7 +135,7 @@ export default function Home() {
             texts={[
               "WEB DEVELOPER ✦ MOBILE DEVELOPER ✦ IOT ENTHUSIAST ✦ DESKTOP APP DEVELOPER ✦",
             ]}
-            className="text-black font-black text-[28px] sm:text-[48px] md:text-[64px] lg:text-[80px] py-16 uppercase"
+            className="text-black font-black text-[45px] sm:text-[48px] md:text-[64px] lg:text-[80px] lg:py-16 uppercase"
             velocity={100}
             parallaxStyle={{
               background: "transparent",
