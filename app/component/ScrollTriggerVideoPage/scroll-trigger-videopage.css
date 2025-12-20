@@ -1,0 +1,117 @@
+.scroll-video-container {
+    margin-top: 300px;
+    width: 100%;
+    min-height: 30px;
+    /* Tall container for scroll range */
+    background: #000;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    /* Left align as requested */
+    align-items: center;
+    padding: -1rem;
+    margin-top: 200px;
+    rotate: -4deg;
+}
+
+.scroll-video-wrapper {
+    position: sticky;
+    top: 50%;
+    transform: translateY(-30%);
+    width: 100%;
+    max-width: 60%;
+    /* Constrain width to hide watermark */
+    display: flex;
+    justify-content: flex-start;
+}
+
+.scroll-video-frame {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.scroll-video {
+    width: 200%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    /* Crop bottom-right corner to hide watermark */
+    object-position: center center;
+    max-height: 100vh;
+    /* Clip path to cut off bottom-right corner only */
+    clip-path: polygon(0 0,
+            /* top-left */
+            100% 0,
+            /* top-right */
+            100% 85%,
+            /* right side, stop at 85% height */
+            85% 100%,
+            /* bottom-right corner cut */
+            0 100%
+            /* bottom-left */
+        );
+}
+
+/* Add subtle border glow */
+.scroll-video-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .scroll-video-wrapper {
+        max-width: 85%;
+    }
+
+    .scroll-video-container {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .scroll-video-wrapper {
+        max-width: 95%;
+    }
+
+    .scroll-video-container {
+        padding: 1rem;
+        min-height: 250vh;
+    }
+
+    .scroll-video-frame {
+        border-radius: 15px;
+    }
+
+    .scroll-video {
+        max-height: 70vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-video-wrapper {
+        max-width: 100%;
+    }
+
+    .scroll-video-container {
+        padding: 0.5rem;
+        min-height: 200vh;
+    }
+
+    .scroll-video-frame {
+        border-radius: 10px;
+    }
+
+    .scroll-video {
+        max-height: 60vh;
+    }
+}

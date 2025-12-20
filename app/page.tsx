@@ -18,6 +18,10 @@ import TestimonialMarquee from "@/components/TestimonialMarquee";
 import MobileTestimonialList from "./component/Testimonialsmobile/MobileTestimonialList";
 import { useDevice } from "./useDevice";
 import AirplaneScene from "./component/AirplaneScene/AirplaneScene";
+import ProjectMarquee from "@/app/component/ProjectMarquee/ProjectMarquee";
+import ScrollTriggerVideoPage from './component/ScrollTriggerVideoPage/scroll-trigger-videopage';
+
+// Tambahkan di page Anda
 
 
 export default function Home() {
@@ -103,38 +107,66 @@ export default function Home() {
         <SkillsSection />
       </section>
 
-      <section ref={projectsRef}>
+      <section ref={projectsRef} className="lg:mb-[15px]">
         <ProjectPage />
       </section>
-      <section ref={testimonialsRef}>
+
+
+      <div className={`
+  ${isSmallScreen ? "" : ""
+        }
+  `}>
+        <div className="hero-comic-marquee-inverse mt-[50px]">
+          <ScrollVelocity
+            texts={[
+              "MOBILE DEVELOPER ✦ DESKTOP APP DEVELOPER ✦ IOT ENTHUSIAST ✦ WEB DEVELOPER ✦",
+            ]}
+            className="text-[#FFD000] font-black text-[28px] sm:text-[48px] md:text-[64px] lg:text-[80px] py-16 uppercase"
+            velocity={-100}
+            parallaxStyle={{
+              background: "transparent",
+            }}
+          />
+
+        </div>
+        <ScrollTriggerVideoPage />
+        <div className="hero-comic-marquee mt-[-200px]">
+          <ScrollVelocity
+            texts={[
+              "WEB DEVELOPER ✦ MOBILE DEVELOPER ✦ IOT ENTHUSIAST ✦ DESKTOP APP DEVELOPER ✦",
+            ]}
+            className="text-black font-black text-[28px] sm:text-[48px] md:text-[64px] lg:text-[80px] py-16 uppercase"
+            velocity={100}
+            parallaxStyle={{
+              background: "transparent",
+            }}
+          />
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      <section ref={testimonialsRef} className="lg:mt-[40px]">
         <div className={`
     ${isSmallScreen ? "hidden" : ""
 
           }
-    
-    
-    
     `}>
-
           <TestimonialMarquee />
-
-
         </div>
       </section>
 
       <div className={`
   ${isSmallScreen ? "" : "hidden"
-
         }
-  
-  
-  
   `}>
-
-
         <MobileTestimonialList testimonials={testimonials} />
-
-
       </div>
 
       <section ref={contactRef}>
@@ -146,7 +178,17 @@ export default function Home() {
       ) : (
         <SecondContactPage />
       )}
+      {isSmallScreen ? (
+        ""
+      ) : (
+        <ProjectMarquee />
+      )}
+
       <EndPage />
+
+
+
+
       <main>
 
       </main>

@@ -1,0 +1,62 @@
+.vertical-marquee-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.vertical-marquee {
+    position: absolute;
+    top: 0;
+    width: 120px;
+    height: 100vh;
+    background-color: #ffeb3b;
+    /* Yellow background */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.vertical-marquee.left {
+    left: 0;
+}
+
+.vertical-marquee.right {
+    right: 0;
+}
+
+.marquee-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    will-change: transform;
+}
+
+.marquee-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000000;
+    /* Black text */
+    text-transform: uppercase;
+    letter-spacing: 0.5rem;
+    white-space: nowrap;
+    user-select: none;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Smooth animation performance */
+.vertical-marquee,
+.marquee-content,
+.marquee-text {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}

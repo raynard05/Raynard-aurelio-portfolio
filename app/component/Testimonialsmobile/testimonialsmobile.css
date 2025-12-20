@@ -23,11 +23,13 @@
   margin-bottom: 24px;
   letter-spacing: -1px;
   text-transform: lowercase;
+  background-color: #000;
 }
 
 .zigzag-title::after {
   content: ".";
   color: #facc15;
+
 }
 
 /* CONTAINER */
