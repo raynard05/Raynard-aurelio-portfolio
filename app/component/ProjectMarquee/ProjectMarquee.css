@@ -73,9 +73,9 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 1400px) {
     .marquee-text {
-        font-size: clamp(2rem, 5vw, 4rem);
+        font-size: clamp(3rem, 5vw, 4rem);
         padding: 1rem 0;
     }
 }
