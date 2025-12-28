@@ -107,7 +107,25 @@ export default function Home() {
         <SkillsSection />
       </section>
 
+      <div className={`${isSmallScreen ? "hidden" : "hero-comic-marquee-inverse"}`}>
+        <ScrollVelocity
+          texts={[
+            "CHECK MY PROJECTS BELOW AND SWIPE TO EXPLORE ",
+          ]}
+          className="text-[#FFD000] font-black text-[45px] sm:text-[48px] md:text-[64px] lg:text-[80px] lg:py-16 uppercase"
+          velocity={100}
+          parallaxStyle={{
+            background: "transparent",
+          }}
+        />
+
+
+
+      </div>
+
+
       <section ref={projectsRef} className="lg:mb-[15px]">
+
         <ProjectPage />
       </section>
 

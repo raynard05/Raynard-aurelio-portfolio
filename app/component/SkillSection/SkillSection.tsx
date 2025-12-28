@@ -9,7 +9,6 @@ import ElectricBorder from "@/components/ElectricBorder";
 import StarBorder from "@/components/StarBorder";
 import AnimatedContent from "@/components/AnimatedContent"
 import { GridScan } from "@/components/GridScan";
-import CurvedLoop from "@/components/CurvedLoop"
 import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -297,16 +296,6 @@ export default function skillsSection() {
             <p className="opacity-80 mt-2">Client Satisfaction</p>
           </div>
         )}
-      </div>
-      <div className="curvedloop-wrapper " >
-        <CurvedLoop
-          marqueeText="Hire Me ✦ Let's Work Together ✦ Connect with me ✦ "
-          speed={3}
-          curveAmount={250}
-          direction="right"
-          interactive={true}
-          variant="groovy"
-        />
       </div>
 
     </section>

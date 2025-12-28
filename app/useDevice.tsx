@@ -29,6 +29,7 @@ export const useDevice = () => {
   /* === Boolean helpers === */
   const isSmallScreen = device === "smallscreen";
   const isWidthScreen = device === "widthscreen";
+  const isLaptopScreen = width > 0 && width <= 1300; // Laptop screens (max-width: 1300px)
 
   /* === Responsive class === */
   const deviceClass = isSmallScreen
@@ -42,5 +43,6 @@ export const useDevice = () => {
 
     isSmallScreen,
     isWidthScreen,
+    isLaptopScreen,
   };
 };

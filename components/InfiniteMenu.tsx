@@ -1,6 +1,7 @@
 import { FC, useRef, useState, useEffect, MutableRefObject } from 'react';
 import { mat4, quat, vec2, vec3 } from 'gl-matrix';
 import { useRouter } from 'next/navigation';
+import { useDevice } from '@/app/useDevice';
 
 const discVertShaderSource = `#version 300 es
 
@@ -1055,6 +1056,7 @@ interface InfiniteMenuProps {
 
 const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
   const router = useRouter();
+  const { isLaptopScreen } = useDevice();
   const canvasRef = useRef<HTMLCanvasElement | null>(null) as MutableRefObject<HTMLCanvasElement | null>;
   const [activeItem, setActiveItem] = useState<MenuItem | null>(null);
   const [isMoving, setIsMoving] = useState<boolean>(false);
@@ -1107,32 +1109,32 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
       />
 
       <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-none transition-opacity duration-300 ${isMoving ? 'opacity-0' : 'opacity-100'} z-20`}>
-        <div className="text-[#FFD000]/70 text-sm font-medium tracking-[0.3em] uppercase animate-pulse whitespace-nowrap">
+        <div className={`text-[#FFD000]/70 ${isLaptopScreen ? 'text-xl' : 'text-4xl'} font-bold tracking-[0.3em] uppercase animate-pulse whitespace-nowrap mb-[20px]`}>
           Click & Swipe to Explore
         </div>
       </div>
 
       {activeItem && (
-        <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-8 md:p-14 lg:p-20">
+        <div className={`absolute inset-0 pointer-events-none flex flex-col justify-between ${isLaptopScreen ? 'p-12' : 'p-20'}`}>
           <div className="flex justify-between items-start w-full border-b border-[#FFD000]/20 pb-4">
-            <div className={`transition-opacity duration-500 ${isMoving ? 'opacity-0' : 'opacity-100'} text-[#FFD000]/70 font-bold text-xs tracking-[0.2em] uppercase`}>
+            <div className={`transition-opacity duration-500 ${isMoving ? 'opacity-0' : 'opacity-100'} text-[#FFD000]/70 font-bold ${isLaptopScreen ? 'text-xs' : 'text-[30px]'} tracking-[0.2em] uppercase`}>
               Selected Work
             </div>
-            <div className={`transition-opacity duration-500 ${isMoving ? 'opacity-0' : 'opacity-100'} text-[#FFD000]/70 font-bold text-xs tracking-[0.2em] uppercase`}>
+            <div className={`transition-opacity duration-500 ${isMoving ? 'opacity-0' : 'opacity-100'} text-[#FFD000]/70 font-bold ${isLaptopScreen ? 'text-xs' : 'text-[30px]'} tracking-[0.2em] uppercase`}>
               ( {items.indexOf(activeItem) + 1} / {items.length} )
             </div>
           </div>
 
-          <div className={`flex flex-col md:flex-row items-end justify-between gap-12 w-full transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${isMoving ? 'opacity-0 translate-y-10' : 'opacity-100 translate-y-0'}`}>
+          <div className={`flex flex-col md:flex-row items-end justify-between ${isLaptopScreen ? 'gap-8' : 'gap-12'} w-full transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] ${isMoving ? 'opacity-0 translate-y-10' : 'opacity-100 translate-y-0'}`}>
 
             <div className="flex-1 relative z-10">
-              <h1 className="text-[#FFD000] text-6xl md:text-8xl lg:text-[10rem] font-black uppercase tracking-tighter leading-[0.85] mix-blend-screen drop-shadow-[0_0_15px_rgba(255,208,0,0.3)]">
+              <h1 className={`text-[#FFD000] ${isLaptopScreen ? 'text-3xl' : 'text-[10rem]'} font-black uppercase tracking-tighter leading-[0.85] mix-blend-screen drop-shadow-[0_0_15px_rgba(255,208,0,0.3)]`}>
                 {activeItem.title}
               </h1>
             </div>
 
-            <div className="flex flex-col items-end gap-8 relative z-10 max-w-md text-right">
-              <h3 className="text-[#FFD000] text-lg md:text-2xl font-medium leading-relaxed tracking-wide">
+            <div className={`flex flex-col items-end ${isLaptopScreen ? 'gap-6' : 'gap-8'} relative z-10 ${isLaptopScreen ? 'max-w-sm' : 'max-w-md'} text-right`}>
+              <h3 className={`text-[#FFD000] ${isLaptopScreen ? 'text-sm' : 'text-2xl'} font-medium leading-relaxed tracking-wide`}>
                 {activeItem.description}
               </h3>
 
@@ -1140,8 +1142,8 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [] }) => {
                 onClick={handleButtonClick}
                 className="pointer-events-auto cursor-pointer group flex items-center gap-4 text-[#FFD000] hover:text-white transition-colors duration-300"
               >
-                <span className="font-bold text-sm tracking-[0.2em] uppercase border-b-2 border-[#FFD000] pb-1 group-hover:border-white">View Project</span>
-                <span className="text-3xl group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300">&#x2197;</span>
+                <span className={`font-bold ${isLaptopScreen ? 'text-xs' : 'text-sm'} tracking-[0.2em] uppercase border-b-2 border-[#FFD000] pb-1 group-hover:border-white`}>View Project</span>
+                <span className={`${isLaptopScreen ? 'text-2xl' : 'text-3xl'} group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300`}>&#x2197;</span>
               </div>
             </div>
           </div>
