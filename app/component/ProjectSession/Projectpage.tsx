@@ -64,9 +64,6 @@ export default function ProjectPage() {
 
   const [circleFull, setCircleFull] = useState(false);
   const [freezeBG, setFreezeBG] = useState(false);
-  const [fadeOut, setFadeOut] = useState(false);
-  const [hideVideo, setHideVideo] = useState(false);
-  const [showContent, setShowContent] = useState(false);
 
   const clipPathScroll = useTransform(
     scrollYProgress,
@@ -91,11 +88,9 @@ export default function ProjectPage() {
     description: p.description
   }));
 
-  // Mobile: Skip video and show content immediately
+  // Mobile: Show content immediately
   useEffect(() => {
     if (isSmallScreen) {
-      setShowContent(true);
-      setHideVideo(true);
       setCircleFull(true);
       setFreezeBG(true);
     }
@@ -112,13 +107,6 @@ export default function ProjectPage() {
       });
     }
   }, [circleFull, isSmallScreen, clipPathScroll]);
-
-  /** Show content after video (desktop only) */
-  useEffect(() => {
-    if (!isSmallScreen && hideVideo) {
-      setShowContent(true);
-    }
-  }, [hideVideo, isSmallScreen]);
 
   return (
     <section id="projects" className={`project-section ${deviceClass}`}>
@@ -156,69 +144,18 @@ export default function ProjectPage() {
       />
 
       {/* CONTENT */}
-      {showContent && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="project-content"
-        >
-          {isSmallScreen ? (
-            <MobileProjectList items={items} />
-          ) : (
-            <InfiniteMenu items={items2} />
-          )}
-        </motion.div>
-      )}
-
-      {/* VIDEO - Desktop Only */}
-      {!isSmallScreen && !hideVideo && (
-        <>
-          {/* Window Shutter Animation */}
-          <motion.div
-            initial={{ height: "50%" }}
-            whileInView={{ height: "0%" }}
-            viewport={{ once: true }}
-            transition={{ duration: 2.5, ease: "easeInOut" }}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              background: "#000",
-              zIndex: 30,
-              pointerEvents: "none"
-            }}
-          />
-          <motion.div
-            initial={{ height: "50%" }}
-            whileInView={{ height: "0%" }}
-            viewport={{ once: true }}
-            transition={{ duration: 2.5, ease: "easeInOut" }}
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              background: "#000",
-              zIndex: 30,
-              pointerEvents: "none"
-            }}
-          />
-          <video
-            className={`project-video-bg ${fadeOut ? "fade-out" : ""}`}
-            src="/video_2.mp4"
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            onEnded={() => {
-              setFadeOut(true);
-              setTimeout(() => setHideVideo(true), 1500);
-            }}
-          />
-        </>
-      )}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="project-content"
+      >
+        {isSmallScreen ? (
+          <MobileProjectList items={items} />
+        ) : (
+          <InfiniteMenu items={items2} />
+        )}
+      </motion.div>
     </section>
   );
 }
