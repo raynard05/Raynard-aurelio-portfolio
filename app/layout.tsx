@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/app/component/Navbar";
 import Preloader from "@/app/component/Preloader";
+import LenisProvider from "@/components/LenisProvider";
 import { JetBrains_Mono } from "next/font/google";
 
 const jetbrains = JetBrains_Mono({
@@ -28,9 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-black text-white ${jetbrains.variable}`}>
-        <Preloader />
-        <Navbar />
-        <main className="pt-5">{children}</main>
+        <LenisProvider>
+          <Preloader />
+          <Navbar />
+          <main className="pt-5">{children}</main>
+        </LenisProvider>
       </body>
     </html>
   );
