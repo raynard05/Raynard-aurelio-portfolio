@@ -39,6 +39,8 @@ body {
   width: 100%;
   overflow-x: hidden;
   /* Prevent horizontal scroll */
+  overflow-y: auto;
+  /* Allow vertical scroll for mobile/non-Lenis devices */
   -ms-overflow-style: none;
   /* IE */
   scrollbar-width: none;

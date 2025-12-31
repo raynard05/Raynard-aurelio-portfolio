@@ -15,10 +15,18 @@ export default function LenisProvider({
     const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
+        // Check if device is touch-enabled (mobile/tablet)
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        // Only enable Lenis on non-touch devices (desktop)
+        if (isTouchDevice) {
+            return; // Exit early for mobile devices - use native scrolling
+        }
+
         // Add lenis class to html element
         document.documentElement.classList.add("lenis", "lenis-smooth");
 
-        // Initialize Lenis
+        // Initialize Lenis for desktop only
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -50,7 +58,6 @@ export default function LenisProvider({
             });
         };
     }, []);
-
 
     return <>{children}</>;
 }
