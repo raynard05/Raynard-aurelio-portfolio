@@ -19,6 +19,7 @@ export default function EndPage() {
             Let's Build Something Amazing Together
           </p>
         }
+        //k
         className="w-full h-full"
       >
         <span className="text-3xl sm:text-5xl text-black font-bold leading-tight">
