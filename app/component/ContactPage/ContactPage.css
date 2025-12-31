@@ -222,12 +222,8 @@
   }
 
   .contact-left {
-    padding: 30px;
-    min-width: 300px;
-    min-height: 500px;
-    transform: rotate(-5deg);
-    margin-bottom: 30px;
-    justify-content: center;
+    display: none;
+    /* Hide ProfileCard on mobile */
   }
 
   .contact-right {
@@ -239,6 +235,15 @@
     margin: 0 !important;
     overflow-x: hidden;
     /* Prevent horizontal scroll from content */
+  }
+
+  /* Add doodle background for mobile */
+  .contact-wrapper {
+    background-color: #000;
+    background-image: url("/doodle.png");
+    background-repeat: repeat;
+    background-size: 240px;
+    background-position: center;
   }
 
   /* Ensure form elements don't overflow */
