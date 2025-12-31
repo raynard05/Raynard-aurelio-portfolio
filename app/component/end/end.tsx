@@ -15,13 +15,13 @@ export default function EndPage() {
       <MaskContainer
         revealSize={maskSize}
         revealText={
-          <p className="mx-auto max-w-4xl text-center text-4xl font-bold text-[#FFD000] px-4">
+          <p className="mx-auto max-w-4xl text-center text-2xl sm:text-4xl font-bold text-[#FFD000] px-4">
             Let's Build Something Amazing Together
           </p>
         }
         className="w-full h-full"
       >
-        <span className="text-5xl text-black font-bold">
+        <span className="text-3xl sm:text-5xl text-black font-bold leading-tight">
           Ready to turn ideas into reality? Whether it's a web app, mobile solution,
           or IoT innovation, I'm here to bring your vision to life.
         </span>

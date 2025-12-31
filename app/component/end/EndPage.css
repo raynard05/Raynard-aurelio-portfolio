@@ -8,3 +8,13 @@
   z-index: 1;
   overflow: hidden;
 }
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .End-wrapper {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
