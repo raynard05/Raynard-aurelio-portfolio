@@ -7,8 +7,12 @@
 }
 
 html {
-  overflow: hidden;
   height: 100%;
+}
+
+/* Only hide overflow when Lenis is active (desktop) */
+html.lenis {
+  overflow: hidden;
 }
 
 html.lenis,
